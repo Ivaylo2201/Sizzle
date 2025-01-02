@@ -1,0 +1,11 @@
+# Node modules
+/frontend/node_modules/
+
+# Django virtual environment
+/backend/.venv/
+
+# PyCharm project files
+.idea/
+
+# Logs
+*.
