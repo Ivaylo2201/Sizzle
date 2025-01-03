@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: blanchedalmond;
+  padding: 20px;
+}
+
+.Toastify__toast {
+  font-family: 'DM Sans', sans-serif !important
+}
