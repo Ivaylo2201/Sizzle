@@ -1,12 +1,22 @@
+@import 'swiper/swiper-bundle.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  background-color: blanchedalmond;
-  padding: 20px;
+  background-color: #ffebcd;
 }
 
 .Toastify__toast {
-  font-family: 'DM Sans', sans-serif !important
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+  opacity: 1;
 }

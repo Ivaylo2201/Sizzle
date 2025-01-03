@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import categorySalad from '../../../assets/categories/categorySalads.jpg'
-import categoryPizza from '../../../assets/categories/categoryPasta.jpg'
+import categoryPizza from '../../../assets/categories/categoryPizza.jpg'
 import categorySushi from '../../../assets/categories/categorySushi.jpg'
 import categoryGrill from '../../../assets/categories/categoryGrill.jpg'
 import categoryBurger from '../../../assets/categories/categoryBurgers.jpg'
@@ -11,6 +11,7 @@ import categoryDrinks from '../../../assets/categories/categoryDrinks.jpg'
 
 import CategoryCarousel from './CategoryCarousel';
 import CategoryGrid from './CategoryGrid';
+import { Category } from '../../../types/Category';
 
 export default function CategoryList() {
   const [isVertical, setIsVertical] = useState<boolean | null>(null);
@@ -18,15 +19,14 @@ export default function CategoryList() {
   useEffect(() => {
     const handleResize = (): void => setIsVertical(window.innerWidth < 1400);
 
-    handleResize(); // Calculate initial orientation
+    handleResize();
 
-    window.addEventListener('resize', handleResize); // Call the function on each window resize
+    window.addEventListener('resize', handleResize);
 
-    // Cleanup function - remove listener, called when the components unmounts
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const categories: { imageUrl: string; title: string }[] = [
+  const categories: Category[] = [
     { imageUrl: categorySalad, title: 'salads' },
     { imageUrl: categoryPizza, title: 'pizzas' },
     { imageUrl: categorySushi, title: 'sushi' },

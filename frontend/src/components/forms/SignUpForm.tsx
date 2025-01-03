@@ -5,8 +5,8 @@ import EmailField from "./fields/EmailField";
 import PasswordField from "./fields/PasswordField";
 import AuthLink from "../generics/AuthLink";
 import Button from "../generics/Button";
-import logo from "../../assets/logo.png";
 import { ClipLoader } from "react-spinners";
+import Logo from "../common/Logo";
 
 
 const schema = z
@@ -66,11 +66,7 @@ export default function SignUpForm() {
 
   return (
     <div className='flex flex-col gap-4 items-center'>
-      <img
-        src={logo}
-        alt=''
-        className='size-32 object-cover hover:scale-105 transition-all duration-300 mb-2'
-      />
+      <Logo size={8} scalable />
 
       <section className='flex flex-col gap-3 '>
         <EmailField control={control} />
@@ -89,7 +85,7 @@ export default function SignUpForm() {
       <Button
         onClick={handleSubmit(onSubmit)}
         colors={{
-          bg: 'bg-[#323232]',
+          bg: 'bg-theme-darkgray',
           text: 'text-white'
         }}
       >

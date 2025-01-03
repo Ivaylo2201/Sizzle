@@ -7,6 +7,7 @@ import Button from '../generics/Button';
 import { ClipLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
+import Logo from '../common/Logo';
 
 const schema = z.object({
   email: z
@@ -49,18 +50,14 @@ export default function ForgotPasswordForm() {
 
   return (
     <div className='flex flex-col gap-4 items-center'>
-      <img
-        src={logo}
-        alt=''
-        className='size-32 object-cover hover:scale-105 transition-all duration-300 mb-6'
-      />
+      <Logo size={8} />
 
       <EmailField control={control} />
 
       <Button
         onClick={handleSubmit(onSubmit)}
         colors={{
-          bg: 'bg-[#323232]',
+          bg: 'bg-theme-darkgray',
           text: 'text-white'
         }}
       >
@@ -72,7 +69,7 @@ export default function ForgotPasswordForm() {
       </Button>
 
       <Link
-        className='text-gray-600 hover:text-[#323232] font-DMSans text-sm transition-colors duration-150'
+        className='text-theme-gray hover:text-theme-darkgray font-DMSans text-sm transition-colors duration-150'
         to='/signin'
       >
         Back to sign in

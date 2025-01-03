@@ -1,10 +1,14 @@
-import { Category } from "../../../types/Category";
+type CategoryLinkProps = {
+  imageUrl: string;
+  title: string;
+  className?: string;
+}
 
-export default function CategoryLink({ imageUrl, title }: Category) {
+export default function CategoryLink({ imageUrl, title, className }: CategoryLinkProps) {
   return (
     <div
       onClick={() => console.log(`/menu/${title}`)}
-      className='w-96 h-60 rounded-xl shadow-xl overflow-hidden relative hover:cursor-pointer'
+      className={`${className} h-60 rounded-xl shadow-xl overflow-hidden relative hover:cursor-pointer`}
     >
       <img
         className='w-full h-full object-cover brightness-75 hover:scale-110 transition-all duration-300'

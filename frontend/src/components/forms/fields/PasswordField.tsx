@@ -18,13 +18,13 @@ export default function PasswordField({
         <Password
           input={{
             colors: {
-              text: 'bg-lightgray',
-              bg: 'text-gray-600'
+              text: 'bg-theme-lightgray',
+              bg: 'text-theme-gray'
             }
           }}
           label={{
             text: confirming ? 'Password Confirmation' : 'Password',
-            color: 'text-[#323232]'
+            color: 'text-theme-darkgray'
           }}
           {...field}
         />

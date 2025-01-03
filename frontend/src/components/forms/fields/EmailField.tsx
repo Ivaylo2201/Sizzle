@@ -12,13 +12,13 @@ export default function EmailField({ control }: EmailFieldProps) {
       control={control}
       render={({ field }) => (
         <Textbox
-          label={{ text: 'Your Email', color: 'text-[#323232]' }}
+          label={{ text: 'Your Email', color: 'text-theme-darkgray' }}
           input={{
             placeholder: 'example@mail.com',
             colors: {
-              text: 'text-gray-600',
-              bg: 'bg-lightgray',
-              placeholder: 'focus:placeholder-gray-600'
+              text: 'text-theme-gray',
+              bg: 'bg-theme-lightgray',
+              placeholder: 'focus:placeholder-theme-gray'
             }
           }}
           {...field}

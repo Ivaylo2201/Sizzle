@@ -9,8 +9,9 @@ import cake from '../assets/loginDessert.jpg';
 import salad from '../assets/loginSalad.jpg';
 import handleWindowResize from '../helpers/handleWindowResize';
 import ImageSwiper from '../components/common/ImageSwiper';
+import Page from './Page';
 
-export default function AuthLayout({ children }: PropsWithChildren) {
+export default function AuthFormLayout({ children }: PropsWithChildren) {
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <div className='h-screen flex justify-center items-center'>
+    <Page className='justify-center items-center'>
       <div className='max-w-[875px] h-[625px] flex rounded-xl overflow-hidden shadow-lg'>
         {isDesktop && (
           <section className='w-[55%] h-full shadow-xl'>
@@ -37,6 +38,6 @@ export default function AuthLayout({ children }: PropsWithChildren) {
           {children}
         </section>
       </div>
-    </div>
+    </Page>
   );
 }

@@ -2,12 +2,12 @@ import EmailField from './fields/EmailField';
 import PasswordField from './fields/PasswordField';
 import Button from '../generics/Button';
 import AuthLink from '../generics/AuthLink';
-import logo from '../../assets/logo.png';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+import Logo from '../common/Logo';
 
 const signInFormDataSchema = z.object({
   email: z
@@ -48,9 +48,8 @@ export default function SignInForm() {
 
     console.log(data);
 
-    await new Promise((resolve, _) => setTimeout(resolve, 1000)).then(() => {
-      navigate('/');
-    })
+    await new Promise((resolve, _) => setTimeout(resolve, 1000))
+    navigate('/');
 
     // await mutateAsync(data, {
     //   onSuccess: () => toast.success('Successfully signed in!'),
@@ -60,17 +59,13 @@ export default function SignInForm() {
 
   return (
     <div className='flex flex-col gap-4 items-center'>
-      <img
-        src={logo}
-        alt=''
-        className='size-32 object-cover hover:scale-105 transition-all duration-300 mb-2'
-      />
+      <Logo size={8} scalable />
 
       <section className='flex flex-col gap-3 justify-center'>
         <EmailField control={control} />
         <PasswordField control={control} />
         <Link
-          className='text-gray-600 hover:text-[#323232] font-DMSans text-sm transition-colors duration-150'
+          className='text-theme-gray hover:text-theme-darkgray font-DMSans text-sm transition-colors duration-150'
           to='/forgot-password'
         >
           Forgot password?
@@ -88,7 +83,7 @@ export default function SignInForm() {
       <Button
         onClick={handleSubmit(onSubmit)}
         colors={{
-          bg: 'bg-[#323232]',
+          bg: 'bg-theme-darkgray',
           text: 'text-white'
         }}
       >

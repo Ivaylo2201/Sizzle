@@ -1,10 +1,10 @@
 import SignUpForm from '../components/forms/SignUpForm';
-import AuthLayout from '../layouts/AuthLayout';
+import AuthFormLayout from '../layouts/AuthFormLayout';
 
 export default function SignUpPage() {
   return (
-    <AuthLayout>
+    <AuthFormLayout>
       <SignUpForm />
-    </AuthLayout>
+    </AuthFormLayout>
   );
 }

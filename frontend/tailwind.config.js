@@ -7,9 +7,10 @@ export default {
         DMSans: ['DM Sans', 'sans-serif'],
       },
       colors: {
-        gunmetal: '#263238',
-        'gunmetal-light': '#3e4b52',
-        lightgray: '#f0f2f4'
+        'theme-darkgray': '#323232',
+        'theme-lightgray': '#f0f2f4',
+        'theme-gray': '#4b5563',
+        'theme-milk': '#ffebcd',
       }
     }
   },
