@@ -8,25 +8,10 @@ import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import Logo from '../common/Logo';
+import schema from '../../schemas/signInFormData';
+import useSignIn from '../../hooks/useSignIn';
 
-const signInFormDataSchema = z.object({
-  email: z
-    .string({ required_error: 'Email is required' })
-    .email({ message: 'Invalid email' }),
-  password: z
-    .string({ required_error: 'Password is required' })
-    .min(5, 'Password length must be greater than 5 characters')
-});
-
-type SignInFormData = z.infer<typeof signInFormDataSchema>;
-
-// function useSignInUser() {
-//   return useMutation({
-//     mutationFn: async (data: SignInFormData) => {
-//       return await new Promise((_, resolve) => setTimeout(resolve, 1000));
-//     }
-//   });
-// }
+type SignInFormData = z.infer<typeof schema>;
 
 export default function SignInForm() {
   const {
@@ -36,25 +21,19 @@ export default function SignInForm() {
   } = useForm<SignInFormData>();
 
   const navigate = useNavigate();
-  // const { mutateAsync } = useSignInUser();
+  const { mutateAsync } = useSignIn();
 
   const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
-    const result = signInFormDataSchema.safeParse(data);
+    const result = schema.safeParse(data);
 
     if (!result.success) {
       toast.error(result.error.issues[0].message);
       return;
     }
 
-    console.log(data);
-
-    await new Promise((resolve, _) => setTimeout(resolve, 1000));
-    navigate('/');
-
-    // await mutateAsync(data, {
-    //   onSuccess: () => toast.success('Successfully signed in!'),
-    //   onError: () => toast.error('Failed to sign in!')
-    // });
+    await mutateAsync(data, {
+      onSuccess: () => navigate('/')
+    });
   };
 
   return (

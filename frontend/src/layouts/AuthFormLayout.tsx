@@ -34,9 +34,9 @@ export default function AuthFormLayout({ children }: PropsWithChildren) {
           </section>
         )}
 
-        <section className='bg-white flex-1 flex flex-col p-16 justify-center'>
+        <main className='bg-white flex-1 flex flex-col p-16 justify-center'>
           {children}
-        </section>
+        </main>
       </div>
     </Page>
   );

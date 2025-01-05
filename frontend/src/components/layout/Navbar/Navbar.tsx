@@ -22,13 +22,13 @@ export default function Navbar({ isAuthenticated }: NavbarProps) {
           Menu
         </Link>
         <Link
-          to='signin'
+          to='/gallery'
           className='py-2 font-Montserrat text-white rounded-full uppercase'
         >
           Gallery
         </Link>
         <Link
-          to='signin'
+          to='/contact'
           className='py-2 font-Montserrat text-white rounded-full uppercase'
         >
           Contact

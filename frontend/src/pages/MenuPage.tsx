@@ -5,7 +5,7 @@ import ProtectedLayout from '../layouts/ProtectedLayout';
 export default function MenuPage() {
   return (
     <ProtectedLayout>
-      <NavbarLayout>
+      <NavbarLayout idented>
         <CategoryList />
       </NavbarLayout>
     </ProtectedLayout>

@@ -1,11 +1,16 @@
 import Navbar from '../components/layout/Navbar/Navbar';
+import useAuthStore from '../stores/authStore';
 import Page from './Page';
 
-export default function NavbarLayout({ children }: React.PropsWithChildren) {
+type NavbarLayoutProps = { idented?: boolean } & React.PropsWithChildren;
+
+export default function NavbarLayout({ idented, children }: NavbarLayoutProps) {
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <Page>
-      <Navbar isAuthenticated={true} />
-      <main className='bg-red-500 h-screen p-6'>{children}</main>
+      <Navbar isAuthenticated={isAuthenticated} />
+      <main className={idented ? 'p-7' : ''}>{children}</main>
     </Page>
   );
 }
