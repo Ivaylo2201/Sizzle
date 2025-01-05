@@ -1,19 +1,15 @@
 type ShoppingCartProps = {
   variant: 'light' | 'dark';
-  filled?: boolean;
 };
 
-export default function ShoppingCart({
-  variant,
-  filled
-}: ShoppingCartProps) {
+export default function ShoppingCart({ variant }: ShoppingCartProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      fill={filled ? variant : 'none'}
+      fill={'none'}
       stroke={variant === 'light' ? '#fff' : '#323232'}
       strokeWidth='2'
       strokeLinecap='round'

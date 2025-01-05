@@ -1,24 +1,44 @@
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import logoImg from '../../assets/logo.png';
+import logoBurger from '../../assets/common/logo-burger.png';
+import LogoBurger from '../../icons/LogoBurger';
 
 type LogoProps = {
   size: number;
-  redirectUrl?: string;
-  scalable?: boolean;
+  iconColor?: 'black' | 'white';
+  redirectable?: {
+    url: string;
+  };
+  vertical?: boolean;
+  className?: string;
 };
 
-export default function Logo({ size, redirectUrl, scalable }: LogoProps) {
+export default function Logo({
+  size,
+  iconColor = 'black',
+  redirectable,
+  vertical,
+  className = ''
+}: LogoProps) {
   const navigate: NavigateFunction = useNavigate();
 
   return (
-    <img
-      src={logoImg}
-      onClick={redirectUrl ? () => navigate(redirectUrl) : undefined}
-      alt='Sizzle logo'
-      className={`object-contain ${
-        scalable ? 'hover:scale-105 transition-all duration-300' : ''
-      } mb-2 ${redirectUrl ? 'cursor-pointer' : ''} `}
-      style={{ width: `${size}rem`, height: `${size}rem` }}
-    />
+    <div
+      className={` flex justify-center items-center ${className} ${
+        vertical ? 'flex-col gap-1' : 'gap-3'
+      } ${redirectable && 'cursor-pointer'}`}
+      onClick={redirectable ? () => navigate(redirectable.url) : undefined}
+    >
+      <LogoBurger
+        color={iconColor === 'black' ? '#000000' : '#ffffff'}
+        size={size}
+      />
+
+      <p
+        style={{ fontSize: `${size * 0.8}rem` }}
+        className='font-Montserrat text-red-500 font-extrabold uppercase tracking-widest'
+      >
+        Sizzle
+      </p>
+    </div>
   );
 }

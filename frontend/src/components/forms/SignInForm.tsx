@@ -48,7 +48,7 @@ export default function SignInForm() {
 
     console.log(data);
 
-    await new Promise((resolve, _) => setTimeout(resolve, 1000))
+    await new Promise((resolve, _) => setTimeout(resolve, 1000));
     navigate('/');
 
     // await mutateAsync(data, {
@@ -58,8 +58,8 @@ export default function SignInForm() {
   };
 
   return (
-    <div className='flex flex-col gap-4 items-center'>
-      <Logo size={8} scalable />
+    <div className='flex flex-col gap-8 items-center'>
+      <Logo size={3} vertical />
 
       <section className='flex flex-col gap-3 justify-center'>
         <EmailField control={control} />
@@ -72,23 +72,29 @@ export default function SignInForm() {
         </Link>
       </section>
 
-      <AuthLink
-        text={'Not registered yet?'}
-        button={{
-          href: '/signup',
-          text: 'Sign up'
-        }}
-      />
+      <section className='flex flex-col items-center gap-1.5'>
+        <AuthLink
+          text={'Not registered yet?'}
+          button={{
+            href: '/signup',
+            text: 'Sign up'
+          }}
+        />
 
-      <Button
-        onClick={handleSubmit(onSubmit)}
-        colors={{
-          bg: 'bg-theme-darkgray',
-          text: 'text-white'
-        }}
-      >
-        {isSubmitting ? <ClipLoader size={20} color='text-white' /> : 'Sign in'}
-      </Button>
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          colors={{
+            bg: 'bg-theme-darkgray',
+            text: 'text-white'
+          }}
+        >
+          {isSubmitting ? (
+            <ClipLoader size={20} color='text-white' />
+          ) : (
+            'Sign in'
+          )}
+        </Button>
+      </section>
     </div>
   );
 }

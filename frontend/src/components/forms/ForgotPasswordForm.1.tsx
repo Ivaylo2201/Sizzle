@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import logo from "../../assets/logo.png";
+import logo from '../../assets/logo.png';
 import EmailField from './fields/EmailField';
 import Button from '../generics/Button';
 import { ClipLoader } from 'react-spinners';
@@ -49,31 +49,32 @@ export default function ForgotPasswordForm() {
   };
 
   return (
-    <div className='flex flex-col gap-4 items-center'>
-      <Logo size={8} />
+    <div className='flex flex-col gap-8 items-center'>
+      <Logo size={3} vertical />
 
-      <EmailField control={control} />
+      <section className='flex flex-col items-center gap-4'>
+        <EmailField control={control} />
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          colors={{
+            bg: 'bg-theme-darkgray',
+            text: 'text-white'
+          }}
+        >
+          {isSubmitting ? (
+            <ClipLoader size={20} color='text-white' />
+          ) : (
+            'Send email'
+          )}
+        </Button>
 
-      <Button
-        onClick={handleSubmit(onSubmit)}
-        colors={{
-          bg: 'bg-theme-darkgray',
-          text: 'text-white'
-        }}
-      >
-        {isSubmitting ? (
-          <ClipLoader size={20} color='text-white' />
-        ) : (
-          'Send email'
-        )}
-      </Button>
-
-      <Link
-        className='text-theme-gray hover:text-theme-darkgray font-DMSans text-sm transition-colors duration-150'
-        to='/signin'
-      >
-        Back to sign in
-      </Link>
+        <Link
+          className='text-theme-gray hover:text-theme-darkgray font-DMSans text-sm transition-colors duration-150'
+          to='/signin'
+        >
+          Back to sign in
+        </Link>
+      </section>
     </div>
   );
 }

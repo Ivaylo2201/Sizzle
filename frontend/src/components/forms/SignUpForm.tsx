@@ -1,13 +1,12 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { z } from "zod";
-import EmailField from "./fields/EmailField";
-import PasswordField from "./fields/PasswordField";
-import AuthLink from "../generics/AuthLink";
-import Button from "../generics/Button";
-import { ClipLoader } from "react-spinners";
-import Logo from "../common/Logo";
-
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { z } from 'zod';
+import EmailField from './fields/EmailField';
+import PasswordField from './fields/PasswordField';
+import AuthLink from '../generics/AuthLink';
+import Button from '../generics/Button';
+import { ClipLoader } from 'react-spinners';
+import Logo from '../common/Logo';
 
 const schema = z
   .object({
@@ -65,8 +64,8 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className='flex flex-col gap-4 items-center'>
-      <Logo size={8} scalable />
+    <div className='flex flex-col gap-8 items-center'>
+      <Logo size={3} vertical />
 
       <section className='flex flex-col gap-3 '>
         <EmailField control={control} />
@@ -74,23 +73,29 @@ export default function SignUpForm() {
         <PasswordField control={control} confirming />
       </section>
 
-      <AuthLink
-        text={'Already have an account?'}
-        button={{
-          href: '/signin',
-          text: 'Sign in'
-        }}
-      />
+      <section className='flex flex-col items-center gap-1.5'>
+        <AuthLink
+          text={'Already have an account?'}
+          button={{
+            href: '/signin',
+            text: 'Sign in'
+          }}
+        />
 
-      <Button
-        onClick={handleSubmit(onSubmit)}
-        colors={{
-          bg: 'bg-theme-darkgray',
-          text: 'text-white'
-        }}
-      >
-        {isSubmitting ? <ClipLoader size={20} color='text-white' /> : 'Sign up'}
-      </Button>
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          colors={{
+            bg: 'bg-theme-darkgray',
+            text: 'text-white'
+          }}
+        >
+          {isSubmitting ? (
+            <ClipLoader size={20} color='text-white' />
+          ) : (
+            'Sign up'
+          )}
+        </Button>
+      </section>
     </div>
   );
 }
