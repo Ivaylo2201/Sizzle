@@ -1,24 +1,29 @@
-import { Link } from 'react-router-dom';
-import CartButton from './CartButton';
-import OrdersButton from './OrdersButton';
 import useAuthStore from '../../../stores/authStore';
+import Navlink from './Navlink';
+import Orders from '../../../icons/Orders';
+import ShoppingCart from '../../../icons/ShoppingCart';
+import { useCartStore } from '../../../stores/cartStore';
 
 export default function AuthenticatedButtons() {
-  const { logout } = useAuthStore();
+  const { signOut } = useAuthStore();
+  const {
+    cart: { items }
+  } = useCartStore();
 
   return (
-    <section className='h-full flex items-center px-2 gap-7'>
-      <div className='flex gap-2'>
-        <OrdersButton />
-        <CartButton />
-      </div>
-      <Link
-        onClick={logout}
-        to='/signin'
-        className='bg-theme-red hover:bg-theme-lightred transition-colors duration-300 px-6 py-2 font-Montserrat text-white rounded-full uppercase'
-      >
+    <>
+      <Navlink to='/orders'>
+        <Orders variant='light' />
+      </Navlink>
+      <Navlink to='/cart' className='relative'>
+        <span className='text-xs font-Montserrat absolute top-0 right-0 bg-theme-red text-white size-5 flex justify-center items-center rounded-full'>
+          {items.length}
+        </span>
+        <ShoppingCart variant='light' />
+      </Navlink>
+      <Navlink to='/signout' onClick={signOut}>
         Sign out
-      </Link>
-    </section>
+      </Navlink>
+    </>
   );
 }

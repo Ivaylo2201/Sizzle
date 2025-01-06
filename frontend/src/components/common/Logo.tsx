@@ -4,7 +4,7 @@ import LogoBurger from '../../icons/LogoBurger';
 
 type LogoProps = {
   size: number;
-  iconColor?: 'black' | 'white';
+  color?: 'black' | 'white';
   redirectable?: {
     url: string;
   };
@@ -14,7 +14,7 @@ type LogoProps = {
 
 export default function Logo({
   size,
-  iconColor = 'black',
+  color = 'black',
   redirectable,
   vertical,
   className = ''
@@ -22,23 +22,16 @@ export default function Logo({
   const navigate: NavigateFunction = useNavigate();
 
   return (
-    <div
-      className={` flex justify-center items-center ${className} ${
+    <span
+      className={`inline-flex justify-center items-center ${className} ${
         vertical ? 'flex-col gap-1' : 'gap-3'
       } ${redirectable && 'cursor-pointer'}`}
       onClick={redirectable ? () => navigate(redirectable.url) : undefined}
     >
       <LogoBurger
-        color={iconColor === 'black' ? '#000000' : '#ffffff'}
+        color={color === 'black' ? '#000000' : '#ffffff'}
         size={size}
       />
-
-      <p
-        style={{ fontSize: `${size * 0.8}rem` }}
-        className='font-Montserrat text-red-500 font-extrabold uppercase tracking-widest'
-      >
-        Sizzle
-      </p>
-    </div>
+    </span>
   );
 }

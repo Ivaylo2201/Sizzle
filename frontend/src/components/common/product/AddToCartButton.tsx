@@ -1,13 +1,25 @@
 import { toast } from 'react-toastify';
 import ShoppingCart from '../../../icons/ShoppingCart';
+import { useCartStore } from '../../../stores/cartStore';
+import useAuthStore from '../../../stores/authStore';
+import {  useNavigate } from 'react-router-dom';
 
 type AddToCartButtonProps = {
   pk: number;
 };
 
 export default function AddToCartButton({ pk }: AddToCartButtonProps) {
-  function buy(id: number) {
-    return toast.success(`Successfully product ${id} added to cart!`);
+  const { add } = useCartStore();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
+
+  function buy(pk: number) {
+    if (!isAuthenticated) {
+      navigate('/auth/signin');
+      return;
+    }
+
+    add(pk, 1);
   }
 
   return (

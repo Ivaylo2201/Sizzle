@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
-import Logo from '../common/Logo';
 import schema from '../../schemas/signInFormData';
 import useSignIn from '../../hooks/useSignIn';
 
@@ -37,15 +36,18 @@ export default function SignInForm() {
   };
 
   return (
-    <div className='flex flex-col gap-8 items-center'>
-      <Logo size={3} vertical />
+    <div className='flex flex-col gap-9 items-center'>
+      <p className='text-4xl font-DMSans text-theme-darkgray font-bold'>
+        Sign in
+      </p>
 
       <section className='flex flex-col gap-3 justify-center'>
         <EmailField control={control} />
         <PasswordField control={control} />
+        
         <Link
           className='text-theme-gray hover:text-theme-darkgray font-DMSans text-sm transition-colors duration-150'
-          to='/forgot-password'
+          to='/auth/forgot-password'
         >
           Forgot password?
         </Link>
@@ -55,7 +57,7 @@ export default function SignInForm() {
         <AuthLink
           text={'Not registered yet?'}
           button={{
-            href: '/signup',
+            href: '/auth/signup',
             text: 'Sign up'
           }}
         />

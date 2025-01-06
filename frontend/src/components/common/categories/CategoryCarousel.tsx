@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 
 import CategoryLink from './CategoryLink';
-import { Category } from '../../../types/Category';
+import Category from '../../../types/Category';
 
 type CarouselProps = {
   categories: Category[];
@@ -28,8 +28,15 @@ export default function CategoryCarousel({ categories }: CarouselProps) {
       }}
     >
       {categories.map((category, i) => (
-        <SwiperSlide className='flex justify-center items-center shadow-none' key={i}>
-          <CategoryLink imageUrl={category.imageUrl} title={category.title} className='w-full' />
+        <SwiperSlide
+          className='flex justify-center items-center shadow-none'
+          key={i}
+        >
+          <CategoryLink
+            imageUrl={category.imageUrl}
+            title={category.title}
+            className='w-full'
+          />
         </SwiperSlide>
       ))}
     </Swiper>

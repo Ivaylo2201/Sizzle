@@ -1,3 +1,5 @@
+import { NavigateFunction, useNavigate } from "react-router-dom";
+
 type CategoryLinkProps = {
   imageUrl: string;
   title: string;
@@ -5,9 +7,11 @@ type CategoryLinkProps = {
 }
 
 export default function CategoryLink({ imageUrl, title, className }: CategoryLinkProps) {
+  const navigate: NavigateFunction = useNavigate();
+
   return (
     <div
-      onClick={() => console.log(`/menu/${title}`)}
+      onClick={() => navigate(`/menu/${title}`)}
       className={`${className} h-60 rounded-xl shadow-xl overflow-hidden relative hover:cursor-pointer`}
     >
       <img

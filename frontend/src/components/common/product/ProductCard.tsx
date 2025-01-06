@@ -27,11 +27,11 @@ export default function ProductCard({
         {discountPercentage > 0 ? (
           <>
             <DiscountLabel discountPercentage={discountPercentage} />
-            <span className='text-red-500 text-2xl'>${discountedPrice}</span>
-            <span className='line-through'>${price}</span>
+            <span className='text-red-500 text-2xl'>${discountedPrice.toFixed(2)}</span>
+            <span className='line-through'>${price.toFixed(2)}</span>
           </>
         ) : (
-          <span className='text-red-500 text-2xl'>${price}</span>
+          <span className='text-red-500 text-2xl'>${price.toFixed(2)}</span>
         )}
       </div>
       <h1 className='text-center uppercase font-bold'>{title}</h1>

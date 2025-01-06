@@ -6,36 +6,11 @@ import PasswordField from './fields/PasswordField';
 import AuthLink from '../generics/AuthLink';
 import Button from '../generics/Button';
 import { ClipLoader } from 'react-spinners';
-import Logo from '../common/Logo';
-
-const schema = z
-  .object({
-    email: z
-      .string({ required_error: 'Email is required' })
-      .email({ message: 'Email is invalid!' }),
-    password: z
-      .string({ required_error: 'Password is required' })
-      .min(2, 'Password must be at least 8 characters long'),
-    passwordConfirmation: z.string({
-      required_error: 'Confirmation is required'
-    })
-  })
-  .refine((data) => data.password === data.passwordConfirmation, {
-    message: 'Passwords do not match!',
-    path: ['passwordConfirmation']
-  });
+import { schema } from '../../schemas/signUpFormData';
+import useSignUp from '../../hooks/useSignUp';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 type SignUpFormData = z.infer<typeof schema>;
-
-// function useSignUpUser() {
-//   return useMutation({
-//     mutationFn: async (data: SignUpFormData) => {
-//       return await new Promise((resolve, reject) =>
-//         setTimeout(() => resolve({ email: ['Email already in use!'] }), 1000)
-//       );
-//     }
-//   });
-// }
 
 export default function SignUpForm() {
   const {
@@ -43,7 +18,9 @@ export default function SignUpForm() {
     control,
     formState: { isSubmitting }
   } = useForm<SignUpFormData>();
-  // const { mutateAsync } = useSignUpUser();
+
+  const navigate: NavigateFunction = useNavigate();
+  const { mutateAsync } = useSignUp();
 
   const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
     const result = schema.safeParse(data);
@@ -53,19 +30,16 @@ export default function SignUpForm() {
       return;
     }
 
-    console.log(data);
-
-    // await mutateAsync(data, {
-    //   onSuccess: () => toast.success('Successfully signed up!'),
-    //   onError: (error: any) => {
-    //     toast.error(error.email[0]);
-    //   }
-    // });
+    await mutateAsync(data, {
+      onSuccess: () => navigate('/')
+    });
   };
 
   return (
-    <div className='flex flex-col gap-8 items-center'>
-      <Logo size={3} vertical />
+    <div className='flex flex-col gap-9 items-center'>
+      <p className='text-4xl font-DMSans text-theme-darkgray font-bold'>
+        Sign up
+      </p>
 
       <section className='flex flex-col gap-3 '>
         <EmailField control={control} />
@@ -77,7 +51,7 @@ export default function SignUpForm() {
         <AuthLink
           text={'Already have an account?'}
           button={{
-            href: '/signin',
+            href: '/auth/signin',
             text: 'Sign in'
           }}
         />
