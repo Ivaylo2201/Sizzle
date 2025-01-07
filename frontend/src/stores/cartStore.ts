@@ -1,7 +1,14 @@
 import { create } from 'zustand';
 import Cart from '../types/cart/Cart';
 import { axiosClient as axios } from '../api/axiosClient';
-import { CartState } from '../types/cart/CartState';
+
+export type CartState = {
+  cart: Cart;
+  add: (pk: number, quantity: number) => Promise<void>;
+  remove: (pk: number) => Promise<void>;
+  fetch: () => Promise<void>;
+  order: () => Promise<void>;
+};
 
 export const useCartStore = create<CartState>((set, get) => ({
   cart: { items: [], subtotal: 0 },

@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import useAuthStore from '../stores/authStore';
-import { schema } from '../schemas/signUpFormData';
+import { schema } from '../schemas/signUpSchema';
 import { z } from 'zod';
 import { axiosClient as axios } from '../api/axiosClient';
 import { AxiosError } from 'axios';
@@ -18,8 +18,8 @@ export default function useSignUp() {
       const res = await axios.post<AuthResponse>('/auth/signup', user);
       return res.data;
     },
-    onSuccess: (data: AuthResponse) => {
-      signIn(data.email);
+    onSuccess: () => {
+      signIn();
     },
     onError: (error) => {
       if (

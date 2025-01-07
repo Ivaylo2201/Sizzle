@@ -1,18 +1,18 @@
 import { Control, Controller } from 'react-hook-form';
-import Password from '../../generics/Password';
+import Password from '../../shared/Password';
 
-type PassowordFieldProps = {
+type PasswordFieldProps = {
   control: Control<any>;
-  confirming?: boolean;
+  isConfirming?: boolean;
 };
 
 export default function PasswordField({
   control,
-  confirming
-}: PassowordFieldProps) {
+  isConfirming
+}: PasswordFieldProps) {
   return (
     <Controller
-      name={confirming ? 'passwordConfirmation' : 'password'}
+      name={isConfirming ? 'passwordConfirmation' : 'password'}
       control={control}
       render={({ field }) => (
         <Password
@@ -23,7 +23,7 @@ export default function PasswordField({
             }
           }}
           label={{
-            text: confirming ? 'Password Confirmation' : 'Password',
+            text: isConfirming ? 'Password Confirmation' : 'Password',
             color: 'text-theme-darkgray'
           }}
           {...field}

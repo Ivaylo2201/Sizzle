@@ -1,5 +1,5 @@
 import { Control, Controller } from 'react-hook-form';
-import Textbox from '../../generics/Textbox';
+import Textbox from '../../shared/Textbox';
 
 type EmailFieldProps = {
   control: Control<any>;

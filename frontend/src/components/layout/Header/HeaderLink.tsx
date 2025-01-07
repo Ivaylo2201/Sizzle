@@ -1,12 +1,17 @@
 import { Link } from 'react-router-dom';
 
-type NavlinkProps = {
+type HeaderLinkProps = {
   to: string;
   onClick?: () => void;
   className?: string;
 } & React.PropsWithChildren;
 
-export default function Navlink({ to, onClick, className, children }: NavlinkProps) {
+export default function HeaderLink({
+  to,
+  onClick,
+  className,
+  children
+}: HeaderLinkProps) {
   return (
     <Link
       to={to}

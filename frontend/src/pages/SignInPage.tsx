@@ -1,10 +1,10 @@
 import SignInForm from '../components/forms/SignInForm';
-import AuthFormLayout from '../layouts/AuthFormLayout';
+import FormWrapper from '../wrappers/FormWrapper';
 
 export default function SignInPage() {
   return (
-    <AuthFormLayout>
+    <FormWrapper>
       <SignInForm />
-    </AuthFormLayout>
+    </FormWrapper>
   );
 }

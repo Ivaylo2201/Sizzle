@@ -1,48 +1,24 @@
 import { useMutation } from 'react-query';
-import useAuthStore from '../stores/authStore';
+
 import { z } from 'zod';
-import schema from '../schemas/signInFormData';
+import { schema } from '../schemas/signInSchema';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { axiosClient as axios } from '../api/axiosClient';
+import { AuthResponse } from '../types/AuthResponse';
+import useAuthStore from '../stores/authStore';
 
 type User = z.infer<typeof schema>;
-type SignInResponse = { access: string; refresh: string; user: User };
-type SignInErrors = { detail: string };
 
 export default function useSignIn() {
   const { signIn } = useAuthStore();
-  const navigate: NavigateFunction = useNavigate();
 
-  const mutation = useMutation<SignInResponse, AxiosError<SignInErrors>, User>({
-    mutationFn: async (user: User) => {
-      // Mock
-      await new Promise((res, reject) =>
-        setTimeout(
-          () =>
-            res({
-              response: {
-                data: {
-                  detail: 'Token is invalid or expired'
-                },
-                status: 400,
-                statusText: 'Bad Request'
-              },
-              message: 'Request failed with status code 400'
-            }),
-          1000
-        )
-      );
-      return { access: '1212', refresh: '1212', user };
-
-      const res = await axios.post<SignInResponse>('/auth/signin', user);
+  const mutation = useMutation<AuthResponse, AxiosError<{ detail: string }>, User>({
+    mutationFn: async (user) => {
+      const res = await axios.post<AuthResponse>('/auth/signin', user);
       return res.data;
     },
-    onSuccess: (data: SignInResponse) => {
-      signIn(data.user.email);
-      navigate('/');
-    },
+    onSuccess: () => signIn(),
     onError: (error) => {
       if (error.response) {
         toast.error(error.response.data.detail);

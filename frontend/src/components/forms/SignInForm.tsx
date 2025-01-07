@@ -1,13 +1,12 @@
 import EmailField from './fields/EmailField';
 import PasswordField from './fields/PasswordField';
-import Button from '../generics/Button';
-import AuthLink from '../generics/AuthLink';
+import Button from '../shared/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
-import schema from '../../schemas/signInFormData';
+import { schema } from '../../schemas/signInSchema';
 import useSignIn from '../../hooks/useSignIn';
 
 type SignInFormData = z.infer<typeof schema>;
@@ -36,31 +35,33 @@ export default function SignInForm() {
   };
 
   return (
-    <div className='flex flex-col gap-9 items-center'>
-      <p className='text-4xl font-DMSans text-theme-darkgray font-bold'>
+    <div className='flex flex-col gap-9 items-center font-DMSans'>
+      <p className='text-4xl text-theme-darkgray font-bold'>
         Sign in
       </p>
 
       <section className='flex flex-col gap-3 justify-center'>
         <EmailField control={control} />
         <PasswordField control={control} />
-        
+
         <Link
-          className='text-theme-gray hover:text-theme-darkgray font-DMSans text-sm transition-colors duration-150'
-          to='/auth/forgot-password'
+          className='text-theme-gray hover:text-theme-darkgray text-sm transition-colors duration-150'
+          to='/auth/reset'
         >
           Forgot password?
         </Link>
       </section>
 
-      <section className='flex flex-col items-center gap-1.5'>
-        <AuthLink
-          text={'Not registered yet?'}
-          button={{
-            href: '/auth/signup',
-            text: 'Sign up'
-          }}
-        />
+      <section className='flex flex-col items-center gap-5'>
+        <p className=' text-theme-gray text-bold'>
+          Not registered yet?&nbsp;
+          <Link
+            className='text-theme-darkgray font-semibold hover:text-opacity-85 transition-colors duration-200'
+            to='/auth/signup'
+          >
+            Sign up
+          </Link>
+        </p>
 
         <Button
           onClick={handleSubmit(onSubmit)}

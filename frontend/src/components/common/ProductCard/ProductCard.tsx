@@ -1,9 +1,7 @@
 import Rating from './Rating';
 import DiscountLabel from './DiscountLabel';
-import Product from '../../../types/Product';
 import AddToCartButton from './AddToCartButton';
-
-type ProductCardProps = Product;
+import Product from '../../../types/product';
 
 export default function ProductCard({
   pk,
@@ -13,7 +11,7 @@ export default function ProductCard({
   discountedPrice,
   title,
   rating = 0
-}: ProductCardProps) {
+}: Product) {
   return (
     <div className='group p-2 inline-flex flex-col font-DMSans bg-white rounded-xl shadow-lg relative'>
       <div className='w-52 h-40 flex justify-center overflow-hidden'>
@@ -27,7 +25,9 @@ export default function ProductCard({
         {discountPercentage > 0 ? (
           <>
             <DiscountLabel discountPercentage={discountPercentage} />
-            <span className='text-red-500 text-2xl'>${discountedPrice.toFixed(2)}</span>
+            <span className='text-red-500 text-2xl'>
+              ${discountedPrice.toFixed(2)}
+            </span>
             <span className='line-through'>${price.toFixed(2)}</span>
           </>
         ) : (

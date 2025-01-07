@@ -1,10 +1,10 @@
-import CategoryList from '../components/common/categories/CategoryList';
-import NavbarLayout from '../layouts/NavbarLayout';
+import Menu from '../components/common/Menu/Menu';
+import HeaderWrapper from '../wrappers/HeaderWrapper';
 
 export default function MenuPage() {
   return (
-    <NavbarLayout idented>
-      <CategoryList />
-    </NavbarLayout>
+    <HeaderWrapper>
+      <Menu />
+    </HeaderWrapper>
   );
 }

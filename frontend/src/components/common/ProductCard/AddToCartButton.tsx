@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import ShoppingCart from '../../../icons/ShoppingCart';
 import { useCartStore } from '../../../stores/cartStore';
 import useAuthStore from '../../../stores/authStore';

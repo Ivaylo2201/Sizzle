@@ -1,13 +1,8 @@
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import TCategory from '../../../types/category';
 
-type CategoryLinkProps = {
-  imageUrl: string;
-  title: string;
-  className?: string;
-}
-
-export default function CategoryLink({ imageUrl, title, className }: CategoryLinkProps) {
-  const navigate: NavigateFunction = useNavigate();
+export default function Category({ imageUrl, title, className }: TCategory) {
+  const navigate = useNavigate();
 
   return (
     <div

@@ -1,14 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import Category from './Category';
+import TMenu from '../../../types/menu';
 
-import CategoryLink from './CategoryLink';
-import Category from '../../../types/Category';
-
-type CarouselProps = {
-  categories: Category[];
-};
-
-export default function CategoryCarousel({ categories }: CarouselProps) {
+export default function CarouselMenu({ categories }: TMenu) {
   return (
     <Swiper
       modules={[Autoplay]}
@@ -32,7 +27,7 @@ export default function CategoryCarousel({ categories }: CarouselProps) {
           className='flex justify-center items-center shadow-none'
           key={i}
         >
-          <CategoryLink
+          <Category
             imageUrl={category.imageUrl}
             title={category.title}
             className='w-full'

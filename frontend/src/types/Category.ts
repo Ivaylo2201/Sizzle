@@ -1,3 +1,3 @@
-type Category = { imageUrl: string; title: string; className?: string };
+type TCategory = { imageUrl: string; title: string; className?: string };
 
-export default Category;
+export default TCategory;

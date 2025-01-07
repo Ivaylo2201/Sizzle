@@ -1,32 +1,27 @@
-import { NavigateFunction, useNavigate } from 'react-router-dom';
-import logoBurger from '../../assets/common/logo-burger.png';
+import { useNavigate } from 'react-router-dom';
 import LogoBurger from '../../icons/LogoBurger';
 
 type LogoProps = {
   size: number;
   color?: 'black' | 'white';
-  redirectable?: {
-    url: string;
-  };
-  vertical?: boolean;
+  redirectUrl?: string;
   className?: string;
 };
 
 export default function Logo({
   size,
   color = 'black',
-  redirectable,
-  vertical,
+  redirectUrl,
   className = ''
 }: LogoProps) {
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <span
       className={`inline-flex justify-center items-center ${className} ${
-        vertical ? 'flex-col gap-1' : 'gap-3'
-      } ${redirectable && 'cursor-pointer'}`}
-      onClick={redirectable ? () => navigate(redirectable.url) : undefined}
+        redirectUrl ? 'cursor-pointer' : ''
+      }`}
+      onClick={redirectUrl ? () => navigate(redirectUrl) : undefined}
     >
       <LogoBurger
         color={color === 'black' ? '#000000' : '#ffffff'}
