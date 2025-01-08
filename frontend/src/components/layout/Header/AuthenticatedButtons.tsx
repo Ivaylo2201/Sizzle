@@ -22,7 +22,7 @@ export default function AuthenticatedButtons() {
         </span>
         <ShoppingCart variant='light' />
       </HeaderLink>
-      <HeaderLink to='/signout' onClick={signOut}>
+      <HeaderLink to='/auth/signin' onClick={signOut}>
         Sign out
       </HeaderLink>
     </>

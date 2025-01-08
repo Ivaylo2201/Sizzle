@@ -15,6 +15,7 @@ export default function useSignIn() {
 
   const mutation = useMutation<AuthResponse, AxiosError<{ detail: string }>, User>({
     mutationFn: async (user) => {
+      return await new Promise<AuthResponse>((resolve, reject) => { setTimeout(resolve, 1000)});
       const res = await axios.post<AuthResponse>('/auth/signin', user);
       return res.data;
     },
