@@ -3,43 +3,62 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-from .constraints import Categories
+from .constraints import (
+    BASE_PRICE_DECIMAL_PLACES, 
+    BASE_PRICE_MAX_DIGITS, 
+    BASE_PRICE_MIN_VALUE, 
+    CART_RELATED_NAME, 
+    CATEGORY_NAME_MAX_LENGTH, 
+    DISCOUNT_PERCENTAGE_DEFAULT, 
+    DISCOUNT_PERCENTAGE_MAX_VALUE, 
+    DISCOUNT_PERCENTAGE_MIN_VALUE, 
+    IMAGE_UPLOAD_DIRECTORY, 
+    PRODUCT_NAME_MAX_LENGTH, 
+    QUANTITY_DEFAULT, 
+    SUBTOTAL_DECIMAL_PLACES, 
+    SUBTOTAL_DEFAULT, 
+    SUBTOTAL_MAX_DIGITS, 
+    Categories
+)
 
 class Cart(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    subtotal = models.DecimalField(max_digits=100, decimal_places=2, default=0)
 
-    @property
-    def items(self) -> int:
-        return self.items.count()
-
-class Product(models.Model):
-    name = models.CharField(
-        max_length=50
+    subtotal = models.DecimalField(
+        max_digits=SUBTOTAL_MAX_DIGITS, 
+        decimal_places=SUBTOTAL_DECIMAL_PLACES, 
+        default=SUBTOTAL_DEFAULT
     )
 
-    category = models.CharField(
-        max_length=25,
+class Category(models.Model):
+    name = models.CharField(
+        max_length=CATEGORY_NAME_MAX_LENGTH, 
         choices=Categories.choices
     )
 
+class Product(models.Model):
+    name = models.CharField(max_length=PRODUCT_NAME_MAX_LENGTH)
+
+    category = models.ForeignKey(
+        to=Category, 
+        on_delete=models.CASCADE
+    )
+
     base_price = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        validators=[MinValueValidator(1)]
+        max_digits=BASE_PRICE_MAX_DIGITS,
+        decimal_places=BASE_PRICE_DECIMAL_PLACES,
+        validators=[MinValueValidator(BASE_PRICE_MIN_VALUE)]
     )
 
     discount_percentage = models.PositiveSmallIntegerField(
-        default=0,
+        default=DISCOUNT_PERCENTAGE_DEFAULT,
         validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)
+            MinValueValidator(DISCOUNT_PERCENTAGE_MIN_VALUE),
+            MaxValueValidator(DISCOUNT_PERCENTAGE_MAX_VALUE)
         ]
     )
 
-    image = models.ImageField(
-        upload_to='products/'
-    )
+    image = models.ImageField(upload_to=IMAGE_UPLOAD_DIRECTORY)
 
     date_added = models.DateTimeField(
         auto_now_add=True,
@@ -54,9 +73,18 @@ class Product(models.Model):
         return self.name
     
 class Item(models.Model):
-    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
-    cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(
+        to=Product, 
+        on_delete=models.CASCADE
+    )
+
+    quantity = models.PositiveSmallIntegerField(default=QUANTITY_DEFAULT)
+
+    cart = models.ForeignKey(
+        to=Cart, 
+        on_delete=models.CASCADE, 
+        related_name=CART_RELATED_NAME
+    )
 
     @property
     def price(self) -> Decimal:
