@@ -11,7 +11,11 @@ export default function SignInForm() {
 
   const onSubmit = async (data: any) => {
     await mutateAsync(data, {
-      onSuccess: () => navigate('/')
+      onSuccess: (res) => {
+        localStorage.setItem('token', res.access);
+        localStorage.setItem('refresh', res.refresh);
+        navigate('/')
+      }
     });
   };
 

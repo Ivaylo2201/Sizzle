@@ -13,10 +13,12 @@ export default function AddToCartButton({ pk }: AddToCartButtonProps) {
   const { isAuthenticated } = useAuthStore();
 
   function buy(pk: number) {
-    if (!isAuthenticated) {
-      navigate('/auth/signin');
-      return;
-    }
+    console.log(isAuthenticated);
+
+    // if (!isAuthenticated) {
+    //   navigate('/auth/signin');
+    //   return;
+    // }
 
     add(pk, 1);
   }

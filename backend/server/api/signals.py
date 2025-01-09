@@ -14,7 +14,7 @@ def create_cart(sender, instance: User, created: bool, **kwargs) -> None:
 @receiver(post_save, sender=Item)
 def calculate_subtotal(sender, instance: Item, **kwargs) -> None:
     cart: Cart = instance.cart
-    items: QuerySet[Item] = cart.items
+    items: QuerySet[Item] = cart.items.all()
 
     cart.subtotal = items.aggregate(total=Sum('price'))['total'] or 0
     cart.save()
