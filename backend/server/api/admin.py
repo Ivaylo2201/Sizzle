@@ -1,3 +1,19 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Cart, Category, Item, Product
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'base_price', 'discount_percentage', 'price', 'image', 'date_added')
+
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('product', 'quantity', 'cart', 'price')
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('user', 'subtotal')
