@@ -4,6 +4,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
@@ -24,6 +26,7 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
+      <Folder Include="Database\Migrations\" />
       <Folder Include="DTOs\" />
       <Folder Include="Repositories\" />
       <Folder Include="Services\" />

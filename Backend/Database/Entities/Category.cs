@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Database.Entities;
 
+
+[Table("Categories")]
 public class Category
 {
     [Key]

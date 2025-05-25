@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Database.Entities;
 
+
+[Table("Products")]
 public class Product
 {
     [Key]
