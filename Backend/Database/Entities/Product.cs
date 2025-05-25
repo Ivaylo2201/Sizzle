@@ -41,6 +41,7 @@ public class Product
     public required int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
     
+    public ICollection<Item> Items { get; set; } = new List<Item>();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
     public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 }

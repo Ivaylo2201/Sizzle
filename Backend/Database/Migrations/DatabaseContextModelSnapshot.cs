@@ -129,6 +129,37 @@ namespace Backend.Database.Migrations
                     b.ToTable("Ingredients");
                 });
 
+            modelBuilder.Entity("Backend.Database.Entities.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Items");
+                });
+
             modelBuilder.Entity("Backend.Database.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -302,6 +333,31 @@ namespace Backend.Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Backend.Database.Entities.Item", b =>
+                {
+                    b.HasOne("Backend.Database.Entities.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Backend.Database.Entities.Order", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Backend.Database.Entities.Product", "Product")
+                        .WithMany("Items")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Backend.Database.Entities.Order", b =>
                 {
                     b.HasOne("Backend.Database.Entities.User", "User")
@@ -358,6 +414,11 @@ namespace Backend.Database.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Database.Entities.Cart", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Backend.Database.Entities.Category", b =>
                 {
                     b.Navigation("Products");
@@ -368,8 +429,15 @@ namespace Backend.Database.Migrations
                     b.Navigation("Addresses");
                 });
 
+            modelBuilder.Entity("Backend.Database.Entities.Order", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Backend.Database.Entities.Product", b =>
                 {
+                    b.Navigation("Items");
+
                     b.Navigation("Reviews");
                 });
 

@@ -14,4 +14,6 @@ public class Order
     [Required]
     public required int UserId { get; set; }
     public User User { get; set; } = null!;
+    
+    public ICollection<Item> Items { get; set; } = new List<Item>();
 }

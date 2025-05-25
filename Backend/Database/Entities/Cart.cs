@@ -15,4 +15,6 @@ public class Cart
     
     [Column(TypeName = "decimal(10,2)")]
     public decimal Total { get; set; }
+    
+    public ICollection<Item> Items { get; set; } = new List<Item>();
 }
