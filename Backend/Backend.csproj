@@ -24,8 +24,7 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
-      <Folder Include="Database\Configurations\" />
-      <Folder Include="Database\Entities\" />
+      <Folder Include="DTOs\" />
       <Folder Include="Repositories\" />
       <Folder Include="Services\" />
       <Folder Include="wwwroot\" />
