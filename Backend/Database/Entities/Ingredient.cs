@@ -11,7 +11,7 @@ public class Ingredient
     public int Id { get; set; }
     
     [Required]
-    [MaxLength(20)]
+    [MaxLength(50)]
     public required string IngredientName { get; set; }
     
     public ICollection<Product> Products { get; set; } = new List<Product>();
