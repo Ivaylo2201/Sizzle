@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using System.Text;
 using Backend.Database;
-using Backend.Database.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -49,7 +48,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddDbContext<DatabaseContext>(options => 
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 // builder.Services.AddSingleton<TokenService>();
 

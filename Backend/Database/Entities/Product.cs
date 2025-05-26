@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Database.Entities;
 
-
 [Table("Products")]
 public class Product
 {
@@ -22,7 +21,7 @@ public class Product
     
     [DefaultValue(0)]
     [Range(0, 100)]
-    public int? DiscountPercentage { get; set; } = 0;
+    public int DiscountPercentage { get; set; } = 0;
     
     [Required]
     [MaxLength(255)]

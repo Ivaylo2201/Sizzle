@@ -24,5 +24,6 @@ public class Review
     
     [Required]
     public required int UserId  { get; set; }
+
     public User User { get; set; } = null!;
 }
