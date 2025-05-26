@@ -197,10 +197,10 @@ namespace Backend.Database.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
-                    b.Property<int?>("DiscountPercentage")
+                    b.Property<int>("DiscountPercentage")
                         .HasColumnType("integer");
 
                     b.Property<string>("ImageUrl")
@@ -208,7 +208,7 @@ namespace Backend.Database.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal>("InitialPrice")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("ProductName")

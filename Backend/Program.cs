@@ -60,6 +60,15 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+if (args.Contains("seed"))
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+
+    await Seeder.Run(context);
+    return;
+}
+
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowAll");

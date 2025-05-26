@@ -29,7 +29,6 @@
       <Folder Include="Database\Migrations\" />
       <Folder Include="Repositories\" />
       <Folder Include="Services\" />
-      <Folder Include="wwwroot\" />
     </ItemGroup>
 
 </Project>

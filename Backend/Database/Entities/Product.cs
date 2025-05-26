@@ -17,11 +17,14 @@ public class Product
     [Required]
     [Range(1, 1000)]
     [Column(TypeName = "decimal(10,2)")]
-    public required decimal Price { get; set; }
+    public required decimal InitialPrice { get; set; }
+    
+    [NotMapped]
+    public decimal Price => InitialPrice * (1 - DiscountPercentage / 100m);
     
     [DefaultValue(0)]
     [Range(0, 100)]
-    public int DiscountPercentage { get; set; } = 0;
+    public int DiscountPercentage { get; set; }
     
     [Required]
     [MaxLength(255)]
@@ -29,7 +32,7 @@ public class Product
     public required string ImageUrl { get; set; }
     
     [Required]
-    [MaxLength(100)]
+    [MaxLength(255)]
     public required string Description { get; set; }
     
     [Required]
