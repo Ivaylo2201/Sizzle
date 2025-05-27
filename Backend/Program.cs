@@ -1,8 +1,10 @@
 using System.Security.Claims;
 using System.Text;
 using Backend.Database;
+using Backend.Middlewares;
 using Backend.Repositories.Interfaces;
 using Backend.Repositories;
+using Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -21,6 +23,7 @@ var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -53,7 +56,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<DatabaseContext>(options => 
     options.UseNpgsql(connectionString));
 
-// builder.Services.AddSingleton<TokenService>();
+builder.Services.AddSingleton<TokenService>();
 
 var app = builder.Build();
 
@@ -78,6 +81,7 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
+app.UseMiddleware<UserContextMiddleware>();
 
 app.MapControllers();
 

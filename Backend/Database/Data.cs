@@ -91,6 +91,7 @@ public static class Data
                 "The ultimate morning indulgence—juicy beef, a fried egg, bacon, and hash browns all tucked inside a buttery bun.",
             Calories = 820,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["beefPatty"],
@@ -113,6 +114,7 @@ public static class Data
                 "Bold and fiery, this burger brings heat with tangy buffalo sauce and cools it down with creamy blue cheese—perfectly balanced.",
             Calories = 780,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["buffaloBeef"],
@@ -136,6 +138,7 @@ public static class Data
                 "Grilled to perfection, our chicken burger is tender, juicy, and refreshingly light, served on a toasted bun with crisp greens.",
             Calories = 690,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["beefPatty"],
@@ -158,6 +161,7 @@ public static class Data
                 "Simple yet irresistible—a traditional beef burger made with love, nostalgia, and the perfect balance of flavors.",
             Calories = 710,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["beefPatty"],
@@ -179,6 +183,7 @@ public static class Data
                 "A festive fusion of savory and sweet, this burger features tangy cranberry sauce paired with a juicy turkey patty and creamy brie.",
             Calories = 730,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["beefPatty"],
@@ -199,6 +204,7 @@ public static class Data
                 "A beast of a burger—double patties, melted cheese, smoky bacon, and all the fixings piled high for the ultimate feast.",
             Calories = 880,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["beefPatty"],
@@ -221,6 +227,7 @@ public static class Data
                 "Crispy on the outside, tender on the inside—our golden fish fillet burger is a refreshing dive into flavor.",
             Calories = 660,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["fishFillet"],
@@ -241,6 +248,7 @@ public static class Data
                 "Spice lovers rejoice—this burger packs a punch with fiery jalapeños and bold chipotle mayo on a juicy beef patty.",
             Calories = 770,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["beefPatty"],
@@ -264,6 +272,7 @@ public static class Data
                 "Sweet, smoky, and melt-in-your-mouth—slow-cooked pulled pork with tangy BBQ sauce creates the perfect messy masterpiece.",
             Calories = 790,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["pulledPork"],
@@ -283,6 +292,7 @@ public static class Data
                 "A garden-fresh delight, packed with a hearty plant-based patty and crisp veggies, perfect for a healthy bite.",
             Calories = 680,
             CategoryId = 1,
+            Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
             {
                 Ingredients["blackBeanPatty"],

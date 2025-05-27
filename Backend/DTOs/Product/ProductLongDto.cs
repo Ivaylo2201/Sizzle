@@ -1,5 +1,4 @@
-﻿using Backend.Database.Entities;
-using Backend.DTOs.Review;
+﻿using Backend.DTOs.Review;
 
 namespace Backend.DTOs.Product;
 
