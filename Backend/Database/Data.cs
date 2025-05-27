@@ -48,7 +48,7 @@ public static class Data
         {
             Id = 1,
             ProductName = "Bacon Burger",
-            InitialPrice = 7.99m,
+            InitialPrice = 8,
             DiscountPercentage = 10,
             ImageUrl = "/Burgers/bacon_burger.png",
             Description =
@@ -67,7 +67,7 @@ public static class Data
         {
             Id = 2,
             ProductName = "Applewood Burger",
-            InitialPrice = 8.49m,
+            InitialPrice = 10,
             ImageUrl = "/Burgers/applewood_burger.png",
             Description =
                 "Savor the deep, savory aroma of applewood-smoked bacon layered over flame-grilled beef, with caramelized onions adding a touch of sweetness.",
@@ -86,7 +86,7 @@ public static class Data
         {
             Id = 3,
             ProductName = "Breakfast Burger",
-            InitialPrice = 8.99m,
+            InitialPrice = 10,
             DiscountPercentage = 15,
             ImageUrl = "/Burgers/breakfast_burger.png",
             Description =
@@ -111,7 +111,7 @@ public static class Data
         {
             Id = 4,
             ProductName = "Buffalo Burger",
-            InitialPrice = 9.29m,
+            InitialPrice = 12,
             ImageUrl = "/Burgers/buffalo_burger.png",
             Description =
                 "Bold and fiery, this burger brings heat with tangy buffalo sauce and cools it down with creamy blue cheese—perfectly balanced.",
@@ -135,7 +135,7 @@ public static class Data
         {
             Id = 5,
             ProductName = "Chicken Burger",
-            InitialPrice = 7.49m,
+            InitialPrice = 8,
             DiscountPercentage = 20,
             ImageUrl = "/Burgers/chicken_burger.png",
             Description =
@@ -160,7 +160,7 @@ public static class Data
         {
             Id = 6,
             ProductName = "Classic Burger",
-            InitialPrice = 6.99m,
+            InitialPrice = 7,
             ImageUrl = "/Burgers/classic_burger.png",
             Description =
                 "Simple yet irresistible—a traditional beef burger made with love, nostalgia, and the perfect balance of flavors.",
@@ -182,7 +182,7 @@ public static class Data
         {
             Id = 7,
             ProductName = "Cranberry Burger",
-            InitialPrice = 8.79m,
+            InitialPrice = 9,
             DiscountPercentage = 10,
             ImageUrl = "/Burgers/cranberry_burger.png",
             Description =
@@ -205,7 +205,7 @@ public static class Data
         {
             Id = 8,
             ProductName = "Deluxe Burger",
-            InitialPrice = 9.49m,
+            InitialPrice = 10,
             ImageUrl = "/Burgers/deluxe_burger.png",
             Description =
                 "A beast of a burger—double patties, melted cheese, smoky bacon, and all the fixings piled high for the ultimate feast.",
@@ -228,7 +228,7 @@ public static class Data
         {
             Id = 9,
             ProductName = "Fish Burger",
-            InitialPrice = 7.29m,
+            InitialPrice = 8,
             DiscountPercentage = 5,
             ImageUrl = "/Burgers/fish_burger.png",
             Description =
@@ -251,7 +251,7 @@ public static class Data
         {
             Id = 10,
             ProductName = "Jalapeño Burger",
-            InitialPrice = 8.59m,
+            InitialPrice = 10,
             ImageUrl = "/Burgers/jalapeno_burger.png",
             Description =
                 "Spice lovers rejoice—this burger packs a punch with fiery jalapeños and bold chipotle mayo on a juicy beef patty.",
@@ -275,7 +275,7 @@ public static class Data
         {
             Id = 11,
             ProductName = "Pulled Pork Burger",
-            InitialPrice = 8.99m,
+            InitialPrice = 9,
             DiscountPercentage = 25,
             ImageUrl = "/Burgers/pulled_pork_burger.png",
             Description =
@@ -297,7 +297,7 @@ public static class Data
         {
             Id = 12,
             ProductName = "Veggie Burger",
-            InitialPrice = 7.89m,
+            InitialPrice = 8,
             ImageUrl = "/Burgers/veggie_burger.png",
             Description =
                 "A garden-fresh delight, packed with a hearty plant-based patty and crisp veggies, perfect for a healthy bite.",

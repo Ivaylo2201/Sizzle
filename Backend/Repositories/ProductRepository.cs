@@ -16,7 +16,13 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
 
     public async Task<ProductLongDto?> GetProductByIdAsync(int id)
     {
-        var product = await context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        var product = await context.Products.Include(p => p.Category)
+                                            .Include(p => p.Ingredients)
+                                            .Include(p => p.Reviews)
+                                                .ThenInclude(r => r.User)
+                                            .AsSplitQuery()
+                                            .FirstOrDefaultAsync(p => p.Id == id);
+        
         return product?.ToLongDto();
     }
 }

@@ -11,6 +11,7 @@ public static class ProductMapper
         {
             Id = product.Id,
             ProductName = product.ProductName,
+            InitialPrice = product.InitialPrice,
             Price = product.Price,
             DiscountPercentage = product.DiscountPercentage,
             ImageUrl = product.ImageUrl
@@ -23,6 +24,7 @@ public static class ProductMapper
         {
             Id = product.Id,
             ProductName = product.ProductName,
+            InitialPrice = product.InitialPrice,
             Price = product.Price,
             DiscountPercentage = product.DiscountPercentage,
             ImageUrl = product.ImageUrl,

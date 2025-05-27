@@ -5,15 +5,15 @@ namespace Backend.Database.Entities;
 public class User
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; init; }
     
     [Required]
     [MaxLength(20)]
-    public required string FirstName { get; set; }
+    public required string FirstName { get; init; }
     
     [Required]
     [MaxLength(20)]
-    public required string LastName { get; set; }
+    public required string LastName { get; init; }
     
     [MaxLength(50)]
     public string? Email { get; set; }
@@ -22,9 +22,9 @@ public class User
     [MaxLength(64)]
     public required string Password { get; set; }
 
-    public Cart Cart { get; set; } = null!;
+    public Cart Cart { get; init; } = null!;
     
-    public ICollection<Review> Reviews { get; set; } = new List<Review>();
-    public ICollection<Order> Orders { get; set; } = new List<Order>();
-    public ICollection<Address> Addresses { get; set; } = new List<Address>();
+    public ICollection<Review> Reviews { get; init; } = new List<Review>();
+    public ICollection<Order> Orders { get; init; } = new List<Order>();
+    public ICollection<Address> Addresses { get; init; } = new List<Address>();
 }

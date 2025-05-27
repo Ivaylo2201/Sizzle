@@ -7,13 +7,13 @@ namespace Backend.Database.Entities;
 public class Order
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; init; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; init; } = DateTime.Now;
     
     [Required]
-    public required int UserId { get; set; }
-    public User User { get; set; } = null!;
+    public required int UserId { get; init; }
+    public User User { get; init; } = null!;
     
-    public ICollection<Item> Items { get; set; } = new List<Item>();
+    public ICollection<Item> Items { get; init; } = new List<Item>();
 }

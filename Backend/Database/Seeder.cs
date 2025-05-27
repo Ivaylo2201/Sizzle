@@ -35,7 +35,7 @@ public static class Seeder
     private static async Task Seed(DatabaseContext context)
     {
         context.Categories.AddRange(Data.Categories.Values);
-        context.Ingredients.AddRange(Data.Ingredients.Values.ToList());
+        context.Ingredients.AddRange(Data.Ingredients.Values);
         context.Products.AddRange(Data.Products);
         
         await context.SaveChangesAsync();

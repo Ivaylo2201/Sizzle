@@ -3,9 +3,9 @@ using Backend.DTOs.Item;
 
 namespace Backend.Mappers;
 
-public class ItemMapper
+public static class ItemMapper
 {
-    public static ItemDto ToDto(Item item)
+    public static ItemDto ToDto(this Item item)
     {
         return new ItemDto
         {

@@ -7,12 +7,14 @@ namespace Backend.Controllers;
 [Route("api/[controller]")]
 public class ProductsController(IProductRepository productRepository) : ControllerBase
 {
+    [HttpGet]
     public async Task<IActionResult> GetAllProductsAsync()
     {
         var products = await productRepository.GetAllProductsAsync();
         return Ok(products);
     }
 
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetProductByIdAsync(int id)
     {
         var product = await productRepository.GetProductByIdAsync(id);

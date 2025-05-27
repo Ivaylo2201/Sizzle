@@ -3,7 +3,7 @@ using Backend.Repositories.Interfaces;
 
 namespace Backend.Middlewares;
 
-public class UserContextMiddleware(RequestDelegate next, IUserRepository userRepository)
+public class UserContextMiddleware(RequestDelegate next)
 {
     public async Task InvokeAsync(HttpContext context)
     {
@@ -11,6 +11,7 @@ public class UserContextMiddleware(RequestDelegate next, IUserRepository userRep
         {
             if (int.TryParse(context.User.FindFirstValue("sub"), out var id))
             {
+                var userRepository = context.RequestServices.GetRequiredService<IUserRepository>();
                 var user = await userRepository.GetUserById(id);
                 context.Items["User"] = user;
             }

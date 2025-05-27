@@ -7,14 +7,14 @@ namespace Backend.Database.Entities;
 public class Cart
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; init; }
     
     [Required]
-    public required int UserId { get; set; }
-    public User User { get; set; } = null!;
+    public required int UserId { get; init; }
+    public User User { get; init; } = null!;
     
     [Column(TypeName = "decimal(10,2)")]
     public decimal Total { get; set; }
     
-    public ICollection<Item> Items { get; set; } = new List<Item>();
+    public ICollection<Item> Items { get; init; } = new List<Item>();
 }

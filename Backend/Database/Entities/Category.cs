@@ -8,11 +8,11 @@ namespace Backend.Database.Entities;
 public class Category
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; init; }
     
     [Required]
     [MaxLength(20)]
-    public required string CategoryName { get; set; }
+    public required string CategoryName { get; init; }
 
-    public ICollection<Product> Products { get; set; } = new List<Product>();
+    public ICollection<Product> Products { get; init; } = new List<Product>();
 }

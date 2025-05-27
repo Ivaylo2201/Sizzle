@@ -7,11 +7,11 @@ namespace Backend.Database.Entities;
 public class City
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; init; }
     
     [Required]
     [MaxLength(25)]
-    public required string CityName { get; set; }
+    public required string CityName { get; init; }
     
-    public ICollection<Address> Addresses { get; set; } = new List<Address>();
+    public ICollection<Address> Addresses { get; init; } = new List<Address>();
 }
