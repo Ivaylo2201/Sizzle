@@ -40,6 +40,10 @@ public class Product
     public required int Calories { get; set; }
     
     [Required]
+    [Range(1, 1000)]
+    public required int Weight { get; set; }
+    
+    [Required]
     public required int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
     

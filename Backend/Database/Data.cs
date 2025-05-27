@@ -54,6 +54,7 @@ public static class Data
             Description =
                 "A rich, smoky delight featuring crispy bacon atop a juicy beef patty, melted cheddar, and a burst of flavor in every bite.",
             Calories = 750,
+            Weight = 250,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -71,6 +72,7 @@ public static class Data
             Description =
                 "Savor the deep, savory aroma of applewood-smoked bacon layered over flame-grilled beef, with caramelized onions adding a touch of sweetness.",
             Calories = 770,
+            Weight = 280,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -90,6 +92,7 @@ public static class Data
             Description =
                 "The ultimate morning indulgence—juicy beef, a fried egg, bacon, and hash browns all tucked inside a buttery bun.",
             Calories = 820,
+            Weight = 320,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -113,6 +116,7 @@ public static class Data
             Description =
                 "Bold and fiery, this burger brings heat with tangy buffalo sauce and cools it down with creamy blue cheese—perfectly balanced.",
             Calories = 780,
+            Weight = 295,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -137,6 +141,7 @@ public static class Data
             Description =
                 "Grilled to perfection, our chicken burger is tender, juicy, and refreshingly light, served on a toasted bun with crisp greens.",
             Calories = 690,
+            Weight = 270,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -160,6 +165,7 @@ public static class Data
             Description =
                 "Simple yet irresistible—a traditional beef burger made with love, nostalgia, and the perfect balance of flavors.",
             Calories = 710,
+            Weight = 260,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -182,6 +188,7 @@ public static class Data
             Description =
                 "A festive fusion of savory and sweet, this burger features tangy cranberry sauce paired with a juicy turkey patty and creamy brie.",
             Calories = 730,
+            Weight = 275,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -203,6 +210,7 @@ public static class Data
             Description =
                 "A beast of a burger—double patties, melted cheese, smoky bacon, and all the fixings piled high for the ultimate feast.",
             Calories = 880,
+            Weight = 350,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -226,6 +234,7 @@ public static class Data
             Description =
                 "Crispy on the outside, tender on the inside—our golden fish fillet burger is a refreshing dive into flavor.",
             Calories = 660,
+            Weight = 240,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -241,12 +250,13 @@ public static class Data
         new()
         {
             Id = 10,
-            ProductName = "Jalapeno Burger",
+            ProductName = "Jalapeño Burger",
             InitialPrice = 8.59m,
             ImageUrl = "/Burgers/jalapeno_burger.png",
             Description =
                 "Spice lovers rejoice—this burger packs a punch with fiery jalapeños and bold chipotle mayo on a juicy beef patty.",
             Calories = 770,
+            Weight = 285,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -271,6 +281,7 @@ public static class Data
             Description =
                 "Sweet, smoky, and melt-in-your-mouth—slow-cooked pulled pork with tangy BBQ sauce creates the perfect messy masterpiece.",
             Calories = 790,
+            Weight = 310,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
@@ -291,6 +302,7 @@ public static class Data
             Description =
                 "A garden-fresh delight, packed with a hearty plant-based patty and crisp veggies, perfect for a healthy bite.",
             Calories = 680,
+            Weight = 265,
             CategoryId = 1,
             Category = Categories["burgers"],
             Ingredients = new List<Ingredient>
