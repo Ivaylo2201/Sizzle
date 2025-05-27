@@ -1,4 +1,4 @@
-﻿namespace Backend.Database.Seeder;
+﻿namespace Backend.Database;
 
 public static class Seeder
 {
@@ -34,9 +34,9 @@ public static class Seeder
 
     private static async Task Seed(DatabaseContext context)
     {
-        context.Categories.AddRange(SeedData.Categories);
-        context.Ingredients.AddRange(SeedData.Ingredients.Values.ToList());
-        context.Products.AddRange(SeedData.Products);
+        context.Categories.AddRange(Data.Categories.Values);
+        context.Ingredients.AddRange(Data.Ingredients.Values.ToList());
+        context.Products.AddRange(Data.Products);
         
         await context.SaveChangesAsync();
     }

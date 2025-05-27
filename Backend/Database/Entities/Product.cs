@@ -43,7 +43,6 @@ public class Product
     public required int CategoryId { get; set; }
     public Category Category { get; set; } = null!;
     
-    // Change back init to set if needed!!!
     public ICollection<Item> Items { get; init; } = new List<Item>();
     public ICollection<Review> Reviews { get; init; } = new List<Review>();
     public ICollection<Ingredient> Ingredients { get; init; } = new List<Ingredient>();

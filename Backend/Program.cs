@@ -1,7 +1,8 @@
 using System.Security.Claims;
 using System.Text;
 using Backend.Database;
-using Backend.Database.Seeder;
+using Backend.Repositories.Interfaces;
+using Backend.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -19,6 +20,7 @@ var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
