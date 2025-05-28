@@ -8,9 +8,13 @@ namespace Backend.Repositories;
 
 public class ProductRepository(DatabaseContext context) : IProductRepository
 {
-    public async Task<List<ProductShortDto>> GetAllProductsAsync()
+    public async Task<List<ProductShortDto>> GetProductsByCategory(string category)
     {
-        var products = await  context.Products.Select(p => p.ToShortDto()).ToListAsync();
+        var products = await context.Products.Include(p => p.Category)
+            .Where(p => EF.Functions.ILike(p.Category.CategoryName, category))
+            .Select(p => p.ToShortDto())
+            .ToListAsync();
+        
         return products;
     }
 

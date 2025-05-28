@@ -4,17 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class ProductsController(IProductRepository productRepository) : ControllerBase
+[Route("api/[controller]s")]
+public class ProductController(IProductRepository productRepository) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAllProductsAsync()
+    [Route("/{category}")]
+    public async Task<IActionResult> GetAllProductsAsync([FromRoute] string category)
     {
-        var products = await productRepository.GetAllProductsAsync();
+        var products = await productRepository.GetProductsByCategory(category);
         return Ok(products);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetProductByIdAsync(int id)
     {
         var product = await productRepository.GetProductByIdAsync(id);

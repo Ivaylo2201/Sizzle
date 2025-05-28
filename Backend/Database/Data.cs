@@ -32,7 +32,37 @@ public static class Data
         { "jalapeno", new Ingredient { Id = 24, IngredientName = "Jalapeños" } },
         { "fishFillet", new Ingredient { Id = 25, IngredientName = "Fish fillet" } },
         { "cranberrySauce", new Ingredient { Id = 26, IngredientName = "Cranberry sauce" } },
-        { "brieCheese", new Ingredient { Id = 27, IngredientName = "Brie cheese" } }
+        { "brieCheese", new Ingredient { Id = 27, IngredientName = "Brie cheese" } },
+        { "grilledChicken", new Ingredient { Id = 28, IngredientName = "Grilled chicken" } },
+        { "grilledLamb", new Ingredient { Id = 29, IngredientName = "Grilled lamb" } },
+        { "donerWrap", new Ingredient { Id = 30, IngredientName = "Doner wrap" } },
+        { "pitaBread", new Ingredient { Id = 31, IngredientName = "Pita bread" } },
+        { "lavash", new Ingredient { Id = 32, IngredientName = "Lavash" } },
+        { "garlicSauce", new Ingredient { Id = 33, IngredientName = "Garlic sauce" } },
+        { "chiliSauce", new Ingredient { Id = 34, IngredientName = "Chili sauce" } },
+        { "yogurtSauce", new Ingredient { Id = 35, IngredientName = "Yogurt sauce" } },
+        { "redCabbage", new Ingredient { Id = 36, IngredientName = "Red cabbage" } },
+        { "cucumber", new Ingredient { Id = 37, IngredientName = "Cucumber" } },
+        { "rawOnion", new Ingredient { Id = 38, IngredientName = "Raw onion" } },
+        { "parsley", new Ingredient { Id = 39, IngredientName = "Parsley" } },
+        { "frenchFries", new Ingredient { Id = 40, IngredientName = "French fries" } },
+        { "tomatoSauce", new Ingredient { Id = 41, IngredientName = "Tomato sauce" } },
+        { "pickledPeppers", new Ingredient { Id = 42, IngredientName = "Pickled peppers" } },
+        { "olives", new Ingredient { Id = 43, IngredientName = "Olives" } },
+        { "rice", new Ingredient { Id = 44, IngredientName = "Rice" } },
+        { "mozzarella", new Ingredient { Id = 45, IngredientName = "Mozzarella" } },
+        { "tortillaChips", new Ingredient { Id = 46, IngredientName = "Tortilla chips" } },
+        { "sourCream", new Ingredient { Id = 47, IngredientName = "Sour cream" } },
+        { "salsa", new Ingredient { Id = 48, IngredientName = "Salsa" } },
+        { "falafelMix", new Ingredient { Id = 49, IngredientName = "Falafel mix" } },
+        { "breadcrumbs", new Ingredient { Id = 50, IngredientName = "Breadcrumbs" } },
+        { "potatoes", new Ingredient { Id = 51, IngredientName = "Potatoes" } },
+        { "batteringMix", new Ingredient { Id = 52, IngredientName = "Battering mix" } },
+        { "cheddarCheeseSauce", new Ingredient { Id = 53, IngredientName = "Cheddar cheese sauce" } },
+        { "eggs", new Ingredient { Id = 54, IngredientName = "Eggs" } },
+        { "sunflowerOil", new Ingredient { Id = 55, IngredientName = "Sunflower oil" } },
+        { "salt", new Ingredient { Id = 56, IngredientName = "Salt" } },
+        { "sugar", new Ingredient { Id = 57, IngredientName = "Sugar" } }
     };
 
     public static readonly Dictionary<string, Category> Categories = new()
@@ -315,6 +345,333 @@ public static class Data
                 Ingredients["pickles"],
                 Ingredients["hummus"],
                 Ingredients["wholeGrainBun"]
+            }
+        },
+        new()
+        {
+            Id = 13,
+            ProductName = "Beef Doner",
+            InitialPrice = 9,
+            ImageUrl = "/Doners/beef_doner.png",
+            Description =
+                "Tender slices of seasoned buffalo beef, layered in a warm pita with crisp veggies and garlic sauce.",
+            Calories = 780,
+            Weight = 320,
+            CategoryId = 2,
+            Category = Categories["doners"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["buffaloBeef"],
+                Ingredients["pitaBread"],
+                Ingredients["lettuce"],
+                Ingredients["tomato"],
+                Ingredients["redCabbage"],
+                Ingredients["rawOnion"],
+                Ingredients["garlicSauce"]
+            }
+        },
+        new()
+        {
+            Id = 14,
+            ProductName = "Chicken Doner",
+            InitialPrice = 8,
+            ImageUrl = "/Doners/chicken_doner.png",
+            Description =
+                "Juicy grilled chicken wrapped in lavash with fresh vegetables and creamy yogurt sauce.",
+            Calories = 730,
+            Weight = 310,
+            CategoryId = 2,
+            Category = Categories["doners"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["grilledChicken"],
+                Ingredients["lavash"],
+                Ingredients["cucumber"],
+                Ingredients["redCabbage"],
+                Ingredients["rawOnion"],
+                Ingredients["yogurtSauce"]
+            }
+        },
+        new()
+        {
+            Id = 15,
+            ProductName = "Crispy Chicken Doner",
+            InitialPrice = 9,
+            ImageUrl = "/Doners/crispy_chicken_doner.png",
+            Description =
+                "Golden crispy chicken fillet in a pita, balanced with fresh lettuce and tangy chili sauce.",
+            Calories = 810,
+            Weight = 330,
+            CategoryId = 2,
+            Category = Categories["doners"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["crispyChickenFillet"],
+                Ingredients["pitaBread"],
+                Ingredients["lettuce"],
+                Ingredients["pickles"],
+                Ingredients["chiliSauce"],
+                Ingredients["mayonnaise"]
+            }
+        },
+        new()
+        {
+            Id = 16,
+            ProductName = "Lamb Doner",
+            InitialPrice = 10,
+            ImageUrl = "/Doners/lamb_doner.png",
+            Description =
+                "Authentic grilled lamb with parsley and veggies, wrapped in soft lavash and topped with garlic sauce.",
+            Calories = 820,
+            Weight = 340,
+            CategoryId = 2,
+            Category = Categories["doners"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["grilledLamb"],
+                Ingredients["lavash"],
+                Ingredients["parsley"],
+                Ingredients["redCabbage"],
+                Ingredients["rawOnion"],
+                Ingredients["garlicSauce"]
+            }
+        },
+        new()
+        {
+            Id = 17,
+            ProductName = "Pork Doner",
+            InitialPrice = 8,
+            ImageUrl = "/Doners/pork_doner.png",
+            Description =
+                "Savory pulled pork wrapped in pita with coleslaw and BBQ sauce for that sweet smoky flavor.",
+            Calories = 790,
+            Weight = 325,
+            CategoryId = 2,
+            Category = Categories["doners"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["pulledPork"],
+                Ingredients["pitaBread"],
+                Ingredients["coleslaw"],
+                Ingredients["bbqSauce"]
+            }
+        },
+        new()
+        {
+            Id = 18,
+            ProductName = "Spicy Pork Doner",
+            InitialPrice = 9,
+            ImageUrl = "/Doners/spicy_pork_doner.png",
+            Description =
+                "Bold and fiery pork doner with jalapeños and chili sauce, wrapped in lavash for spice lovers.",
+            Calories = 820,
+            Weight = 335,
+            CategoryId = 2,
+            Category = Categories["doners"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["pulledPork"],
+                Ingredients["lavash"],
+                Ingredients["jalapeno"],
+                Ingredients["chiliSauce"],
+                Ingredients["pickledPeppers"]
+            }
+        },
+        new()
+        {
+            Id = 19,
+            ProductName = "Cheese Balls",
+            InitialPrice = 4,
+            ImageUrl = "/Snacks/cheese_balls.png",
+            Description = "Crispy golden balls with a gooey cheddar cheese center — the ultimate snack-time treat.",
+            Calories = 450,
+            Weight = 150,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 20,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["cheddarCheese"],
+                Ingredients["breadcrumbs"],
+                Ingredients["batteringMix"]
+            }
+        },
+        new()
+        {
+            Id = 20,
+            ProductName = "Chicken Nuggets",
+            InitialPrice = 5,
+            ImageUrl = "/Snacks/chicken_nuggets.png",
+            Description = "Tender, juicy chicken pieces coated in a crispy golden crust — snack perfection.",
+            Calories = 520,
+            Weight = 180,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 15,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["crispyChickenFillet"],
+                Ingredients["batteringMix"],
+                Ingredients["breadcrumbs"]
+            }
+        },
+        new()
+        {
+            Id = 21,
+            ProductName = "Falafels",
+            InitialPrice = 4,
+            ImageUrl = "/Snacks/falafels.png",
+            Description = "Middle Eastern spiced chickpea balls — crispy outside, soft and flavorful inside.",
+            Calories = 390,
+            Weight = 160,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["falafelMix"],
+                Ingredients["batteringMix"]
+            }
+        },
+        new()
+        {
+            Id = 22,
+            ProductName = "Big french fries",
+            InitialPrice = 3,
+            ImageUrl = "/Snacks/french_fries_big.png",
+            Description = "A generous serving of classic golden fries — crispy, salty, and satisfying.",
+            Calories = 600,
+            Weight = 250,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 25,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["potatoes"]
+            }
+        },
+        new()
+        {
+            Id = 23,
+            ProductName = "Medium french fries",
+            InitialPrice = 2.5m,
+            ImageUrl = "/Snacks/french_fries_medium.png",
+            Description = "Perfectly portioned crispy fries, golden and irresistible.",
+            Calories = 450,
+            Weight = 180,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["potatoes"]
+            }
+        },
+        new()
+        {
+            Id = 24,
+            ProductName = "Small french fries",
+            InitialPrice = 2,
+            ImageUrl = "/Snacks/french_fries_small.png",
+            Description = "Small size, same big fry flavor — crispy and golden.",
+            Calories = 300,
+            Weight = 120,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["potatoes"]
+            }
+        },
+        new()
+        {
+            Id = 25,
+            ProductName = "Ketchup",
+            InitialPrice = 0.5m,
+            ImageUrl = "/Snacks/ketchup.png",
+            Description = "Classic tomato ketchup — a tangy companion for your snacks.",
+            Calories = 80,
+            Weight = 50,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["tomato"],
+                Ingredients["salt"],
+                Ingredients["sugar"]
+            }
+        },
+        new()
+        {
+            Id = 26,
+            ProductName = "Mayonnaise",
+            InitialPrice = 0.5m,
+            ImageUrl = "/Snacks/mayonnaise.png",
+            Description = "Creamy and smooth — the perfect dip for any snack.",
+            Calories = 120,
+            Weight = 50,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 10,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["eggs"],
+                Ingredients["sunflowerOil"],
+                Ingredients["salt"]
+            }
+        },
+        new()
+        {
+            Id = 27,
+            ProductName = "Mozzarella Sticks",
+            InitialPrice = 4.5m,
+            ImageUrl = "/Snacks/mozzarella_sticks.png",
+            Description = "Crunchy on the outside, melty mozzarella on the inside — a cheese lover’s dream.",
+            Calories = 470,
+            Weight = 160,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 30,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["mozzarella"],
+                Ingredients["breadcrumbs"],
+                Ingredients["batteringMix"]
+            }
+        },
+        new()
+        {
+            Id = 28,
+            ProductName = "Nachos",
+            InitialPrice = 5,
+            ImageUrl = "/Snacks/nachos.png",
+            Description = "Crispy tortilla chips served with creamy cheddar sauce and fresh salsa.",
+            Calories = 520,
+            Weight = 200,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["tortillaChips"],
+                Ingredients["cheddarCheeseSauce"],
+                Ingredients["salsa"]
+            }
+        },
+        new()
+        {
+            Id = 29,
+            ProductName = "Onion Rings",
+            InitialPrice = 4,
+            ImageUrl = "/Snacks/onion_rings.png",
+            Description = "Golden-fried onion rings — crispy, savory, and endlessly snackable.",
+            Calories = 430,
+            Weight = 170,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 50,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["caramelizedOnions"],
+                Ingredients["batteringMix"],
+                Ingredients["breadcrumbs"]
             }
         }
     ];

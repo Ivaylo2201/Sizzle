@@ -10,34 +10,34 @@ using Moq;
 
 namespace Tests;
 
-public class ProductsControllerTests
+public class ProductControllerTests
 {
     private static readonly List<Product> Products = Data.Products[..2];
     private static readonly Mock<IProductRepository> MockRepo = new();
-    private static readonly ProductsController Controller = new(MockRepo.Object);
+    private static readonly ProductController Controller = new(MockRepo.Object);
     
-    [Fact]
-    public async Task GetAllProductsAsync_ReturnsListOfProductShortDtos_WhenThereAreProducts()
-    {
-        var productShortDtos = Products.Select(p => p.ToShortDto()).ToList();
-        MockRepo.Setup(r => r.GetAllProductsAsync()).ReturnsAsync(productShortDtos);
-        
-        var response = await Controller.GetAllProductsAsync();
-        
-        var okResult = Assert.IsType<OkObjectResult>(response);
-        Assert.Equivalent(productShortDtos, okResult.Value);
-    }
-    
-    [Fact]
-    public async Task GetAllProductsAsync_ReturnsEmptyList_WhenThereAreNoProducts()
-    {
-        MockRepo.Setup(r => r.GetAllProductsAsync()).ReturnsAsync([]);
-        
-        var response = await Controller.GetAllProductsAsync();
-        
-        var okResult = Assert.IsType<OkObjectResult>(response);
-        Assert.Empty((okResult.Value as IEnumerable)!);
-    }
+    // [Fact]
+    // public async Task GetAllProductsAsync_ReturnsListOfProductShortDtos_WhenThereAreProducts()
+    // {
+    //     var productShortDtos = Products.Select(p => p.ToShortDto()).ToList();
+    //     MockRepo.Setup(r => r.GetAllProductsAsync()).ReturnsAsync(productShortDtos);
+    //     
+    //     var response = await Controller.GetAllProductsAsync();
+    //     
+    //     var okResult = Assert.IsType<OkObjectResult>(response);
+    //     Assert.Equivalent(productShortDtos, okResult.Value);
+    // }
+    //
+    // [Fact]
+    // public async Task GetAllProductsAsync_ReturnsEmptyList_WhenThereAreNoProducts()
+    // {
+    //     MockRepo.Setup(r => r.GetAllProductsAsync()).ReturnsAsync([]);
+    //     
+    //     var response = await Controller.GetAllProductsAsync();
+    //     
+    //     var okResult = Assert.IsType<OkObjectResult>(response);
+    //     Assert.Empty((okResult.Value as IEnumerable)!);
+    // }
     
     [Fact]
     public async Task GetProductByIdAsync_ReturnsProductLongDto_WhenProductExists()

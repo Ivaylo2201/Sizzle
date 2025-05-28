@@ -4,6 +4,6 @@ namespace Backend.Repositories.Interfaces;
 
 public interface IProductRepository
 {
-    Task<List<ProductShortDto>> GetAllProductsAsync();
+    Task<List<ProductShortDto>> GetProductsByCategory(string category);
     Task<ProductLongDto?> GetProductByIdAsync(int id);
 }
