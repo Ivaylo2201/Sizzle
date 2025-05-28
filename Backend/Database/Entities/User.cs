@@ -8,15 +8,13 @@ public class User
     public int Id { get; init; }
     
     [Required]
-    [MaxLength(20)]
-    public required string FirstName { get; init; }
+    [MaxLength(50)]
+    public required string Name { get; init; }
     
     [Required]
-    [MaxLength(20)]
-    public required string LastName { get; init; }
-    
     [MaxLength(50)]
-    public string? Email { get; set; }
+    [EmailAddress]
+    public required string Email { get; set; }
     
     [Required]
     [MaxLength(64)]

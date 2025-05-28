@@ -9,7 +9,7 @@ public static class ReviewMapper
     {
         return new ReviewDto
         {
-            User = $"{review.User.FirstName} {review.User.LastName}",
+            User = review.User.Name,
             CreatedAt = review.CreatedAt,
             Comment = review.Comment,
             Rating = review.Rating,

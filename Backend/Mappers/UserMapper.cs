@@ -9,8 +9,7 @@ public static class UserMapper
     {
         return new User
         {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
+            Name = dto.Name,
             Email = dto.Email,
             Password = dto.Password,
         };
