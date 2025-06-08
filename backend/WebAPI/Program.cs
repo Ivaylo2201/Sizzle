@@ -3,6 +3,7 @@ using Application;
 using DotNetEnv;
 using Infrastructure;
 using Infrastructure.Database;
+using Infrastructure.Database.Repositories;
 using Infrastructure.Database.Seed;
 using Scalar.AspNetCore;
 
@@ -32,8 +33,10 @@ if (args.Contains("seed"))
 {
     using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    var seeder = new Seeder(context, new UserRepository(context));
 
-    await Seeder.Run(context);
+    await seeder.Run();
+    
     return;
 }
 

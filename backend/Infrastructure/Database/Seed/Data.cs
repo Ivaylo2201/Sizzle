@@ -4,6 +4,12 @@ namespace Infrastructure.Database.Seed;
 
 public static class Data
 {
+    public static readonly List<User> Users =
+    [
+        new User { Username = "JohnDoe", PhoneNumber = "0888888888", Password = "SecurePassword123" },
+        new User { Username = "JaneDoe", PhoneNumber = "0999999999", Password = "456PasswordSecure" }
+    ];
+    
     public static readonly Dictionary<string, Ingredient> Ingredients = new()
     {
         { "buffaloBeef", new Ingredient {IngredientName = "Buffalo beef" } },

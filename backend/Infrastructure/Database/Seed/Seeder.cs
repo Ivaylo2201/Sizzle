@@ -1,22 +1,24 @@
-﻿namespace Infrastructure.Database.Seed;
+﻿using Core.Interfaces.Repositories;
 
-public static class Seeder
+namespace Infrastructure.Database.Seed;
+
+public class Seeder(DatabaseContext context, IUserRepository userRepository)
 {
-    public static async Task Run(DatabaseContext context)
+    public async Task Run()
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Seeding database...");
         Console.ResetColor();
         
-        await Clear(context);
-        await Seed(context);
+        await Clear();
+        await Seed();
         
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Seeding complete.");
         Console.ResetColor();
     }
 
-    private static async Task Clear(DatabaseContext context)
+    private async Task Clear()
     {
         context.Addresses.RemoveRange(context.Addresses);
         context.Cities.RemoveRange(context.Cities);
@@ -32,11 +34,16 @@ public static class Seeder
         await context.SaveChangesAsync();
     }
 
-    private static async Task Seed(DatabaseContext context)
+    private async Task Seed()
     {
         context.Categories.AddRange(Data.Categories.Values);
         context.Ingredients.AddRange(Data.Ingredients.Values);
         context.Products.AddRange(Data.Products);
+
+        foreach (var user in Data.Users)
+        {
+            await userRepository.Create(user);
+        }
         
         await context.SaveChangesAsync();
     }

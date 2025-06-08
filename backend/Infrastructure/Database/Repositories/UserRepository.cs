@@ -7,10 +7,14 @@ namespace Infrastructure.Database.Repositories;
 
 public class UserRepository(DatabaseContext context) : IUserRepository
 {
-    public async Task<Result<User>> Create(User item)
+    public async Task<Result<User>> Create(User user)
     {
-        item.Password = BCrypt.Net.BCrypt.HashPassword(item.Password);
-        var result = context.Users.Add(item);
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        
+        var result = context.Users.Add(user);
+        var cart = new Cart { User = user };
+        context.Carts.Add(cart);
+        
         await context.SaveChangesAsync();
         return Result.Success(result.Entity);
     }
@@ -24,10 +28,10 @@ public class UserRepository(DatabaseContext context) : IUserRepository
             : Result.Success<User?>(user);
     }
 
-    public async Task<Result> Update(User item)
+    public async Task<Result> Update(User user)
     {
-        item.Password = BCrypt.Net.BCrypt.HashPassword(item.Password);
-        context.Users.Update(item);
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        context.Users.Update(user);
         await context.SaveChangesAsync();
         return Result.Success();
     }
