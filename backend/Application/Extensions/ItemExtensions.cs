@@ -1,7 +1,7 @@
 ﻿using Application.DTOs.Item;
 using Core.Entities;
 
-namespace Application.Extension;
+namespace Application.Extensions;
 
 public static class ItemExtensions
 {

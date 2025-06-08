@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Items.Queries;
 using Application.DTOs.Item;
-using Application.Extension;
+using Application.Extensions;
 using Core.Abstractions;
 using Core.Interfaces.Repositories;
 using MediatR;

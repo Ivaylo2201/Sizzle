@@ -2,7 +2,7 @@
 
 public class Category
 {
-    public int Id { get; set; }
-    public required string CategoryName { get; set; }
-    public ICollection<Product> Products { get; set; } = new List<Product>();
+    public int Id { get; init; }
+    public required string CategoryName { get; init; }
+    public ICollection<Product> Products { get; init; } = new List<Product>();
 }

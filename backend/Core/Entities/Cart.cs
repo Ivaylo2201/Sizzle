@@ -2,9 +2,9 @@
 
 public class Cart
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; } = null!;
-    public double Total { get; set; } = 0;
-    public ICollection<Item> Items { get; set; } = new List<Item>();
+    public int Id { get; init; }
+    public int UserId { get; init; }
+    public User User { get; init; } = null!;
+    public double Total { get; init; }
+    public ICollection<Item> Items { get; init; } = new List<Item>();
 }

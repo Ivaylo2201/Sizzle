@@ -2,9 +2,9 @@
 
 public class Order
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; } = null!;
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public ICollection<Item> Items { get; set; } = new List<Item>();
+    public int Id { get; init; }
+    public int UserId { get; init; }
+    public User User { get; init; } = null!;
+    public DateTime CreatedAt { get; init; } = DateTime.Now;
+    public ICollection<Item> Items { get; init; } = new List<Item>();
 }

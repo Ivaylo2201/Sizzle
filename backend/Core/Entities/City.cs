@@ -2,7 +2,7 @@
 
 public class City
 {
-    public int Id { get; set; }
-    public required string CityName { get; set; }
-    public ICollection<Address> Addresses { get; set; } = new List<Address>();
+    public int Id { get; init; }
+    public required string CityName { get; init; }
+    public ICollection<Address> Addresses { get; init; } = new List<Address>();
 }
