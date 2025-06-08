@@ -19,6 +19,8 @@ public static class InfrastructureDependencyInjection
         string connectionString)
     {
         services.AddScoped<IItemRepository, ItemRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
         services.AddJwtAuthentication(jwtConfig.Key, jwtConfig.Issuer, jwtConfig.Audience);

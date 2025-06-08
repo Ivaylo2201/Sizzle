@@ -32,11 +32,8 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
     public async Task<Result> Update(Item item)
     {
         context.Items.Update(item);
-        var isSuccess = await context.SaveChangesAsync() > 0;
-        
-        return isSuccess
-            ? Result.Success()
-            : Result.Failure("Failed to update item.");
+        await context.SaveChangesAsync();
+        return Result.Success();
     }
 
     public async Task<Result> Delete(int id)
@@ -46,7 +43,7 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
         if (!result.IsSuccess)
             return Result.Failure($"Item {id} not found.");
         
-        context.Items.Remove(result.Value);
+        context.Items.Remove(result.Value!);
         await context.SaveChangesAsync();
         return Result.Success();
     }

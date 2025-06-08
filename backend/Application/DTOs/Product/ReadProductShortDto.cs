@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.Product;
 
-public class ReadProductShortDto
+public record ReadProductShortDto
 {
     public required Guid Id { get; init; }
     public required string ProductName { get; init; }

@@ -9,6 +9,6 @@ public class DeleteItemCommandHandler(IItemRepository repository) : IRequestHand
 {
     public async Task<Result> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
     {
-        return await repository.Delete(request.Id);
+        return await repository.Delete(request.Dto.Id);
     }
 }
