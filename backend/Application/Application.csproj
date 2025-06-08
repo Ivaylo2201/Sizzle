@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="CQRS\Orders\" />
+      <Folder Include="CQRS\Orders\Validators\" />
       <Folder Include="CQRS\Reviews\" />
     </ItemGroup>
 

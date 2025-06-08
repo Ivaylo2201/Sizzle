@@ -9,7 +9,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
 {
     public async Task<Result<List<Product>>> GetAll()
     {
-        var products = await context.Products.Select(p => p).ToListAsync();
+        var products = await context.Products.ToListAsync();
         return Result.Success(products);
     }
 

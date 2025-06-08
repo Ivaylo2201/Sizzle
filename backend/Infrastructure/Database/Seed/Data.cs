@@ -6,21 +6,21 @@ public static class Data
 {
     public static readonly List<User> Users =
     [
-        new User { Username = "JohnDoe", PhoneNumber = "0888888888", Password = "SecurePassword123" },
-        new User { Username = "JaneDoe", PhoneNumber = "0999999999", Password = "456PasswordSecure" }
+        new() { Username = "JohnDoe", PhoneNumber = "0888888888", Password = "SecurePassword123" },
+        new() { Username = "JaneDoe", PhoneNumber = "0999999999", Password = "456PasswordSecure" }
     ];
     
     public static readonly Dictionary<string, Ingredient> Ingredients = new()
     {
-        { "buffaloBeef", new Ingredient {IngredientName = "Buffalo beef" } },
-        { "cheddarCheese", new Ingredient {IngredientName = "Cheddar cheese" } },
-        { "lettuce", new Ingredient {IngredientName = "Lettuce" } },
-        { "tomato", new Ingredient {IngredientName = "Tomato" } },
-        { "caramelizedOnions", new Ingredient {IngredientName = "Caramelized onions" } },
-        { "pickles", new Ingredient {IngredientName = "Pickles" } },
-        { "bbqSauce", new Ingredient {IngredientName = "BBQ sauce" } },
-        { "briocheBun", new Ingredient {IngredientName = "Brioche bun" } },
-        { "pulledPork", new Ingredient {IngredientName = "Pulled pork" } },
+        { "buffaloBeef", new Ingredient { IngredientName = "Buffalo beef" } },
+        { "cheddarCheese", new Ingredient { IngredientName = "Cheddar cheese" } },
+        { "lettuce", new Ingredient { IngredientName = "Lettuce" } },
+        { "tomato", new Ingredient { IngredientName = "Tomato" } },
+        { "caramelizedOnions", new Ingredient { IngredientName = "Caramelized onions" } },
+        { "pickles", new Ingredient { IngredientName = "Pickles" } },
+        { "bbqSauce", new Ingredient { IngredientName = "BBQ sauce" } },
+        { "briocheBun", new Ingredient { IngredientName = "Brioche bun" } },
+        { "pulledPork", new Ingredient { IngredientName = "Pulled pork" } },
         { "coleslaw", new Ingredient { IngredientName = "Coleslaw" } },
         { "beefPatty", new Ingredient { IngredientName = "Beef patty" } },
         { "friedEgg", new Ingredient { IngredientName = "Fried egg" } },
@@ -73,9 +73,9 @@ public static class Data
 
     public static readonly Dictionary<string, Category> Categories = new()
     {
-        {"burgers", new Category {CategoryName = "Burgers" } },
-        {"doners", new Category {CategoryName = "Doners" } },
-        {"snacks",  new Category {CategoryName = "Snacks" } }
+        { "burgers", new Category { CategoryName = "Burgers" } },
+        { "doners", new Category { CategoryName = "Doners" } },
+        { "snacks", new Category { CategoryName = "Snacks" } }
     };
 
     public static readonly List<Product> Products =
