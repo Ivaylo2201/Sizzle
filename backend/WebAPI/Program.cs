@@ -1,8 +1,10 @@
 using System.Security.Claims;
 using System.Text;
+using Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using DotNetEnv;
+using Infrastructure;
 using Infrastructure.Database;
 using Infrastructure.Database.Seed;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +20,9 @@ var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")!;
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddDbContext<DatabaseContext>(options => 
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

@@ -1,15 +1,17 @@
 ﻿using Application.CQRS.Items.Queries;
+using Application.DTOs.Item;
+using Application.Extension;
 using Core.Abstractions;
-using Core.Entities;
 using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
-public class ListItemQueryHandler(IItemRepository repository) : IRequestHandler<ListItemQuery, Result<List<Item>>>
+public class ListItemQueryHandler(IItemRepository repository) : IRequestHandler<ListItemQuery, Result<List<ItemDto>>>
 {
-    public async Task<Result<List<Item>>> Handle(ListItemQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<ItemDto>>> Handle(ListItemQuery request, CancellationToken cancellationToken)
     {
-        return await repository.GetAllFromCartAsync(request.CartId);
+        var result = await repository.GetAllFromCartAsync(request.CartId);
+        return Result.Success(result.Value.Select(item => item.ToDto()).ToList());
     }
 }
