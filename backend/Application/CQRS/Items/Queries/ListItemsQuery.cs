@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.CQRS.Items.Queries;
 
-public record ListItemQuery(int CartId) : IRequest<Result<List<ItemDto>>>;
+public record ListItemsQuery(int CartId) : IRequest<Result<List<ReadItemDto>>>;

@@ -1,6 +1,7 @@
-﻿using Core.Abstractions;
+﻿using Application.DTOs.Item;
+using Core.Abstractions;
 using MediatR;
 
 namespace Application.CQRS.Items.Commands;
 
-public record UpdateItemCommand(int ItemId, int Quantity) : IRequest<Result>;
+public record UpdateItemCommand(UpdateItemDto Dto) : IRequest<Result>;

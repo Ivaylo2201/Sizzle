@@ -5,9 +5,9 @@ namespace Application.Extensions;
 
 public static class ItemExtensions
 {
-    public static ItemDto ToDto(this Item item)
+    public static ReadItemDto ToDto(this Item item)
     {
-        return new ItemDto
+        return new ReadItemDto
         {
             ProductName = item.Product.ProductName,
             ImageUrl = item.Product.ImageUrl,

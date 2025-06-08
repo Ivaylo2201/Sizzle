@@ -12,9 +12,9 @@ public class CreateItemCommandHandler(IItemRepository repository) : IRequestHand
     {
         var item = new Item
         {
-            ProductId = request.ProductId,
-            Quantity = request.Quantity,
-            CartId = request.CartId
+            ProductId = request.Dto.ProductId,
+            Quantity = request.Dto.Quantity,
+            CartId = request.Dto.CartId
         };
 
         return await repository.Create(item);

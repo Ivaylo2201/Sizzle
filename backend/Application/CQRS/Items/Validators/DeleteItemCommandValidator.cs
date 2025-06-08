@@ -7,7 +7,7 @@ public class DeleteItemCommandValidator : AbstractValidator<DeleteItemCommand>
 {
     public DeleteItemCommandValidator()
     {
-        RuleFor(c => c.Id)
+        RuleFor(c => c.Dto.Id)
             .NotEmpty().WithMessage("Id must be provided.")
             .GreaterThan(0).WithMessage("Id must be greater than 0.");
     }

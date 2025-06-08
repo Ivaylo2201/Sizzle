@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.Item;
 
-public record ItemDto
+public record ReadItemDto
 {
     public required string ProductName { get; init; }
     public required string ImageUrl { get; init; }

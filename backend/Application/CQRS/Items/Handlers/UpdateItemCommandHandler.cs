@@ -9,13 +9,13 @@ public class UpdateItemCommandHandler(IItemRepository repository) : IRequestHand
 {
     public async Task<Result> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
-        var result = await repository.GetOne(request.ItemId);
+        var result = await repository.GetOne(request.Dto.ItemId);
 
         if (!result.IsSuccess)
             return Result.Failure(result.Error);
 
-        var item = result.Value;
-        item.Quantity = request.Quantity;
+        var item = result.Value!;
+        item.Quantity = request.Dto.Quantity;
         return await repository.Update(item);
     }
 }
