@@ -1,6 +1,7 @@
 ﻿using Core.Abstractions;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Repositories;
@@ -11,13 +12,13 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
     {
         var result = await context.Items.AddAsync(item);
         await context.SaveChangesAsync();
-        return Result<Item>.Success(result.Entity);
+        return Result.Success(result.Entity);
     }
 
-    public async Task<Result<List<Item>>> GetAll()
+    public async Task<Result<List<Item>>> GetAllFromCartAsync(int cartId)
     {
-        var items = await context.Items.ToListAsync();
-        return Result<List<Item>>.Success(items);
+        var itemsInCart = await context.Items.Where(i => i.CartId == cartId).ToListAsync();
+        return Result.Success(itemsInCart);
     }
 
     public async Task<Result<Item>> GetOne(int id)
@@ -25,8 +26,8 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
         var item = await context.Items.FirstOrDefaultAsync(x => x.Id == id);
         
         return item == null
-            ? Result<Item>.Failure($"Item {id} not found.") 
-            : Result<Item>.Success(item);
+            ? Result.Failure<Item>($"Item {id} not found.") 
+            : Result.Success(item);
     }
 
     public async Task<Result> Update(Item item)

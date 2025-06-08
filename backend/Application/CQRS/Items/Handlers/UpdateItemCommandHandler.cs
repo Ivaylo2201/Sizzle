@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Items.Commands;
 using Core.Abstractions;
-using Core.Interfaces;
+using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Items.Handlers;

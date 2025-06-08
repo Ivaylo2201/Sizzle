@@ -3,7 +3,7 @@
 public class Result
 {
     public bool IsSuccess { get; }
-    public string? Error { get; protected init; }
+    public string? Error { get; }
 
     protected Result(bool isSuccess, string? error)
     {
@@ -15,18 +15,12 @@ public class Result
     }
 
     public static Result Success() => new(true, null);
-    public static Result Failure(string? error) => new(false, error ?? "Operation failed.");
+    public static Result Failure(string? error) => new(false, error);
+    public static Result<T> Success<T>(T value) => new(true, null, value);
+    public static Result<T> Failure<T>(string? error) => new(false, error, default!);
 }
 
-public class Result<T> : Result
+public class Result<T>(bool isSuccess, string? error, T value) : Result(isSuccess, error)
 {
-    public T Value { get; private init; }
-
-    private Result(bool isSuccess, string? error, T value) : base(isSuccess, error)
-    {
-        Value = value;
-    }
-
-    public static Result<T> Success(T value) => new(true, null, value);
-    public new static Result<T> Failure(string? error) => new(false, error ?? "Operation failed.", default!);
+    public T Value { get; private init; } = value;
 }

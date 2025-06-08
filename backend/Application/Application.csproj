@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="CQRS\Items\Queries\" />
       <Folder Include="CQRS\Items\Validators\" />
       <Folder Include="DTOs\" />
     </ItemGroup>
