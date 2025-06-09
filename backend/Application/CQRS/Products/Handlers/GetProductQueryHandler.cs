@@ -14,10 +14,10 @@ public class GetProductQueryHandler(IProductRepository productRepository) :
     {
         var result = await productRepository.GetOne(request.ProductId);
 
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Result.Failure<GetProductLongDto?>(result.Error);
 
-        var dto = result.Value!.ToLongDto();
+        var dto = result.Value.ToLongDto();
         return Result.Success<GetProductLongDto?>(dto);
     }
 }

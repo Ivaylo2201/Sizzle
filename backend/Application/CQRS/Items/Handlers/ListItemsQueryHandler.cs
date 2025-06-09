@@ -14,7 +14,7 @@ public class ListItemsQueryHandler(IItemRepository itemRepository, ICartReposito
     {
         var cartResult = await cartRepository.GetOne(request.CartId);
 
-        if (!cartResult.IsSuccess)
+        if (!cartResult.IsSuccess || cartResult.Value == null)
             return Result.Failure<List<GetItemDto>?>(cartResult.Error);
 
         var itemResult = await itemRepository.GetAllFromCartAsync(request.CartId);

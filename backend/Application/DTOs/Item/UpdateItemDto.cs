@@ -2,6 +2,6 @@
 
 public record UpdateItemDto
 {
-    public required int ItemId { get; init; }
+    public required int Id { get; init; }
     public required int Quantity { get; init; }
 }

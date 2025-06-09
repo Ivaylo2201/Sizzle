@@ -10,12 +10,12 @@ public class UpdateUserCommandHandler(IUserRepository repository) :
 {
     public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var result = await repository.GetOne(request.Dto.UserId);
+        var result = await repository.GetOne(request.Dto.Id);
 
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Result.Failure(result.Error);
 
-        var user = result.Value!;
+        var user = result.Value;
         user.PhoneNumber = request.Dto.PhoneNumber;
         user.Password = request.Dto.Password;
         return await repository.Update(user);

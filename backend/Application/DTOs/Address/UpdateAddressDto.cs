@@ -2,7 +2,7 @@
 
 public record UpdateAddressDto
 {
-    public required int AddressId { get; init; }
+    public required int Id { get; init; }
     public required int CityId { get; init; }
     public required string StreetName { get; init; }
     public required int StreetNumber { get; init; }

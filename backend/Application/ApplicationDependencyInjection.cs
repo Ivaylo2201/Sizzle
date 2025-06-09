@@ -8,12 +8,14 @@ namespace Application;
 
 public static class ApplicationDependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static void AddApplication(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        // Registered behaviors run in reverse. Example:
+        // services.AddTransient(..., typeof(ValidationBehavior<,>));
+        // services.AddTransient(..., typeof(LoggingBehavior<,>));
+        // On every request LoggingBehavior will run first then ValidationBehavior
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
-        return services;
     }
 }

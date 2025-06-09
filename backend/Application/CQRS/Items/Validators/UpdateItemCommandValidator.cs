@@ -7,7 +7,7 @@ public class UpdateItemCommandValidator : AbstractValidator<UpdateItemCommand>
 {
     public UpdateItemCommandValidator()
     {
-        RuleFor(c => c.Dto.ItemId)
+        RuleFor(c => c.Dto.Id)
             .NotEmpty().WithMessage("ItemId must be provided.")
             .GreaterThan(0).WithMessage("ItemId must be greater than 0.");
         

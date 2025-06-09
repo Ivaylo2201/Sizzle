@@ -9,6 +9,7 @@ public static class OrderExtensions
     {
         return new GetOrderDto
         {
+            Id = order.Id,
             Items = order.Items.Select(i => i.ToDto()).ToList(),
             CreatedAt = order.CreatedAt,
         };

@@ -10,9 +10,9 @@ public class UpdateItemCommandHandler(IItemRepository itemRepository) :
 {
     public async Task<Result> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
-        var result = await itemRepository.GetOne(request.Dto.ItemId);
+        var result = await itemRepository.GetOne(request.Dto.Id);
 
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Result.Failure(result.Error);
 
         var item = result.Value!;

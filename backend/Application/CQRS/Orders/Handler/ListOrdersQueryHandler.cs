@@ -14,7 +14,7 @@ public class ListOrdersQueryHandler(IOrderRepository orderRepository, IUserRepos
     {
         var userResult = await userRepository.GetOne(request.UserId);
         
-        if (!userResult.IsSuccess)
+        if (!userResult.IsSuccess || userResult.Value == null)
             return Result.Failure<List<GetOrderDto>?>(userResult.Error);
         
         var result = await orderRepository.GetAllOrdersForUser(request.UserId);

@@ -10,13 +10,12 @@ public class UpdateAddressCommandHandler(IAddressRepository addressRepository) :
 {
     public async Task<Result> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
     {
-        var result = await addressRepository.GetOne(request.Dto.AddressId);
+        var result = await addressRepository.GetOne(request.Dto.Id);
 
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Result.Failure(result.Error);
 
-        var address = result.Value!;
-        
+        var address = result.Value;
         address.CityId = request.Dto.CityId;
         address.StreetName = request.Dto.StreetName;
         address.StreetNumber = request.Dto.StreetNumber;
