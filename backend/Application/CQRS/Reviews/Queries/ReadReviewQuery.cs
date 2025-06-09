@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.CQRS.Reviews.Queries;
 
-public record ReadReviewsQuery(Guid ProductId) : IRequest<Result<List<ReadReviewsDto>?>>;
+public record ReadReviewsQuery(Guid ProductId) : IRequest<Result<List<GetReviewDto>?>>;

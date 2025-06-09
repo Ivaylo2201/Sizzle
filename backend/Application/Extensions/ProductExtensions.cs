@@ -7,9 +7,9 @@ public static class ProductExtensions
 {
     // TODO: Make sure you prefetch Reviews, Ingredients and Category
     
-    public static ReadProductLongDto ToLongDto(this Product product)
+    public static GetProductLongDto ToLongDto(this Product product)
     {
-        return new ReadProductLongDto
+        return new GetProductLongDto
         {
             Id = product.Id,
             ProductName = product.ProductName,
@@ -27,9 +27,9 @@ public static class ProductExtensions
 
     }
     
-    public static ReadProductShortDto ToShortDto(this Product product)
+    public static GetProductShortDto ToShortDto(this Product product)
     {
-        return new ReadProductShortDto
+        return new GetProductShortDto
         {
             Id = product.Id,
             ProductName = product.ProductName,

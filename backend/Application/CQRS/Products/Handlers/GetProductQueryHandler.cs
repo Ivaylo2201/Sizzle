@@ -8,16 +8,16 @@ using MediatR;
 namespace Application.CQRS.Products.Handlers;
 
 public class GetProductQueryHandler(IProductRepository productRepository) : 
-    IRequestHandler<GetProductQuery, Result<ReadProductLongDto?>>
+    IRequestHandler<GetProductQuery, Result<GetProductLongDto?>>
 {
-    public async Task<Result<ReadProductLongDto?>> Handle(GetProductQuery request, CancellationToken cancellationToken)
+    public async Task<Result<GetProductLongDto?>> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
         var result = await productRepository.GetOne(request.ProductId);
 
         if (!result.IsSuccess)
-            return Result.Failure<ReadProductLongDto?>(result.Error);
+            return Result.Failure<GetProductLongDto?>(result.Error);
 
         var dto = result.Value!.ToLongDto();
-        return Result.Success<ReadProductLongDto?>(dto);
+        return Result.Success<GetProductLongDto?>(dto);
     }
 }

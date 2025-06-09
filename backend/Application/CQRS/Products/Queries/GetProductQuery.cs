@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.CQRS.Products.Queries;
 
-public record GetProductQuery(Guid ProductId) : IRequest<Result<ReadProductLongDto?>>;
+public record GetProductQuery(Guid ProductId) : IRequest<Result<GetProductLongDto?>>;

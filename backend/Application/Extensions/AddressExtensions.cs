@@ -5,9 +5,9 @@ namespace Application.Extensions;
 
 public static class AddressExtensions
 {
-    public static ReadAddressDto ToDto(this Address address)
+    public static GetAddressDto ToDto(this Address address)
     {
-        return new ReadAddressDto
+        return new GetAddressDto
         {
             Id = address.Id,
             StreetName = address.StreetName,

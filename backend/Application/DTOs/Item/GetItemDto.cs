@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.Item;
 
-public record ReadItemDto
+public record GetItemDto
 {
     public required int Id { get; init; }
     public required string ProductName { get; init; }

@@ -22,4 +22,13 @@ public class CartRepository(DatabaseContext context) : ICartRepository
             ? Result.Failure<Cart?>($"Cart {id} not found.") 
             : Result.Success<Cart?>(cart);
     }
+
+    public async Task<Result<Cart?>> GetOneByUserIdAsync(int userId)
+    {
+        var cart = await context.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+        
+        return cart == null
+            ? Result.Failure<Cart?>($"User {userId}'s cart not found.") 
+            : Result.Success<Cart?>(cart);
+    }
 }
