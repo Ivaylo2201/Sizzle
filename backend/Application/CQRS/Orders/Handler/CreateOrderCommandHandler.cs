@@ -7,13 +7,15 @@ using MediatR;
 
 namespace Application.CQRS.Orders.Handler;
 
-public class CreateOrderCommandHandler(IOrderRepository repository, IItemService service) : IRequestHandler<CreateOrderCommand, Result<Order>>
+public class CreateOrderCommandHandler(IOrderRepository repository, IOrderService service) : IRequestHandler<CreateOrderCommand, Result<Order>>
 {
     public async Task<Result<Order>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = new Order { User = request.Dto.User };
+        var order = new Order { UserId = request.Dto.UserId };
         var result = await repository.Create(order);
-        await service.MarkAsOrdered(request.Dto.User.Cart.Items.ToList(), order);
+        
+        await service.MarkItemsInUsersCartAsOrderedAsync(request.Dto.UserId, order);
+        
         return Result.Success(result.Value);
     }
 }

@@ -6,6 +6,7 @@ public class User
     public required string Username { get; init; }
     public required string PhoneNumber { get; set; }
     public required string Password { get; set; }
+    public int CartId { get; init; }
     public Cart Cart { get; init; } = null!;
     public ICollection<Address> Addresses { get; init; } = new List<Address>();
     public ICollection<Order> Orders { get; init; } = new List<Order>();

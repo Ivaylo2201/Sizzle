@@ -16,9 +16,4 @@
       <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="CQRS\Orders\Validators\" />
-      <Folder Include="CQRS\Reviews\" />
-    </ItemGroup>
-
 </Project>

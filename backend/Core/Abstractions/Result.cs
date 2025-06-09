@@ -18,6 +18,7 @@ public class Result
     public static Result Failure(string? error) => new(false, error);
     public static Result<T> Success<T>(T value) => new(true, null, value);
     public static Result<T> Failure<T>(string? error) => new(false, error, default!);
+    
 }
 
 public class Result<T>(bool isSuccess, string? error, T value) : Result(isSuccess, error)

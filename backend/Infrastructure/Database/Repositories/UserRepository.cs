@@ -11,9 +11,9 @@ public class UserRepository(DatabaseContext context) : IUserRepository
     {
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         
-        var result = context.Users.Add(user);
+        var result = await context.Users.AddAsync(user);
         var cart = new Cart { User = user };
-        context.Carts.Add(cart);
+        await context.Carts.AddAsync(cart);
         
         await context.SaveChangesAsync();
         return Result.Success(result.Entity);

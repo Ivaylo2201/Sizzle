@@ -9,6 +9,7 @@ public static class ItemExtensions
     {
         return new ReadItemDto
         {
+            Id = item.Id,
             ProductName = item.Product.ProductName,
             ImageUrl = item.Product.ImageUrl,
             Price = item.Product.Price,

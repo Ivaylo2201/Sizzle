@@ -2,6 +2,7 @@
 
 public record ReadItemDto
 {
+    public required int Id { get; init; }
     public required string ProductName { get; init; }
     public required string ImageUrl { get; init; }
     public required double Price { get; init; }

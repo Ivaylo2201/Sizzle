@@ -3,4 +3,6 @@ using Core.Interfaces.Generic;
 
 namespace Core.Interfaces.Repositories;
 
-public interface IProductRepository : ISingleReadable<Product, Guid>, IMultipleReadable<Product>;
+public interface IProductRepository : 
+    ISingleReadable<Product, Guid>,
+    IMultipleReadable<Product>;

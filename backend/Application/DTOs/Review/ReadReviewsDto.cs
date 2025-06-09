@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.Review;
 
-public record ReadReviewDto
+public record ReadReviewsDto
 {
     public required int Rating { get; init; }
     public required string? Comment { get; init; }

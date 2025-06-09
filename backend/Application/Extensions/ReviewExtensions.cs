@@ -5,9 +5,9 @@ namespace Application.Extensions;
 
 public static class ReviewExtensions
 {
-    public static ReadReviewDto ToDto(this Review review)
+    public static ReadReviewsDto ToDto(this Review review)
     {
-        return new ReadReviewDto
+        return new ReadReviewsDto
         {
             Rating = review.Rating,
             Comment = review.Comment,

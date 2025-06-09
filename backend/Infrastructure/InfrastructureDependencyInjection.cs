@@ -1,7 +1,9 @@
 ﻿using System.Security.Claims;
 using Core.Interfaces.Repositories;
+using Core.Interfaces.Services;
 using Infrastructure.Database;
 using Infrastructure.Database.Repositories;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,9 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IReviewRepository, ReviewRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<IOrderService, OrderService>();
 
         services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
         services.AddJwtAuthentication(jwtConfig.Key, jwtConfig.Issuer, jwtConfig.Audience);
