@@ -31,4 +31,15 @@ public class CartRepository(DatabaseContext context) : ICartRepository
             ? Result.Failure<Cart?>($"User {userId}'s cart not found.") 
             : Result.Success<Cart?>(cart);
     }
+    
+    public async Task<Result<List<Item>?>> GetItemsFromUsersCart(int userId)
+    {
+        var user = await context.Users.SingleOrDefaultAsync(u => u.Id == userId);
+
+        if (user is null)
+            return Result.Failure<List<Item>?>($"Multiple users or no user with id {userId} found.");
+        
+        var items = await context.Items.Where(i => i.CartId == user.Cart.Id).ToListAsync();
+        return Result.Success<List<Item>?>(items);
+    }
 }

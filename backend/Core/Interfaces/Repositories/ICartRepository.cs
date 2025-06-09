@@ -9,4 +9,5 @@ public interface ICartRepository :
     ISingleReadable<Cart, int>
 {
     Task<Result<Cart?>> GetOneByUserIdAsync(int userId);
+    Task<Result<List<Item>?>> GetItemsFromUsersCart(int userId);
 }

@@ -1,8 +1,9 @@
-﻿using Core.Entities;
+﻿using Core.Abstractions;
+using Core.Entities;
 
 namespace Core.Interfaces.Services;
 
 public interface IOrderService
 {
-    Task MarkItemsInUsersCartAsOrderedAsync(int userId, Order order);
+    Task<Result> MarkItemsInUsersCartAsOrderedAsync(int userId, Order order);
 }

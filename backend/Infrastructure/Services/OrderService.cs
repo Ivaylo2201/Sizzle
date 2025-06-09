@@ -1,33 +1,27 @@
-﻿using Core.Entities;
+﻿using Core.Abstractions;
+using Core.Entities;
+using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services;
 
-public class OrderService(DatabaseContext context) : IOrderService
+public class OrderService(DatabaseContext context, ICartRepository cartRepository) : IOrderService
 {
-    private async Task<List<Item>> GetItemsFromUsersCart(int userId)
+    public async Task<Result> MarkItemsInUsersCartAsOrderedAsync(int userId, Order order)
     {
-        var user = await context.Users.SingleOrDefaultAsync(u => u.Id == userId);
-
-        if (user is null)
-            return [];
+        var result = await cartRepository.GetItemsFromUsersCart(userId);
         
-        var items = await context.Items.Where(i => i.CartId == user.Cart.Id).ToListAsync();
-        return items;
-    }
-    
-    public async Task MarkItemsInUsersCartAsOrderedAsync(int userId, Order order)
-    {
-        var items = await GetItemsFromUsersCart(userId);
+        if (!result.IsSuccess || result.Value is null)
+            return Result.Failure(result.Error);
         
-        foreach (var item in items)
+        foreach (var item in result.Value)
         {
             item.Cart = null;
             item.Order = order;
         }
         
-        await context.SaveChangesAsync();
+        var isDone = await context.SaveChangesAsync() == result.Value.Count;
+        return Result.Success(isDone);
     }
 }
