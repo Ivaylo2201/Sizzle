@@ -1,8 +1,8 @@
 ﻿using Application.CQRS.Orders.Commands;
+using Application.Interfaces.Services;
 using Core.Abstractions;
 using Core.Entities;
 using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
 using MediatR;
 
 namespace Application.CQRS.Orders.Handler;

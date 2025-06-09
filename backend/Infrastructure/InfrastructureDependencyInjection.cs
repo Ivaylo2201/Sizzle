@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
+using Application.Interfaces.Services;
 using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
 using Infrastructure.Database;
 using Infrastructure.Database.Repositories;
 using Infrastructure.Services;
@@ -25,6 +25,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<IOrderService, OrderService>();
+        services.AddSingleton<TokenService>();
 
         services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
         services.AddJwtAuthentication(jwtConfig.Key, jwtConfig.Issuer, jwtConfig.Audience);

@@ -1,7 +1,7 @@
-﻿using Core.Abstractions;
+﻿using Application.Interfaces.Services;
+using Core.Abstractions;
 using Core.Entities;
 using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
 using Infrastructure.Database;
 
 namespace Infrastructure.Services;

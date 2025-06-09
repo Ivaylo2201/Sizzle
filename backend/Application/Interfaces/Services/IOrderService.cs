@@ -1,7 +1,7 @@
 ﻿using Core.Abstractions;
 using Core.Entities;
 
-namespace Core.Interfaces.Services;
+namespace Application.Interfaces.Services;
 
 public interface IOrderService
 {
