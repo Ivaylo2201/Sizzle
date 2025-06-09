@@ -23,7 +23,7 @@ public class ProductController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(new GetProductQuery(id));
 
         if (!result.IsSuccess)
-            return NotFound(new { message = result.Error});
+            return NotFound(new { message = result.Error });
         
         return Ok(result.Value);
     }
