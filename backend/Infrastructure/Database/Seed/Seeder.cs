@@ -1,17 +1,8 @@
 ﻿using Infrastructure.Database.Repositories;
 using Infrastructure.Extensions;
+using Infrastructure.Utilities;
 
 namespace Infrastructure.Database.Seed;
-
-internal static class ColorConsole
-{
-    public static void WriteLine(ConsoleColor color, string message)
-    {
-        Console.ForegroundColor = color;
-        Console.WriteLine(message);
-        Console.ResetColor();
-    }
-}
 
 public class Seeder(DatabaseContext context)
 {
@@ -21,17 +12,17 @@ public class Seeder(DatabaseContext context)
     
     public async Task Run()
     {
-        ColorConsole.WriteLine(ConsoleColor.Green, "Seeding database...");
+        ColorConsole.WriteLine("Seeding database...");
         
         await Clear();
         await Seed();
         
-        ColorConsole.WriteLine(ConsoleColor.Green, "Seeding complete.");
+        ColorConsole.WriteLine("Seeding complete.");
     }
 
     private async Task Clear()
     {
-        ColorConsole.WriteLine(ConsoleColor.Red, "Truncating tables...");
+        ColorConsole.WriteLine("Truncating tables...", ConsoleColor.Red);
         
         context.Addresses.RemoveRange(context.Addresses);
         context.Cities.RemoveRange(context.Cities);
