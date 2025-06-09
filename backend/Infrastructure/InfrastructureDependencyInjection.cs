@@ -15,10 +15,7 @@ public record JwtConfig(byte[] Key, string Issuer, string Audience);
 
 public static class InfrastructureDependencyInjection
 {
-    public static void AddInfrastructure(
-        this IServiceCollection services,
-        JwtConfig jwtConfig,
-        string connectionString)
+    public static void AddInfrastructure(this IServiceCollection services, JwtConfig jwtConfig, string connectionString)
     {
         services.AddScoped<IItemRepository, ItemRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
@@ -34,8 +31,7 @@ public static class InfrastructureDependencyInjection
         services.AddCorsSupport();
     }
 
-    private static void AddJwtAuthentication(this IServiceCollection services, byte[] key, string issuer,
-        string audience)
+    private static void AddJwtAuthentication(this IServiceCollection services, byte[] key, string issuer, string audience)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

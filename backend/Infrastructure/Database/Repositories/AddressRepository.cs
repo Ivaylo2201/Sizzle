@@ -31,7 +31,7 @@ public class AddressRepository(DatabaseContext context) : IAddressRepository
     {
         var result = await GetOne(id);
         
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure($"Address {id} not found.");
         
         context.Addresses.Remove(result.Value);

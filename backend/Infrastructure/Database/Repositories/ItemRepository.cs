@@ -22,7 +22,7 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
 
     public async Task<Result<Item?>> GetOne(int id)
     {
-        var item = await context.Items.FirstOrDefaultAsync(x => x.Id == id);
+        var item = await context.Items.FirstOrDefaultAsync(i => i.Id == id);
         
         return item == null
             ? Result.Failure<Item?>($"Item {id} not found.") 
@@ -40,7 +40,7 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
     {
         var result = await GetOne(id);
         
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure($"Item {id} not found.");
         
         context.Items.Remove(result.Value);

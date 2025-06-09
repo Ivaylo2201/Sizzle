@@ -5,19 +5,19 @@ using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
-public class UpdateUserCommandHandler(IUserRepository repository) : 
+public class UpdateUserCommandHandler(IUserRepository userRepository) : 
     IRequestHandler<UpdateUserCommand, Result>
 {
     public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var result = await repository.GetOne(request.Dto.Id);
+        var result = await userRepository.GetOne(request.Dto.Id);
 
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure(result.Error);
 
         var user = result.Value;
         user.PhoneNumber = request.Dto.PhoneNumber;
         user.Password = request.Dto.Password;
-        return await repository.Update(user);
+        return await userRepository.Update(user);
     }
 }

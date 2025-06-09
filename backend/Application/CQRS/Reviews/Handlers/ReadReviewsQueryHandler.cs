@@ -14,11 +14,11 @@ public class ReadReviewsQueryHandler(IReviewRepository reviewRepository, IProduc
     {
         var productResult = await productRepository.GetOne(request.ProductId);
         
-        if (!productResult.IsSuccess || productResult.Value == null)
+        if (!productResult.IsSuccess || productResult.Value is null)
             return Result.Failure<List<GetReviewDto>?>(productResult.Error);
         
         var reviewResult = await reviewRepository.GetAllReviewsForProduct(request.ProductId);
-        var reviewDtos = reviewResult.Value.Select(review => review.ToDto()).ToList();
+        var reviewDtos = reviewResult.Value.Select(r => r.ToDto()).ToList();
         return Result.Success<List<GetReviewDto>?>(reviewDtos);
     }
 }

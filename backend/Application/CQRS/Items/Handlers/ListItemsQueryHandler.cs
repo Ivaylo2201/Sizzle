@@ -14,11 +14,11 @@ public class ListItemsQueryHandler(IItemRepository itemRepository, ICartReposito
     {
         var cartResult = await cartRepository.GetOne(request.CartId);
 
-        if (!cartResult.IsSuccess || cartResult.Value == null)
+        if (!cartResult.IsSuccess || cartResult.Value is null)
             return Result.Failure<List<GetItemDto>?>(cartResult.Error);
 
         var itemResult = await itemRepository.GetAllFromCartAsync(request.CartId);
-        var itemDtos = itemResult.Value.Select(item => item.ToDto()).ToList();
+        var itemDtos = itemResult.Value.Select(i => i.ToDto()).ToList();
         return Result.Success<List<GetItemDto>?>(itemDtos);
     }
 }

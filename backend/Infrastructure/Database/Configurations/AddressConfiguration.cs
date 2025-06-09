@@ -9,6 +9,8 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
     public void Configure(EntityTypeBuilder<Address> builder)
     {
         builder.HasKey(a => a.Id);
+        builder.HasIndex(a => a.CityId);
+        builder.HasIndex(a => a.UserId);
         
         builder.HasOne(a => a.City)
             .WithMany(c => c.Addresses)

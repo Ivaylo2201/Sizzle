@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.CQRS.Products.Queries;
 
-public record ListProductsQuery : IRequest<Result<List<GetProductShortDto>>>;
+public record ListProductsQuery(string Category) : IRequest<Result<List<GetProductShortDto>>>;

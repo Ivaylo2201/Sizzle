@@ -9,12 +9,12 @@ public class OrderService(DatabaseContext context) : IOrderService
 {
     private async Task<List<Item>> GetItemsFromUsersCart(int userId)
     {
-        var user = await context.Users.SingleOrDefaultAsync(user => user.Id == userId);
+        var user = await context.Users.SingleOrDefaultAsync(u => u.Id == userId);
 
         if (user is null)
             return [];
         
-        var items = await context.Items.Where(item => item.CartId == user.CartId).ToListAsync();
+        var items = await context.Items.Where(i => i.CartId == user.Cart.Id).ToListAsync();
         return items;
     }
     
@@ -27,6 +27,7 @@ public class OrderService(DatabaseContext context) : IOrderService
             item.Cart = null;
             item.Order = order;
         }
+        
         await context.SaveChangesAsync();
     }
 }

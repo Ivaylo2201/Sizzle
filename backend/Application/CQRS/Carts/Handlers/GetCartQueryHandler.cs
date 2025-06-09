@@ -14,7 +14,7 @@ public class GetCartQueryHandler(ICartRepository cartRepository) :
     {
         var result = await cartRepository.GetOneByUserIdAsync(request.UserId);
         
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure<GetCartDto?>(result.Error);
 
         var cartDto = result.Value.ToDto();

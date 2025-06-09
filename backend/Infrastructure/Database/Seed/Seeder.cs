@@ -1,4 +1,5 @@
-﻿using Core.Interfaces.Repositories;
+﻿using Infrastructure.Database.Repositories;
+using Infrastructure.Extensions;
 
 namespace Infrastructure.Database.Seed;
 
@@ -12,8 +13,11 @@ internal static class ColorConsole
     }
 }
 
-public class Seeder(DatabaseContext context, IUserRepository userRepository)
+public class Seeder(DatabaseContext context)
 {
+    private readonly UserRepository _userRepository = new(context);
+    private readonly ReviewRepository _reviewRepository = new(context);
+    
     public async Task Run()
     {
         ColorConsole.WriteLine(ConsoleColor.Green, "Seeding database...");
@@ -50,7 +54,14 @@ public class Seeder(DatabaseContext context, IUserRepository userRepository)
 
         foreach (var user in Data.Users)
         {
-            await userRepository.Create(user);
+            await _userRepository.Create(user);
+        }
+
+        foreach (var review in Data.Reviews)
+        {
+            review.Product = await context.Products.Random();
+            review.User = await context.Users.Random();
+            await _reviewRepository.Create(review);
         }
         
         await context.SaveChangesAsync();

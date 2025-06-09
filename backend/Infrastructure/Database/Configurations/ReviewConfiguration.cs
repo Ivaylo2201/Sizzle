@@ -9,6 +9,8 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
     public void Configure(EntityTypeBuilder<Review> builder)
     {
         builder.HasKey(r => r.Id);
+        builder.HasIndex(r => r.UserId);
+        builder.HasIndex(r => r.ProductId);
         
         builder.HasOne(r => r.User)
             .WithMany(u => u.Reviews)

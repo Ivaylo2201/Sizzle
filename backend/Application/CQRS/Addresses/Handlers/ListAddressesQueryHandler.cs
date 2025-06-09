@@ -14,7 +14,7 @@ public class ListAddressesQueryHandler(IAddressRepository addressRepository, IUs
     {
         var userResult = await userRepository.GetOne(request.UserId);
         
-        if (!userResult.IsSuccess || userResult.Value == null)
+        if (!userResult.IsSuccess || userResult.Value is null)
             return Result.Failure<List<GetAddressDto>?>(userResult.Error);
 
         var addressResult = await addressRepository.GetAllAddressesForUser(request.UserId);

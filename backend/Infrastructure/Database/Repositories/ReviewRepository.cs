@@ -17,7 +17,7 @@ public class ReviewRepository(DatabaseContext context) : IReviewRepository
     public async Task<Result<List<Review>>> GetAllReviewsForProduct(Guid productId)
     {
         var reviews = await context.Reviews
-            .Where(review => review.ProductId == productId)
+            .Where(r => r.ProductId == productId)
             .ToListAsync();
         
         return Result.Success(reviews);

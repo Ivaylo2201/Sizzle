@@ -14,7 +14,7 @@ public class GetProductQueryHandler(IProductRepository productRepository) :
     {
         var result = await productRepository.GetOne(request.ProductId);
 
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure<GetProductLongDto?>(result.Error);
 
         var dto = result.Value.ToLongDto();

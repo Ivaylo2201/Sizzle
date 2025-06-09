@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
-public class CreateUserCommandHandler(IUserRepository repository) : IRequestHandler<CreateUserCommand, Result<User>>
+public class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<User>>
 {
     public async Task<Result<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
@@ -17,6 +17,6 @@ public class CreateUserCommandHandler(IUserRepository repository) : IRequestHand
             Password = request.Dto.Password,
         };
         
-        return await repository.Create(user);
+        return await userRepository.Create(user);
     }
 }

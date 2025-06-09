@@ -9,6 +9,9 @@ public class ItemConfiguration : IEntityTypeConfiguration<Item>
     public void Configure(EntityTypeBuilder<Item> builder)
     {
         builder.HasKey(i => i.Id);
+        builder.HasIndex(i => i.ProductId);
+        builder.HasIndex(i => i.CartId);
+        builder.HasIndex(i => i.OrderId);
         
         builder.HasOne(i => i.Product)
             .WithMany(p => p.Items)

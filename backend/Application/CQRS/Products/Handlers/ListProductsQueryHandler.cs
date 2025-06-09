@@ -12,8 +12,8 @@ public class ListProductsQueryHandler(IProductRepository productRepository) :
 {
     public async Task<Result<List<GetProductShortDto>>> Handle(ListProductsQuery request, CancellationToken cancellationToken)
     {
-        var result = await productRepository.GetAll();
-        var productDtos = result.Value.Select(product => product.ToShortDto()).ToList();
+        var result = await productRepository.GetAllProductsByCategory(request.Category);
+        var productDtos = result.Value.Select(p => p.ToShortDto()).ToList();
         return Result.Success(productDtos);
     }
 }

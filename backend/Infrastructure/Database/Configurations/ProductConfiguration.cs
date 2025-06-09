@@ -9,6 +9,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(p => p.Id);
+        builder.HasIndex(p => p.CategoryId);
         
         builder.HasOne(p => p.Category)
             .WithMany(c => c.Products)
@@ -17,6 +18,5 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.HasMany(p => p.Ingredients)
             .WithMany(i => i.Products);
-
     }
 }

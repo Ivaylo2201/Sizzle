@@ -9,6 +9,21 @@ public static class Data
         new() { Username = "JohnDoe", PhoneNumber = "0888888888", Password = "SecurePassword123" },
         new() { Username = "JaneDoe", PhoneNumber = "0999999999", Password = "456PasswordSecure" }
     ];
+
+    public static readonly List<Review> Reviews =
+    [
+        new() { Rating = 4, Comment = "Very delicious!" },
+        new() { Rating = 5, Comment = "Absolutely amazing!" },
+        new() { Rating = 3, Comment = "Pretty good, but could be better." },
+        new() { Rating = 2, Comment = "Not my taste." },
+        new() { Rating = 4, Comment = "Tasty and well prepared!" },
+        new() { Rating = 5, Comment = "Best burger I've ever had!" },
+        new() { Rating = 1, Comment = "Too salty and overcooked." },
+        new() { Rating = 3, Comment = "It was okay." },
+        new() { Rating = 4, Comment = "Would definitely order again." },
+        new() { Rating = 5, Comment = "Perfect combo of flavor and texture!" },
+        new() { Rating = 2, Comment = "Disappointed, expected more." }
+    ];
     
     public static readonly Dictionary<string, Ingredient> Ingredients = new()
     {
@@ -84,7 +99,7 @@ public static class Data
         {
             ProductName = "Bacon Burger",
             InitialPrice = 8,
-            DiscountPercentage = 10,
+            DiscountPercentage = 25,
             ImageUrl = "/burgers/bacon_burger.png",
             Description =
                 "A rich, smoky delight featuring crispy bacon atop a juicy beef patty, melted cheddar, and a burst of flavor in every bite.",

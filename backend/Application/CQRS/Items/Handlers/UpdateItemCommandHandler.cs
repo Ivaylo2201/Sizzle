@@ -12,7 +12,7 @@ public class UpdateItemCommandHandler(IItemRepository itemRepository) :
     {
         var result = await itemRepository.GetOne(request.Dto.Id);
 
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure(result.Error);
 
         var item = result.Value!;

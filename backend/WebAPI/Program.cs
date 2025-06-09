@@ -3,9 +3,7 @@ using Application;
 using DotNetEnv;
 using Infrastructure;
 using Infrastructure.Database;
-using Infrastructure.Database.Repositories;
 using Infrastructure.Database.Seed;
-using Scalar.AspNetCore;
 
 var builder = WebApplication .CreateBuilder(args);
 
@@ -20,23 +18,24 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(new JwtConfig(jwtSecretKey, jwtIssuer, jwtAudience), connectionString);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.UseSwagger();
+    app.UseSwaggerUI(o => o.DisplayRequestDuration());
 }
 
 if (args.Contains("seed"))
 {
     using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-    var seeder = new Seeder(context, new UserRepository(context));
-
+    var seeder = new Seeder(context);
     await seeder.Run();
-    
     return;
 }
 

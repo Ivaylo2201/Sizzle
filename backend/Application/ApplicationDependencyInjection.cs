@@ -10,7 +10,7 @@ public static class ApplicationDependencyInjection
 {
     public static void AddApplication(this IServiceCollection services)
     {
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        services.AddMediatR(c => c.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         // Registered behaviors run in reverse. Example:
         // services.AddTransient(..., typeof(ValidationBehavior<,>));
         // services.AddTransient(..., typeof(LoggingBehavior<,>));

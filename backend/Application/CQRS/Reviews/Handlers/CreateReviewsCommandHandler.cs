@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.CQRS.Reviews.Handlers;
 
-public class CreateReviewsCommandHandler(IReviewRepository repository) : IRequestHandler<CreateReviewCommand, Result<Review>>
+public class CreateReviewsCommandHandler(IReviewRepository reviewRepository) : IRequestHandler<CreateReviewCommand, Result<Review>>
 {
     public async Task<Result<Review>> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
     {
@@ -18,6 +18,6 @@ public class CreateReviewsCommandHandler(IReviewRepository repository) : IReques
             ProductId = request.Dto.ProductId,
         };
         
-        return await repository.Create(review);
+        return await reviewRepository.Create(review);
     }
 }

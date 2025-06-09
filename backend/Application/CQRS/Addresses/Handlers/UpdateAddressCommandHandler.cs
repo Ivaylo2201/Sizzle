@@ -12,7 +12,7 @@ public class UpdateAddressCommandHandler(IAddressRepository addressRepository) :
     {
         var result = await addressRepository.GetOne(request.Dto.Id);
 
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess || result.Value is null)
             return Result.Failure(result.Error);
 
         var address = result.Value;
