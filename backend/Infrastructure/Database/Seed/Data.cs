@@ -10,6 +10,29 @@ public static class Data
         new() { Username = "JaneDoe", PhoneNumber = "0999999999", Password = "456PasswordSecure" }
     ];
 
+    public static readonly List<City> Cities =
+    [
+        new() { CityName = "Sofia" },
+        new() { CityName = "Plovdiv" },
+        new() { CityName = "Varna" },
+        new() { CityName = "Burgas" },
+        new() { CityName = "Ruse" }
+    ];
+
+    public static readonly List<Address> Addresses =
+    [
+        new() { StreetName = "Tsar Simeon Str.", StreetNumber = 14 },
+        new() { StreetName = "Hristo Botev Blvd.", StreetNumber = 22 },
+        new() { StreetName = "Vasil Levski Blvd.", StreetNumber = 5 },
+        new() { StreetName = "Alexander Stamboliyski Blvd.", StreetNumber = 39 },
+        new() { StreetName = "Patriarch Evtimiy Blvd.", StreetNumber = 11 },
+        new() { StreetName = "Ivan Vazov Str.", StreetNumber = 7 },
+        new() { StreetName = "Rakovski Str.", StreetNumber = 18 },
+        new() { StreetName = "Slivnitsa Blvd.", StreetNumber = 27 },
+        new() { StreetName = "Tsar Boris III Blvd.", StreetNumber = 36 },
+        new() { StreetName = "Geo Milev Str.", StreetNumber = 9 }
+    ];
+
     public static readonly List<Review> Reviews =
     [
         new() { Rating = 4, Comment = "Very delicious!" },

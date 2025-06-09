@@ -17,6 +17,7 @@ public class Seeder(DatabaseContext context)
 {
     private readonly UserRepository _userRepository = new(context);
     private readonly ReviewRepository _reviewRepository = new(context);
+    private readonly AddressRepository _addressRepository = new(context);
     
     public async Task Run()
     {
@@ -51,18 +52,10 @@ public class Seeder(DatabaseContext context)
         context.Categories.AddRange(Data.Categories.Values);
         context.Ingredients.AddRange(Data.Ingredients.Values);
         context.Products.AddRange(Data.Products);
-
-        foreach (var user in Data.Users)
-        {
-            await _userRepository.Create(user);
-        }
-
-        foreach (var review in Data.Reviews)
-        {
-            review.Product = await context.Products.Random();
-            review.User = await context.Users.Random();
-            await _reviewRepository.Create(review);
-        }
+        context.Cities.AddRange(Data.Cities);
+        await context.AddUsersAsync(_userRepository);
+        await context.AddAddressesAsync(_addressRepository);
+        await context.AddReviewsAsync(_reviewRepository);
         
         await context.SaveChangesAsync();
     }
