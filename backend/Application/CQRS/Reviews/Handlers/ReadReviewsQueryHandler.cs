@@ -7,12 +7,18 @@ using MediatR;
 
 namespace Application.CQRS.Reviews.Handlers;
 
-public class ReadReviewsQueryHandler(IReviewRepository repository) : IRequestHandler<ReadReviewsQuery, Result<List<ReadReviewsDto>>>
+public class ReadReviewsQueryHandler(IReviewRepository reviewRepository, IProductRepository productRepository) : 
+    IRequestHandler<ReadReviewsQuery, Result<List<ReadReviewsDto>?>>
 {
-    public async Task<Result<List<ReadReviewsDto>>> Handle(ReadReviewsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<ReadReviewsDto>?>> Handle(ReadReviewsQuery request, CancellationToken cancellationToken)
     {
-        var result = await repository.GetAllReviewsForProduct(request.ProductId);
+        var productResult = await productRepository.GetOne(request.ProductId);
+        
+        if (!productResult.IsSuccess)
+            return Result.Failure<List<ReadReviewsDto>?>(productResult.Error);
+        
+        var result = await reviewRepository.GetAllReviewsForProduct(request.ProductId);
         var reviewDtos = result.Value.Select(review => review.ToDto()).ToList();
-        return Result.Success(reviewDtos);
+        return Result.Success<List<ReadReviewsDto>?>(reviewDtos);
     }
 }

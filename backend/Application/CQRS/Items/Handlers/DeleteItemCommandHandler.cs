@@ -5,10 +5,11 @@ using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
-public class DeleteItemCommandHandler(IItemRepository repository) : IRequestHandler<DeleteItemCommand, Result>
+public class DeleteItemCommandHandler(IItemRepository itemRepository) : 
+    IRequestHandler<DeleteItemCommand, Result>
 {
     public async Task<Result> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
     {
-        return await repository.Delete(request.Dto.Id);
+        return await itemRepository.Delete(request.Dto.Id);
     }
 }

@@ -5,7 +5,8 @@ using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
-public class UpdateUserCommandHandler(IUserRepository repository) : IRequestHandler<UpdateUserCommand, Result>
+public class UpdateUserCommandHandler(IUserRepository repository) : 
+    IRequestHandler<UpdateUserCommand, Result>
 {
     public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {

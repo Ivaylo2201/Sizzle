@@ -7,12 +7,18 @@ using MediatR;
 
 namespace Application.CQRS.Orders.Handler;
 
-public class ListOrdersQueryHandler(IOrderRepository repository) : IRequestHandler<ListOrdersQuery, Result<List<ReadOrderDto>>>
+public class ListOrdersQueryHandler(IOrderRepository orderRepository, IUserRepository userRepository) : 
+    IRequestHandler<ListOrdersQuery, Result<List<ReadOrderDto>?>>
 {
-    public async Task<Result<List<ReadOrderDto>>> Handle(ListOrdersQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<ReadOrderDto>?>> Handle(ListOrdersQuery request, CancellationToken cancellationToken)
     {
-        var result = await repository.GetAllOrdersForUser(request.UserId);
+        var userResult = await userRepository.GetOne(request.UserId);
+        
+        if (!userResult.IsSuccess)
+            return Result.Failure<List<ReadOrderDto>?>(userResult.Error);
+        
+        var result = await orderRepository.GetAllOrdersForUser(request.UserId);
         var orderDtos = result.Value.Select(order => order.ToDto()).ToList();
-        return Result.Success(orderDtos);
+        return Result.Success<List<ReadOrderDto>?>(orderDtos);
     }
 }

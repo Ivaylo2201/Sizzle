@@ -26,6 +26,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IReviewRepository, ReviewRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<IOrderService, OrderService>();
 
         services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));

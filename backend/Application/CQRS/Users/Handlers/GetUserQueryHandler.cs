@@ -7,7 +7,8 @@ using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
-public class GetUserQueryHandler(IUserRepository repository) : IRequestHandler<GetUserQuery, Result<ReadUserDto?>>
+public class GetUserQueryHandler(IUserRepository repository) : 
+    IRequestHandler<GetUserQuery, Result<ReadUserDto?>>
 {
     public async Task<Result<ReadUserDto?>> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {

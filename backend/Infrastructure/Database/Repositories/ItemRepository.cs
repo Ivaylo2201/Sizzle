@@ -40,10 +40,10 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
     {
         var result = await GetOne(id);
         
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Result.Failure($"Item {id} not found.");
         
-        context.Items.Remove(result.Value!);
+        context.Items.Remove(result.Value);
         await context.SaveChangesAsync();
         return Result.Success();
     }

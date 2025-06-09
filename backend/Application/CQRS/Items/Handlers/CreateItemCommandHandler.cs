@@ -6,7 +6,8 @@ using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
-public class CreateItemCommandHandler(IItemRepository repository) : IRequestHandler<CreateItemCommand, Result<Item>>
+public class CreateItemCommandHandler(IItemRepository itemRepository) : 
+    IRequestHandler<CreateItemCommand, Result<Item>>
 {
     public async Task<Result<Item>> Handle(CreateItemCommand request, CancellationToken cancellationToken)
     {
@@ -17,6 +18,6 @@ public class CreateItemCommandHandler(IItemRepository repository) : IRequestHand
             CartId = request.Dto.CartId
         };
 
-        return await repository.Create(item);
+        return await itemRepository.Create(item);
     }
 }

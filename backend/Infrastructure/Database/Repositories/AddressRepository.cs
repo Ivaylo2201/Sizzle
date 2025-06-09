@@ -31,10 +31,10 @@ public class AddressRepository(DatabaseContext context) : IAddressRepository
     {
         var result = await GetOne(id);
         
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Result.Failure($"Address {id} not found.");
         
-        context.Addresses.Remove(result.Value!);
+        context.Addresses.Remove(result.Value);
         await context.SaveChangesAsync();
         return Result.Success();
     }

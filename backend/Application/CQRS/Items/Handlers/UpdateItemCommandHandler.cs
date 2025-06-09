@@ -5,17 +5,18 @@ using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
-public class UpdateItemCommandHandler(IItemRepository repository) : IRequestHandler<UpdateItemCommand, Result>
+public class UpdateItemCommandHandler(IItemRepository itemRepository) : 
+    IRequestHandler<UpdateItemCommand, Result>
 {
     public async Task<Result> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
-        var result = await repository.GetOne(request.Dto.ItemId);
+        var result = await itemRepository.GetOne(request.Dto.ItemId);
 
         if (!result.IsSuccess)
             return Result.Failure(result.Error);
 
         var item = result.Value!;
         item.Quantity = request.Dto.Quantity;
-        return await repository.Update(item);
+        return await itemRepository.Update(item);
     }
 }
