@@ -27,7 +27,12 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IOrderService, OrderService>();
         services.AddSingleton<ITokenService, TokenService>();
 
-        services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<DatabaseContext>(d =>
+        {
+            d.UseSqlServer(connectionString,
+                s => s.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+        });
+        
         services.AddJwtAuthentication(jwtConfig.Key, jwtConfig.Issuer, jwtConfig.Audience);
         services.AddCorsSupport();
     }
@@ -35,9 +40,9 @@ public static class InfrastructureDependencyInjection
     private static void AddJwtAuthentication(this IServiceCollection services, byte[] key, string issuer, string audience)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
+            .AddJwtBearer(o =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
+                o.TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = ClaimTypes.NameIdentifier,
                     ValidateIssuer = true,
@@ -49,20 +54,21 @@ public static class InfrastructureDependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
+        
         services.AddAuthorization();
     }
 
     private static void AddCorsSupport(this IServiceCollection services)
     {
-        services.AddCors(options =>
+        services.AddCors(o =>
         {
-            options.AddPolicy("AllowFrontend", policy =>
-            {
-                policy
-                    .WithOrigins("http://localhost:5173/")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-            });
+            o.AddPolicy(
+                "AllowFrontend", 
+                p => p.WithOrigins("http://localhost:5173/").AllowAnyHeader().AllowAnyMethod());
+
+            o.AddPolicy(
+                "AllowAny", 
+                p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         });
     }
 }

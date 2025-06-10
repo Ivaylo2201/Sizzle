@@ -10,18 +10,16 @@ namespace WebAPI.Controllers;
 [Route("api/auth")]
 public class AuthenticationController(IMediator mediator, ITokenService tokenService) : ControllerBase
 {
-    [HttpPost]
-    [Route("sign-up")]
+    [HttpPost("sign-up")]
     public async Task<IActionResult> SignUp([FromBody] CreateUserDto dto)
     {
         var result = await mediator.Send(new CreateUserCommand(dto));
         var token = tokenService.GenerateToken(result.Value);
         
-        return Created(null as string, new { token });
+        return Created(string.Empty, new { token });
     }
 
-    [HttpPost]
-    [Route("sign-in")]
+    [HttpPost("sign-in")]
     public async Task<IActionResult> SignIn([FromBody] SignInUserDto dto)
     {
         var result = await mediator.Send(new SignInUserCommand(dto));

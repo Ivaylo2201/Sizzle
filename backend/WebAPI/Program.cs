@@ -17,6 +17,7 @@ var jwtSecretKey = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JW
 var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER")!;
 var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")!;
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")!;
+var isInDevelopment = bool.Parse(Environment.GetEnvironmentVariable("IS_IN_DEVELOPMENT")!);
 
 builder.Services.AddControllers(o => o.Filters.Add<ExceptionFilter>());
 builder.Services.AddOpenApi();
@@ -45,7 +46,7 @@ if (args.Contains("seed"))
 
 // app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors("AllowFrontend");
+app.UseCors(isInDevelopment ? "AllowAny" : "AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
