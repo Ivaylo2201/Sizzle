@@ -3,6 +3,7 @@ using Application.DTOs.User;
 using Application.Interfaces.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Requests;
 
 namespace WebAPI.Controllers;
 
@@ -11,8 +12,16 @@ namespace WebAPI.Controllers;
 public class AuthenticationController(IMediator mediator, ITokenService tokenService) : ControllerBase
 {
     [HttpPost("sign-up")]
-    public async Task<IActionResult> SignUp([FromBody] CreateUserDto dto)
+    public async Task<IActionResult> SignUp([FromBody] CreateUserRequest request)
     {
+        var dto = new CreateUserDto
+        {
+            Username = request.Username,
+            PhoneNumber = request.PhoneNumber,
+            Password = request.Password,
+            PasswordConfirmation = request.PasswordConfirmation
+        };
+        
         var result = await mediator.Send(new CreateUserCommand(dto));
         var token = tokenService.GenerateToken(result.Value);
         
@@ -20,8 +29,14 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
     }
 
     [HttpPost("sign-in")]
-    public async Task<IActionResult> SignIn([FromBody] SignInUserDto dto)
+    public async Task<IActionResult> SignIn([FromBody] SignInUserRequest request)
     {
+        var dto = new SignInUserDto
+        {
+            Username = request.Username,
+            Password = request.Password,
+        };
+        
         var result = await mediator.Send(new SignInUserCommand(dto));
 
         if (!result.IsSuccess || result.Value is null)
