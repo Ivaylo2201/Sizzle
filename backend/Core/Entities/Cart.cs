@@ -5,6 +5,6 @@ public class Cart
     public int Id { get; init; }
     public int UserId { get; init; }
     public User User { get; init; } = null!;
-    public double Total { get; init; }
+    public double Total { get; set; }
     public ICollection<Item> Items { get; init; } = new List<Item>();
 }

@@ -1,9 +1,13 @@
 using System.Text;
 using Application;
+using Application.CQRS.Users.Validators;
 using DotNetEnv;
+using FluentValidation;
 using Infrastructure;
 using Infrastructure.Database;
 using Infrastructure.Database.Seed;
+using Infrastructure.Utilities;
+using Scalar.AspNetCore;
 
 var builder = WebApplication .CreateBuilder(args);
 
@@ -14,20 +18,20 @@ var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER")!;
 var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")!;
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")!;
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(o => o.Filters.Add<ExceptionFilter>());
 builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(new JwtConfig(jwtSecretKey, jwtIssuer, jwtAudience), connectionString);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI(o => o.DisplayRequestDuration());
+    app.MapScalarApiReference();
 }
 
 if (args.Contains("seed"))
@@ -39,7 +43,7 @@ if (args.Contains("seed"))
     return;
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();

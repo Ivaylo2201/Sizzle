@@ -25,7 +25,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<IOrderService, OrderService>();
-        services.AddSingleton<TokenService>();
+        services.AddSingleton<ITokenService, TokenService>();
 
         services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
         services.AddJwtAuthentication(jwtConfig.Key, jwtConfig.Issuer, jwtConfig.Audience);

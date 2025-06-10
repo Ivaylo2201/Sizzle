@@ -20,5 +20,9 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
             .MinimumLength(5).WithMessage("Password must be at least 5 characters long.")
             .Matches(@"^(?=.*[A-Za-z])(?=.*\d).+$").WithMessage("Password must contain both letters and numbers.")
             .Must((c, password) => !password.Contains(c.Dto.Username)).WithMessage("Password must not contain username.");
+        
+        RuleFor(c => c.Dto.PasswordConfirmation)
+            .NotEmpty().WithMessage("PasswordConfirmation must be provided.")
+            .Equal(c => c.Dto.Password).WithMessage("Passwords do not match.");
     }
 }

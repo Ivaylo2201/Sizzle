@@ -10,4 +10,5 @@ public interface ICartRepository :
 {
     Task<Result<Cart?>> GetOneByUserIdAsync(int userId);
     Task<Result<List<Item>?>> GetItemsFromUsersCart(int userId);
+    Task<Result> UpdateCartTotal(int cartId, double amount);
 }

@@ -35,4 +35,14 @@ public class UserRepository(DatabaseContext context) : IUserRepository
         await context.SaveChangesAsync();
         return Result.Success();
     }
+
+    public async Task<Result<User?>> GetOneByUsernameAndPassword(string username, string password)
+    {
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        
+        if (user is null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
+            return Result.Failure<User?>("Invalid credentials provided.");
+        
+        return Result.Success<User?>(user);
+    }
 }
