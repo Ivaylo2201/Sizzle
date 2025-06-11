@@ -18,6 +18,14 @@ public class UserRepository(DatabaseContext context) : IUserRepository
         await context.SaveChangesAsync();
         return Result.Success(result.Entity);
     }
+    
+    public async Task<Result> Update(User user)
+    {
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        context.Users.Update(user);
+        await context.SaveChangesAsync();
+        return Result.Success();
+    }
 
     public async Task<Result<User?>> GetOne(int id)
     {
@@ -28,21 +36,19 @@ public class UserRepository(DatabaseContext context) : IUserRepository
             : Result.Success<User?>(user);
     }
 
-    public async Task<Result> Update(User user)
+    public async Task<(bool, User?)> IsSignedUp(string username, string password)
     {
-        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-        context.Users.Update(user);
-        await context.SaveChangesAsync();
-        return Result.Success();
+        var user = await context.Users.SingleOrDefaultAsync(u => u.Username == username);
+        
+        if (user is null)
+            return (false, null);
+        
+        var isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+        return isPasswordValid ? (true, user) : (false, null);
     }
-
-    public async Task<Result<User?>> GetOneByUsernameAndPassword(string username, string password)
+    
+    public async Task<bool> IsUsernameTaken(string username)
     {
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
-        
-        if (user is null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
-            return Result.Failure<User?>("Invalid credentials provided.");
-        
-        return Result.Success<User?>(user);
+        return await context.Users.AnyAsync(u => u.Username == username);
     }
 }

@@ -10,6 +10,11 @@ public class CreateUserCommandHandler(IUserRepository userRepository) : IRequest
 {
     public async Task<Result<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
+        var userResult = await userRepository.IsUsernameTaken(request.Dto.Username);
+        
+        if (userResult)
+            return Result.Failure<User>("Username already taken.");
+        
         var user = new User
         {
             Username = request.Dto.Username,

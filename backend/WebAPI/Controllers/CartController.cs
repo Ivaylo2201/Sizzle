@@ -14,6 +14,18 @@ namespace WebAPI.Controllers;
 public class CartController(IMediator mediator) : ControllerBase
 {
     [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetCartContent()
+    {
+        var result = await mediator.Send(new GetCartQuery(User.GetId()));
+        
+        if (!result.IsSuccess || result.Value is null)
+            return NotFound(new { message = result.Error });
+        
+        return Ok(result.Value);
+    }
+    
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddItemToCart([FromBody] AddItemToCartRequest request)
     {

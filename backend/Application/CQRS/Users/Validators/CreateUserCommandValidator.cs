@@ -1,4 +1,5 @@
 ﻿using Application.CQRS.Users.Commands;
+using Core.Interfaces.Repositories;
 using FluentValidation;
 
 namespace Application.CQRS.Users.Validators;

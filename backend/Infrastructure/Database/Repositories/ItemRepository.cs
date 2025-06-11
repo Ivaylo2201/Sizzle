@@ -14,12 +14,6 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
         return Result.Success(result.Entity);
     }
 
-    public async Task<Result<List<Item>>> GetAllFromCartAsync(int cartId)
-    {
-        var itemsInCart = await context.Items.Where(i => i.CartId == cartId).ToListAsync();
-        return Result.Success(itemsInCart);
-    }
-
     public async Task<Result<Item?>> GetOne(int id)
     {
         var item = await context.Items.FirstOrDefaultAsync(i => i.Id == id);

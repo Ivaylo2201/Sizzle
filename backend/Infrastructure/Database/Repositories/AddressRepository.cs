@@ -14,12 +14,6 @@ public class AddressRepository(DatabaseContext context) : IAddressRepository
         return Result.Success(result.Entity);
     }
 
-    public async Task<Result<List<Address>>> GetAllAddressesForUser(int userId)
-    {
-        var addresses = await context.Addresses.Where(a => a.UserId == userId).ToListAsync();
-        return Result.Success(addresses);
-    }
-
     public async Task<Result> Update(Address address)
     {
         context.Addresses.Update(address);

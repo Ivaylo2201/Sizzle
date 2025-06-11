@@ -10,11 +10,10 @@ public class SignInUserCommandHandler(IUserRepository userRepository) : IRequest
 {
     public async Task<Result<User?>> Handle(SignInUserCommand request, CancellationToken cancellationToken)
     {
-        var result = await userRepository.GetOneByUsernameAndPassword(request.Dto.Username, request.Dto.Password);
-
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure<User?>(result.Error);
+        var (isSignedUp, user) = await userRepository.IsSignedUp(request.Dto.Username, request.Dto.Password);
         
-        return Result.Success<User?>(result.Value);
+        return isSignedUp
+            ? Result.Success(user)
+            : Result.Failure<User?>("Invalid credentials provided.");
     }
 }

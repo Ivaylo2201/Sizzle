@@ -8,7 +8,4 @@ public interface IItemRepository :
     ICreatable<Item>, 
     IUpdatable<Item>, 
     IDeletable<int>, 
-    ISingleReadable<Item, int>
-{
-    Task<Result<List<Item>>> GetAllFromCartAsync(int cartId);
-}
+    ISingleReadable<Item, int>;

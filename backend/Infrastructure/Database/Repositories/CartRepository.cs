@@ -14,18 +14,9 @@ public class CartRepository(DatabaseContext context) : ICartRepository
         return Result.Success(result.Entity);
     }
 
-    public async Task<Result<Cart?>> GetOne(int id)
-    {
-        var cart = await context.Carts.FirstOrDefaultAsync(c => c.Id == id);
-        
-        return cart == null
-            ? Result.Failure<Cart?>($"Cart {id} not found.") 
-            : Result.Success<Cart?>(cart);
-    }
-
     public async Task<Result<Cart?>> GetOneByUserIdAsync(int userId)
     {
-        var cart = await context.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+        var cart = await GetIncludedCartQuery().FirstOrDefaultAsync(c => c.UserId == userId);
         
         return cart == null
             ? Result.Failure<Cart?>($"User {userId}'s cart not found.") 
@@ -34,7 +25,7 @@ public class CartRepository(DatabaseContext context) : ICartRepository
     
     public async Task<Result<List<Item>?>> GetItemsFromUsersCart(int userId)
     {
-        var user = await context.Users.SingleOrDefaultAsync(u => u.Id == userId);
+        var user = await context.Users.Include(u => u.Cart).SingleOrDefaultAsync(u => u.Id == userId);
 
         if (user is null)
             return Result.Failure<List<Item>?>($"Multiple users or no user with id {userId} found.");
@@ -53,5 +44,13 @@ public class CartRepository(DatabaseContext context) : ICartRepository
         cart.Total += amount;
         await context.SaveChangesAsync();
         return Result.Success();
+    }
+
+    private IQueryable<Cart> GetIncludedCartQuery()
+    {
+        return context.Carts
+            .Include(c => c.User)
+            .Include(c => c.Items)
+            .ThenInclude(i => i.Product);
     }
 }

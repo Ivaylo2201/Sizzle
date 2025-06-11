@@ -11,6 +11,7 @@ public static class ItemExtensions
         {
             Id = item.Id,
             ProductName = item.Product.ProductName,
+            ProductPrice = item.Product.Price,
             ImageUrl = item.Product.ImageUrl,
             Price = item.Product.Price * item.Quantity,
             Quantity = item.Quantity,
