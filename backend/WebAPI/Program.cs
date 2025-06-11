@@ -9,7 +9,7 @@ using Infrastructure.Database.Seed;
 using Infrastructure.Utilities;
 using Scalar.AspNetCore;
 
-var builder = WebApplication .CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
 
@@ -24,7 +24,6 @@ builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(new JwtConfig(jwtSecretKey, jwtIssuer, jwtAudience), connectionString);
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
 
 var app = builder.Build();
@@ -44,13 +43,10 @@ if (args.Contains("seed"))
     return;
 }
 
-// app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(isInDevelopment ? "AllowAny" : "AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
-
 app.MapControllers();
-
 app.Run();

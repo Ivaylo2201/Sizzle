@@ -25,6 +25,6 @@ public class ReviewController(IMediator mediator) : ControllerBase
         };
         
         await mediator.Send(new CreateReviewCommand(dto));
-        return Created(null as string, new { message = "Item added successfully." });
+        return Created(null as string, new { message = "Review added successfully." });
     }
 }

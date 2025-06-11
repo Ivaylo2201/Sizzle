@@ -35,7 +35,7 @@ public class AddressRepository(DatabaseContext context) : IAddressRepository
 
     public async Task<Result<Address?>> GetOne(int id)
     {
-        var address = await context.Addresses.FirstOrDefaultAsync(a => a.Id == id);
+        var address = await context.Addresses.SingleOrDefaultAsync(a => a.Id == id);
         
         return address == null
             ? Result.Failure<Address?>($"Address {id} not found.") 

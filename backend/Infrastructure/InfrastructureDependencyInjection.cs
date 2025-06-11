@@ -26,6 +26,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddSingleton<ITokenService, TokenService>();
+        services.AddScoped<IOwnershipService, OwnershipService>();
 
         services.AddDbContext<DatabaseContext>(d =>
         {

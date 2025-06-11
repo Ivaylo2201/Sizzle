@@ -6,14 +6,14 @@ using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
-public class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<User>>
+public class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<User?>>
 {
-    public async Task<Result<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<User?>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var userResult = await userRepository.IsUsernameTaken(request.Dto.Username);
+        var isUsernameTaken = await userRepository.IsUsernameTaken(request.Dto.Username);
         
-        if (userResult)
-            return Result.Failure<User>("Username already taken.");
+        if (isUsernameTaken)
+            return Result.Failure<User?>("Username already taken.");
         
         var user = new User
         {
@@ -22,6 +22,7 @@ public class CreateUserCommandHandler(IUserRepository userRepository) : IRequest
             Password = request.Dto.Password,
         };
         
-        return await userRepository.Create(user);
+        var result = await userRepository.Create(user);
+        return Result.Success<User?>(result.Value); 
     }
 }

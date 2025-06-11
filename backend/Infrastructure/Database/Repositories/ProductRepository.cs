@@ -24,7 +24,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
             .Include(p => p.Reviews)
                 .ThenInclude(r => r.User)
             .Include(p => p.Ingredients)
-            .FirstOrDefaultAsync(p => p.Id == id);
+            .SingleOrDefaultAsync(p => p.Id == id);
 
         return product == null
             ? Result.Failure<Product?>($"Product {id} not found.") 

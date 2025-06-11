@@ -16,10 +16,14 @@ public class CartRepository(DatabaseContext context) : ICartRepository
 
     public async Task<Result<Cart?>> GetOneByUserIdAsync(int userId)
     {
-        var cart = await GetIncludedCartQuery().FirstOrDefaultAsync(c => c.UserId == userId);
+        var cart = await context.Carts
+            .Include(c => c.User)
+            .Include(c => c.Items)
+                .ThenInclude(i => i.Product)
+            .SingleOrDefaultAsync(c => c.UserId == userId);
         
         return cart == null
-            ? Result.Failure<Cart?>($"User {userId}'s cart not found.") 
+            ? Result.Failure<Cart?>($"User #{userId}'s cart was not found.") 
             : Result.Success<Cart?>(cart);
     }
     
@@ -44,13 +48,5 @@ public class CartRepository(DatabaseContext context) : ICartRepository
         cart.Total += amount;
         await context.SaveChangesAsync();
         return Result.Success();
-    }
-
-    private IQueryable<Cart> GetIncludedCartQuery()
-    {
-        return context.Carts
-            .Include(c => c.User)
-            .Include(c => c.Items)
-            .ThenInclude(i => i.Product);
     }
 }

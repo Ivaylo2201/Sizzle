@@ -16,7 +16,10 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
 
     public async Task<Result<Item?>> GetOne(int id)
     {
-        var item = await context.Items.FirstOrDefaultAsync(i => i.Id == id);
+        var item = await context.Items
+            .Include(i => i.Product)
+            .Include(i => i.Cart)
+            .SingleOrDefaultAsync(i => i.Id == id);
         
         return item == null
             ? Result.Failure<Item?>($"Item {id} not found.") 

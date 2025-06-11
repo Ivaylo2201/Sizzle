@@ -1,6 +1,9 @@
 ﻿using Application.CQRS.Carts.Queries;
 using Application.CQRS.Items.Commands;
+using Application.CQRS.Items.Queries;
+using Application.CQRS.Products.Queries;
 using Application.DTOs.Item;
+using Application.Interfaces.Services;
 using Infrastructure.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -11,34 +14,36 @@ namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("api/carts/items")]
-public class CartController(IMediator mediator) : ControllerBase
+public class CartController(IMediator mediator, IOwnershipService ownershipService) : ControllerBase
 {
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetCartContent()
     {
-        var result = await mediator.Send(new GetCartQuery(User.GetId()));
+        var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
         
-        if (!result.IsSuccess || result.Value is null)
-            return NotFound(new { message = result.Error });
+        if (!cartResult.IsSuccess || cartResult.Value is null)
+            return NotFound(new { message = cartResult.Error });
         
-        return Ok(result.Value);
+        return Ok(new { cartResult.Value.Items, cartResult.Value.Total });
     }
     
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddItemToCart([FromBody] AddItemToCartRequest request)
     {
-        var result = await mediator.Send(new GetCartQuery(User.GetId()));
+        var productResult = await mediator.Send(new GetProductQuery(request.ProductId));
         
-        if (!result.IsSuccess || result.Value is null)
-            return NotFound(new { message = result.Error });
+        if (!productResult.IsSuccess || productResult.Value is null)
+            return NotFound(new { error = productResult.Error });
+        
+        var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
 
         var dto = new CreateItemDto
         {
             ProductId = request.ProductId, 
             Quantity = request.Quantity, 
-            CartId = result.Value.Id
+            CartId = cartResult.Value!.Id
         };
         
         await mediator.Send(new CreateItemCommand(dto));
@@ -49,13 +54,15 @@ public class CartController(IMediator mediator) : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> RemoveItemFromCart([FromRoute] int id)
     {
-        var result = await mediator.Send(new GetCartQuery(User.GetId()));
-        
-        if (!result.IsSuccess || result.Value is null)
-            return NotFound(new { message = result.Error });
+        var itemResult = await mediator.Send(new GetItemQuery(id));
 
-        var dto = new DeleteItemDto { Id = id, CartId = result.Value.Id };
+        if (!itemResult.IsSuccess || itemResult.Value is null)
+            return NotFound(new { error = itemResult.Error });
+
+        if (!await ownershipService.HasItemOwnership(itemResult.Value.Id, User.GetId()))
+            return Forbid();
         
+        var dto = new DeleteItemDto { Id = itemResult.Value.Id };
         await mediator.Send(new DeleteItemCommand(dto));
         return NoContent();
     }

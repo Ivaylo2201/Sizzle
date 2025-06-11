@@ -10,9 +10,9 @@ public class UserRepository(DatabaseContext context) : IUserRepository
     public async Task<Result<User>> Create(User user)
     {
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-        
         var result = await context.Users.AddAsync(user);
-        var cart = new Cart { User = user };
+        
+        var cart = new Cart { User = result.Entity };
         await context.Carts.AddAsync(cart);
         
         await context.SaveChangesAsync();
@@ -29,7 +29,7 @@ public class UserRepository(DatabaseContext context) : IUserRepository
 
     public async Task<Result<User?>> GetOne(int id)
     {
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        var user = await context.Users.SingleOrDefaultAsync(u => u.Id == id);
         
         return user is null 
             ? Result.Failure<User?>("User not found")

@@ -22,10 +22,12 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
             PasswordConfirmation = request.PasswordConfirmation
         };
         
-        var result = await mediator.Send(new CreateUserCommand(dto));
-        var token = tokenService.GenerateToken(result.Value);
+        var userResult = await mediator.Send(new CreateUserCommand(dto));
         
-        return Created(string.Empty, new { token });
+        if (!userResult.IsSuccess || userResult.Value is null)
+            return BadRequest(new { error = userResult.Error });
+        
+        return Created(string.Empty, new { token = tokenService.GenerateToken(userResult.Value) });
     }
 
     [HttpPost("sign-in")]
@@ -37,12 +39,11 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
             Password = request.Password,
         };
         
-        var result = await mediator.Send(new SignInUserCommand(dto));
+        var userResult = await mediator.Send(new SignInUserCommand(dto));
 
-        if (!result.IsSuccess || result.Value is null)
-            return BadRequest(new { message = result.Error });
+        if (!userResult.IsSuccess || userResult.Value is null)
+            return BadRequest(new { error = userResult.Error });
         
-        var token = tokenService.GenerateToken(result.Value);
-        return Ok(new { token });
+        return Ok(new { token = tokenService.GenerateToken(userResult.Value) });
     }
 }
