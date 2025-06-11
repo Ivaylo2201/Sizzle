@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.CQRS.Reviews.Handlers;
 
-public class CreateReviewsCommandHandler(IReviewRepository reviewRepository) : IRequestHandler<CreateReviewCommand, Result<Review>>
+public class CreateReviewCommandHandler(IReviewRepository reviewRepository) : IRequestHandler<CreateReviewCommand, Result<Review>>
 {
     public async Task<Result<Review>> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
     {

@@ -16,8 +16,7 @@ public class GetCartQueryHandler(ICartRepository cartRepository) :
         
         if (!result.IsSuccess || result.Value is null)
             return Result.Failure<GetCartDto?>(result.Error);
-
-        var cartDto = result.Value.ToDto();
-        return Result.Success<GetCartDto?>(cartDto);
+        
+        return Result.Success<GetCartDto?>(result.Value.ToDto());
     }
 }

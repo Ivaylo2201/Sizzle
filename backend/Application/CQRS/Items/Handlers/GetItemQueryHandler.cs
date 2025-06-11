@@ -15,8 +15,7 @@ public class GetItemQueryHandler(IItemRepository itemRepository) : IRequestHandl
 
         if (!result.IsSuccess || result.Value is null)
             return Result.Failure<GetItemDto?>(result.Error);
-        
-        var itemDto = result.Value.ToDto();
-        return Result.Success<GetItemDto?>(itemDto);
+
+        return Result.Success<GetItemDto?>(result.Value.ToDto());
     }
 }

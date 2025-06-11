@@ -16,8 +16,7 @@ public class GetProductQueryHandler(IProductRepository productRepository) :
 
         if (!result.IsSuccess || result.Value is null)
             return Result.Failure<GetProductLongDto?>(result.Error);
-
-        var dto = result.Value.ToLongDto();
-        return Result.Success<GetProductLongDto?>(dto);
+        
+        return Result.Success<GetProductLongDto?>(result.Value.ToLongDto());
     }
 }
