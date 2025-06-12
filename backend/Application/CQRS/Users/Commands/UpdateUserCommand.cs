@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.CQRS.Users.Commands;
 
-public record UpdateUserCommand(UpdateUserDto Dto) : IRequest<Result>;
+public record UpdateUserCommand(UpdateUserDto Dto) : IRequest<Unit>;

@@ -27,28 +27,21 @@ public class UserRepository(DatabaseContext context) : IUserRepository
         return Result.Success();
     }
 
-    public async Task<Result<User?>> GetOne(int id)
+    public async Task<Result<User>> GetOne(int id)
     {
         var user = await context.Users.SingleOrDefaultAsync(u => u.Id == id);
         
         return user is null 
-            ? Result.Failure<User?>("User not found")
-            : Result.Success<User?>(user);
+            ? Result.Failure<User>($"User {id} not found")
+            : Result.Success(user);
     }
-
-    public async Task<(bool, User?)> IsSignedUp(string username, string password)
+    
+    public async Task<Result<User>> GetOne(string username)
     {
         var user = await context.Users.SingleOrDefaultAsync(u => u.Username == username);
         
-        if (user is null)
-            return (false, null);
-        
-        var isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
-        return isPasswordValid ? (true, user) : (false, null);
-    }
-    
-    public async Task<bool> IsUsernameTaken(string username)
-    {
-        return await context.Users.AnyAsync(u => u.Username == username);
+        return user is null 
+            ? Result.Failure<User>($"User {username} not found")
+            : Result.Success(user);
     }
 }

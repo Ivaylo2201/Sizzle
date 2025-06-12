@@ -1,15 +1,15 @@
 ﻿using Application.CQRS.Addresses.Commands;
-using Core.Abstractions;
 using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Addresses.Handlers;
 
 public class DeleteAddressCommandHandler(IAddressRepository addressRepository) : 
-    IRequestHandler<DeleteAddressCommand, Result>
+    IRequestHandler<DeleteAddressCommand, Unit>
 {
-    public async Task<Result> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
     {
-        return await addressRepository.Delete(request.Dto.Id);
+        await addressRepository.Delete(request.Id);
+        return Unit.Value;
     }
 }

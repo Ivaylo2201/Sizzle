@@ -1,25 +1,21 @@
 ﻿using Application.CQRS.Addresses.Commands;
-using Core.Abstractions;
 using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Addresses.Handlers;
 
 public class UpdateAddressCommandHandler(IAddressRepository addressRepository) : 
-    IRequestHandler<UpdateAddressCommand, Result>
+    IRequestHandler<UpdateAddressCommand, Unit>
 {
-    public async Task<Result> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
     {
-        var result = await addressRepository.GetOne(request.Dto.Id);
-
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure(result.Error);
-
-        var address = result.Value;
-        address.CityId = request.Dto.CityId;
+        var address = request.Dto.Address;
+        
+        address.City = request.Dto.City;
         address.StreetName = request.Dto.StreetName;
         address.StreetNumber = request.Dto.StreetNumber;
         
-        return await addressRepository.Update(address);
+        await addressRepository.Update(address);
+        return Unit.Value;
     }
 }

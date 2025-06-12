@@ -1,7 +1,7 @@
-﻿using Application.DTOs.Cart;
-using Core.Abstractions;
+﻿using Core.Abstractions;
+using Core.Entities;
 using MediatR;
 
 namespace Application.CQRS.Carts.Queries;
 
-public record GetCartQuery(int UserId) : IRequest<Result<GetCartDto?>>;
+public record GetCartQuery(int UserId) : IRequest<Result<Cart>>;

@@ -4,6 +4,7 @@ public class Result
 {
     public bool IsSuccess { get; }
     public string? Error { get; }
+    public object? ErrorObject { get; }
 
     protected Result(bool isSuccess, string? error)
     {
@@ -12,6 +13,7 @@ public class Result
         
         IsSuccess = isSuccess;
         Error = error;
+        ErrorObject = new { message = error };
     }
 
     public static Result Success() => new(true, null);

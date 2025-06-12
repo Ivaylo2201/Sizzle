@@ -14,7 +14,7 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
         return Result.Success(result.Entity);
     }
 
-    public async Task<Result<Item?>> GetOne(int id)
+    public async Task<Result<Item>> GetOne(int id)
     {
         var item = await context.Items
             .Include(i => i.Product)
@@ -22,8 +22,8 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
             .SingleOrDefaultAsync(i => i.Id == id);
         
         return item == null
-            ? Result.Failure<Item?>($"Item {id} not found.") 
-            : Result.Success<Item?>(item);
+            ? Result.Failure<Item>($"Item {id} not found.") 
+            : Result.Success(item);
     }
 
     public async Task<Result> Update(Item item)
@@ -35,12 +35,12 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
 
     public async Task<Result> Delete(int id)
     {
-        var result = await GetOne(id);
-        
-        if (!result.IsSuccess || result.Value is null)
+        var item = await context.Addresses.SingleOrDefaultAsync(a => a.Id == id);
+
+        if (item is null)
             return Result.Failure($"Item {id} not found.");
         
-        context.Items.Remove(result.Value);
+        context.Addresses.Remove(item);
         await context.SaveChangesAsync();
         return Result.Success();
     }

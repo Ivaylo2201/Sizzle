@@ -1,23 +1,20 @@
 ﻿using Application.CQRS.Users.Commands;
-using Core.Abstractions;
 using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
 public class UpdateUserCommandHandler(IUserRepository userRepository) : 
-    IRequestHandler<UpdateUserCommand, Result>
+    IRequestHandler<UpdateUserCommand, Unit>
 {
-    public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var result = await userRepository.GetOne(request.Dto.Id);
-
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure(result.Error);
-
-        var user = result.Value;
+        var user = request.Dto.User;
+        
         user.PhoneNumber = request.Dto.PhoneNumber;
         user.Password = request.Dto.Password;
-        return await userRepository.Update(user);
+        await userRepository.Update(user);
+        
+        return Unit.Value;
     }
 }

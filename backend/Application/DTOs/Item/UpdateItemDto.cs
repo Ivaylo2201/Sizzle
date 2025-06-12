@@ -2,6 +2,6 @@
 
 public record UpdateItemDto
 {
-    public required int Id { get; init; }
+    public required Core.Entities.Item Item { get; init; }
     public required int Quantity { get; init; }
 }

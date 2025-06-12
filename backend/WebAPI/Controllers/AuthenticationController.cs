@@ -22,12 +22,13 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
             PasswordConfirmation = request.PasswordConfirmation
         };
         
-        var userResult = await mediator.Send(new CreateUserCommand(dto));
+        var createUserResult = await mediator.Send(new CreateUserCommand(dto));
         
-        if (!userResult.IsSuccess || userResult.Value is null)
-            return BadRequest(new { error = userResult.Error });
-        
-        return Created(string.Empty, new { token = tokenService.GenerateToken(userResult.Value) });
+        if (!createUserResult.IsSuccess)
+            return BadRequest(createUserResult.ErrorObject);
+
+        var token = tokenService.GenerateToken(createUserResult.Value);
+        return Created(string.Empty, new { token  });
     }
 
     [HttpPost("sign-in")]
@@ -39,11 +40,12 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
             Password = request.Password,
         };
         
-        var userResult = await mediator.Send(new SignInUserCommand(dto));
+        var signInUserResult = await mediator.Send(new SignInUserCommand(dto));
 
-        if (!userResult.IsSuccess || userResult.Value is null)
-            return BadRequest(new { error = userResult.Error });
+        if (!signInUserResult.IsSuccess)
+            return BadRequest(signInUserResult.ErrorObject);
         
-        return Ok(new { token = tokenService.GenerateToken(userResult.Value) });
+        var token = tokenService.GenerateToken(signInUserResult.Value);
+        return Created(string.Empty, new { token  });
     }
 }

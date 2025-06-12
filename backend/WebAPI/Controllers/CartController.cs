@@ -20,30 +20,30 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
     [HttpGet]
     public async Task<IActionResult> GetCartContent()
     {
-        var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
+        var cart = await mediator.Send(new GetCartQuery(User.GetId()));
         
-        if (!cartResult.IsSuccess || cartResult.Value is null)
-            return NotFound(new { message = cartResult.Error });
+        if (!cart.IsSuccess)
+            return NotFound(cart.ErrorObject);
         
-        return Ok(new { cartResult.Value.Items, cartResult.Value.Total });
+        return Ok(new { cart.Value.Items, cart.Value.Total });
     }
     
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddItemToCart([FromBody] AddItemToCartRequest request)
     {
-        var productResult = await mediator.Send(new GetProductQuery(request.ProductId));
+        var product = await mediator.Send(new GetProductQuery(request.ProductId));
         
-        if (!productResult.IsSuccess || productResult.Value is null)
-            return NotFound(new { error = productResult.Error });
+        if (!product.IsSuccess)
+            return NotFound(product.ErrorObject);
         
         var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
 
         var dto = new CreateItemDto
         {
-            ProductId = request.ProductId, 
+            Product = product.Value,
             Quantity = request.Quantity, 
-            CartId = cartResult.Value!.Id
+            Cart = cartResult.Value
         };
         
         await mediator.Send(new CreateItemCommand(dto));
@@ -54,16 +54,15 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> RemoveItemFromCart([FromRoute] int id)
     {
-        var itemResult = await mediator.Send(new GetItemQuery(id));
+        var item = await mediator.Send(new GetItemQuery(id));
 
-        if (!itemResult.IsSuccess || itemResult.Value is null)
-            return NotFound(new { error = itemResult.Error });
+        if (!item.IsSuccess)
+            return NotFound(item.ErrorObject);
 
-        if (!await ownershipService.HasItemOwnership(itemResult.Value.Id, User.GetId()))
+        if (!await ownershipService.HasItemOwnership(item.Value.Id, User.GetId()))
             return Forbid();
         
-        var dto = new DeleteItemDto { Id = itemResult.Value.Id };
-        await mediator.Send(new DeleteItemCommand(dto));
+        await mediator.Send(new DeleteItemCommand(item.Value.Id));
         return NoContent();
     }
 }

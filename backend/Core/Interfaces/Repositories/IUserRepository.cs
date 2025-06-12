@@ -9,6 +9,5 @@ public interface IUserRepository :
     ISingleReadable<User, int>,
     IUpdatable<User>
 {
-    Task<(bool, User?)> IsSignedUp(string username, string password);
-    Task<bool> IsUsernameTaken(string username);
+    Task<Result<User>> GetOne(string username);
 }

@@ -1,22 +1,19 @@
 ﻿using Application.CQRS.Items.Commands;
-using Core.Abstractions;
 using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
 public class UpdateItemCommandHandler(IItemRepository itemRepository) : 
-    IRequestHandler<UpdateItemCommand, Result>
+    IRequestHandler<UpdateItemCommand, Unit>
 {
-    public async Task<Result> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
-        var result = await itemRepository.GetOne(request.Dto.Id);
-
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure(result.Error);
-
-        var item = result.Value!;
+        var item = request.Dto.Item;
+        
         item.Quantity = request.Dto.Quantity;
-        return await itemRepository.Update(item);
+        await itemRepository.Update(item);
+
+        return Unit.Value;
     }
 }

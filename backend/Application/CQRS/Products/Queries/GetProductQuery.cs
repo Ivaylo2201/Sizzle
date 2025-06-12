@@ -1,7 +1,7 @@
-﻿using Application.DTOs.Product;
-using Core.Abstractions;
+﻿using Core.Abstractions;
+using Core.Entities;
 using MediatR;
 
 namespace Application.CQRS.Products.Queries;
 
-public record GetProductQuery(Guid ProductId) : IRequest<Result<GetProductLongDto?>>;
+public record GetProductQuery(Guid ProductId) : IRequest<Result<Product>>;

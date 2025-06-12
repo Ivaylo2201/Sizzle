@@ -38,14 +38,9 @@ public class CartRepository(DatabaseContext context) : ICartRepository
         return Result.Success<List<Item>?>(items);
     }
 
-    public async Task<Result> UpdateCartTotal(int cartId, double amount)
+    public async Task<Result> Update(Cart cart)
     {
-        var cart = await context.Carts.SingleOrDefaultAsync(c => c.Id == cartId);
-        
-        if (cart is null)
-            return Result.Failure<List<Item>?>($"Multiple carts or no cart with id {cartId} found.");
-        
-        cart.Total += amount;
+        context.Carts.Update(cart);
         await context.SaveChangesAsync();
         return Result.Success();
     }

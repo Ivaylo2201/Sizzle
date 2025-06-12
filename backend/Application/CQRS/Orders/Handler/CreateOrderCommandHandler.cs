@@ -14,12 +14,12 @@ public class CreateOrderCommandHandler(
 {
     public async Task<Result<Order>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var userResult = await userRepository.GetOne(request.Dto.UserId);
+        var user = await userRepository.GetOne(request.Dto.UserId);
 
-        if (!userResult.IsSuccess || userResult.Value is null)
-            return Result.Failure<Order>(userResult.Error);
+        if (!user.IsSuccess || user.Value is null)
+            return Result.Failure<Order>(user.Error);
         
-        var order = new Order { User = userResult.Value };
+        var order = new Order { User = user.Value };
         var result = await orderRepository.Create(order);
         
         await orderService.MarkItemsInUsersCartAsOrderedAsync(request.Dto.UserId, order);

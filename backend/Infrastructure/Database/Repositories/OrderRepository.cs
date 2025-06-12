@@ -9,8 +9,8 @@ public class OrderRepository(DatabaseContext context) : IOrderRepository
 {
     public async Task<Result<List<Order>>> GetAllOrdersForUser(int userId)
     {
-        var itemsForUser = await context.Orders.Where(o => o.UserId == userId).ToListAsync();
-        return Result.Success(itemsForUser);
+        var items = await context.Orders.Where(o => o.UserId == userId).ToListAsync();
+        return Result.Success(items);
     }
 
     public async Task<Result<Order>> Create(Order order)

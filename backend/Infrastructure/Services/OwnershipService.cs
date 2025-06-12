@@ -3,11 +3,17 @@ using Core.Interfaces.Repositories;
 
 namespace Infrastructure.Services;
 
-public class OwnershipService(ICartRepository cartRepository) : IOwnershipService
+public class OwnershipService(ICartRepository cartRepository, IAddressRepository addressRepository) : IOwnershipService
 {
     public async Task<bool> HasItemOwnership(int itemId, int userId)
     {
-        var cartResult = await cartRepository.GetOneByUserIdAsync(userId);
-        return itemId == cartResult.Value!.Id;
+        var cart = await cartRepository.GetOneByUserIdAsync(userId);
+        return itemId == cart.Value?.Id;
+    }
+
+    public async Task<bool> HasAddressOwnership(int addressId, int userId)
+    {
+        var addressResult = await addressRepository.GetOne(addressId);
+        return addressResult.Value?.UserId == userId;
     }
 }

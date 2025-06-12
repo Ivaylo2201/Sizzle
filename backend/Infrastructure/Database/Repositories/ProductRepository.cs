@@ -18,7 +18,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
         return Result.Success(products);
     }
 
-    public async Task<Result<Product?>> GetOne(Guid id)
+    public async Task<Result<Product>> GetOne(Guid id)
     {
         var product = await context.Products
             .Include(p => p.Category)
@@ -28,7 +28,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
             .SingleOrDefaultAsync(p => p.Id == id);
 
         return product == null
-            ? Result.Failure<Product?>($"Product {id} not found.") 
-            : Result.Success<Product?>(product);
+            ? Result.Failure<Product>($"Product {id} not found.") 
+            : Result.Success(product);
     }
 }

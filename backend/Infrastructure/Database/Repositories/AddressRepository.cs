@@ -23,22 +23,28 @@ public class AddressRepository(DatabaseContext context) : IAddressRepository
 
     public async Task<Result> Delete(int id)
     {
-        var result = await GetOne(id);
-        
-        if (!result.IsSuccess || result.Value is null)
+        var address = await context.Addresses.SingleOrDefaultAsync(a => a.Id == id);
+
+        if (address is null)
             return Result.Failure($"Address {id} not found.");
         
-        context.Addresses.Remove(result.Value);
+        context.Addresses.Remove(address);
         await context.SaveChangesAsync();
         return Result.Success();
     }
 
-    public async Task<Result<Address?>> GetOne(int id)
+    public async Task<Result<List<Address>>> GetAllAddressesForUserAsync(int userId)
+    {
+        var addresses = await context.Addresses.Where(a => a.UserId == userId).ToListAsync();
+        return Result.Success(addresses);
+    }
+
+    public async Task<Result<Address>> GetOne(int id)
     {
         var address = await context.Addresses.SingleOrDefaultAsync(a => a.Id == id);
         
         return address == null
-            ? Result.Failure<Address?>($"Address {id} not found.") 
-            : Result.Success<Address?>(address);
+            ? Result.Failure<Address>($"Address {id} not found.") 
+            : Result.Success(address);
     }
 }

@@ -7,9 +7,8 @@ public class UpdateAddressCommandValidator : AbstractValidator<UpdateAddressComm
 {
     public UpdateAddressCommandValidator()
     {
-        RuleFor(c => c.Dto.CityId)
-            .NotEmpty().WithMessage("CityId must be provided.")
-            .GreaterThan(0).WithMessage("CityId must be greater than 0.");
+        RuleFor(c => c.Dto.City)
+            .NotEmpty().WithMessage("City must be provided.");
         
         RuleFor(c => c.Dto.StreetName)
             .NotEmpty().WithMessage("StreetName must be provided.")

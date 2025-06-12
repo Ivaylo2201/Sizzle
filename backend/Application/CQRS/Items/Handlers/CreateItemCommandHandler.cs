@@ -1,4 +1,5 @@
 ﻿using Application.CQRS.Items.Commands;
+using Application.Interfaces.Services;
 using Core.Abstractions;
 using Core.Entities;
 using Core.Interfaces.Repositories;
@@ -6,23 +7,19 @@ using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
-public class CreateItemCommandHandler(IItemRepository itemRepository, IProductRepository productRepository, ICartRepository cartRepository) : 
-    IRequestHandler<CreateItemCommand, Result<Item>>
+public class CreateItemCommandHandler(IItemRepository itemRepository, ICartService cartService) 
+    : IRequestHandler<CreateItemCommand, Result<Item>>
 {
     public async Task<Result<Item>> Handle(CreateItemCommand request, CancellationToken cancellationToken)
     {
-        var productResult = await productRepository.GetOne(request.Dto.ProductId);
-        
-        if (!productResult.IsSuccess || productResult.Value is null)
-            return Result.Failure<Item>($"Product with id {request.Dto.ProductId} not found.");
-        
-        await cartRepository.UpdateCartTotal(request.Dto.CartId, request.Dto.Quantity * productResult.Value.Price);
+        var itemPrice = request.Dto.Quantity * request.Dto.Product.Price;
+        await cartService.AddItemPriceToCartTotal(itemPrice, request.Dto.Cart);
         
         var item = new Item
         {
-            ProductId = request.Dto.ProductId,
+            Product = request.Dto.Product,
             Quantity = request.Dto.Quantity,
-            CartId = request.Dto.CartId
+            Cart = request.Dto.Cart
         };
 
         return await itemRepository.Create(item);

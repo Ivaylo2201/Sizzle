@@ -2,7 +2,7 @@
 
 public record UpdateUserDto
 {
-    public required int Id { get; init; }
+    public required Core.Entities.User User { get; init; }
     public required string PhoneNumber { get; init; }
     public required string Password { get; init; }
 }

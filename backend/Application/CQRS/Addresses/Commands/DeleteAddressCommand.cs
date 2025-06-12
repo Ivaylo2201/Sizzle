@@ -1,8 +1,5 @@
-﻿using Application.DTOs.Address;
-using Core.Abstractions;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.CQRS.Addresses.Commands;
 
-public record DeleteAddressCommand(DeleteAddressDto Dto) : 
-    IRequest<Result>;
+public record DeleteAddressCommand(int Id) : IRequest<Unit>;

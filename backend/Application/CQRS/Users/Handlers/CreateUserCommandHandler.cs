@@ -1,4 +1,5 @@
 ﻿using Application.CQRS.Users.Commands;
+using Application.Interfaces.Services;
 using Core.Abstractions;
 using Core.Entities;
 using Core.Interfaces.Repositories;
@@ -6,14 +7,13 @@ using MediatR;
 
 namespace Application.CQRS.Users.Handlers;
 
-public class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<User?>>
+public class CreateUserCommandHandler(IUserRepository userRepository, IAuthenticationService authenticationService) : 
+    IRequestHandler<CreateUserCommand, Result<User>>
 {
-    public async Task<Result<User?>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var isUsernameTaken = await userRepository.IsUsernameTaken(request.Dto.Username);
-        
-        if (isUsernameTaken)
-            return Result.Failure<User?>("Username already taken.");
+        if (await authenticationService.IsUsernameTaken(request.Dto.Username))
+            return Result.Failure<User>("Username already taken.");
         
         var user = new User
         {
@@ -23,6 +23,6 @@ public class CreateUserCommandHandler(IUserRepository userRepository) : IRequest
         };
         
         var result = await userRepository.Create(user);
-        return Result.Success<User?>(result.Value); 
+        return Result.Success(result.Value); 
     }
 }

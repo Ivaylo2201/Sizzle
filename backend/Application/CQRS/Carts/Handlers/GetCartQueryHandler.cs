@@ -1,22 +1,21 @@
 ﻿using Application.CQRS.Carts.Queries;
-using Application.DTOs.Cart;
-using Application.Extensions;
 using Core.Abstractions;
+using Core.Entities;
 using Core.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.CQRS.Carts.Handlers;
 
 public class GetCartQueryHandler(ICartRepository cartRepository) :
-    IRequestHandler<GetCartQuery, Result<GetCartDto?>>
+    IRequestHandler<GetCartQuery, Result<Cart>>
 {
-    public async Task<Result<GetCartDto?>> Handle(GetCartQuery request, CancellationToken cancellationToken)
+    public async Task<Result<Cart>> Handle(GetCartQuery request, CancellationToken cancellationToken)
     {
         var result = await cartRepository.GetOneByUserIdAsync(request.UserId);
         
         if (!result.IsSuccess || result.Value is null)
-            return Result.Failure<GetCartDto?>(result.Error);
+            return Result.Failure<Cart>(result.Error);
         
-        return Result.Success<GetCartDto?>(result.Value.ToDto());
+        return Result.Success(result.Value);
     }
 }

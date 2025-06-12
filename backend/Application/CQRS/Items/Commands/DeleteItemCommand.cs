@@ -1,7 +1,5 @@
-﻿using Application.DTOs.Item;
-using Core.Abstractions;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.CQRS.Items.Commands;
 
-public record DeleteItemCommand(DeleteItemDto Dto) : IRequest<Result>;
+public record DeleteItemCommand(int Id) : IRequest<Unit>;

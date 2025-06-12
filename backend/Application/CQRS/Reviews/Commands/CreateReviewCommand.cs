@@ -1,5 +1,4 @@
-﻿using Application.DTOs.Order;
-using Application.DTOs.Review;
+﻿using Application.DTOs.Review;
 using Core.Abstractions;
 using Core.Entities;
 using MediatR;
