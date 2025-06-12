@@ -1,6 +1,7 @@
 ﻿using Application.CQRS.Addresses.Commands;
 using Application.CQRS.Addresses.Queries;
 using Application.DTOs.Address;
+using Application.Extensions;
 using Application.Interfaces.Services;
 using Infrastructure.Extensions;
 using MediatR;
@@ -14,12 +15,13 @@ namespace WebAPI.Controllers;
 [Route("api/profile/addresses")]
 public class AddressController(IMediator mediator, IOwnershipService ownershipService) : ControllerBase
 {
-    // [Authorize]
-    // [HttpGet]
-    // public async Task<IActionResult> GetAddresses()
-    // {
-    //     var addressResult = await mediator.Send(new ListAddressesQuery(User.GetId()));
-    // }
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetAddresses()
+    {
+        var addressResult = await mediator.Send(new ListAddressesQuery(User.GetId()));
+        return Ok(addressResult.Value.Select(a => a.ToDto()).ToList());
+    }
 
     [Authorize]
     [HttpPost("add")]
@@ -45,15 +47,15 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
     [HttpDelete("remove/{id:int}")]
     public async Task<IActionResult> RemoveAddress([FromRoute] int id)
     {
-        var address = await mediator.Send(new GetAddressQuery(id));
+        var addressResult = await mediator.Send(new GetAddressQuery(id));
         
-        if (!address.IsSuccess)
-            return NotFound(address.ErrorObject);
+        if (!addressResult.IsSuccess)
+            return NotFound(addressResult.ErrorObject);
         
-        if (!await ownershipService.HasAddressOwnership(address.Value.Id, User.GetId()))
+        if (!await ownershipService.HasAddressOwnership(addressResult.Value.Id, User.GetId()))
             return Forbid();
         
-        await mediator.Send(new DeleteAddressCommand(address.Value.Id));
+        await mediator.Send(new DeleteAddressCommand(addressResult.Value.Id));
         return NoContent();
     }
 }

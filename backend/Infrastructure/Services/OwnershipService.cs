@@ -5,15 +5,15 @@ namespace Infrastructure.Services;
 
 public class OwnershipService(ICartRepository cartRepository, IAddressRepository addressRepository) : IOwnershipService
 {
-    public async Task<bool> HasItemOwnership(int itemId, int userId)
+    public async Task<bool> HasItemOwnership(int? cartId, int userId)
     {
         var cart = await cartRepository.GetOneByUserIdAsync(userId);
-        return itemId == cart.Value?.Id;
+        return cartId == cart.Value?.Id;
     }
 
     public async Task<bool> HasAddressOwnership(int addressId, int userId)
     {
         var addressResult = await addressRepository.GetOne(addressId);
-        return addressResult.Value?.UserId == userId;
+        return addressResult.Value.UserId == userId;
     }
 }

@@ -3,8 +3,10 @@ using Application.CQRS.Items.Commands;
 using Application.CQRS.Items.Queries;
 using Application.CQRS.Products.Queries;
 using Application.DTOs.Item;
+using Application.Extensions;
 using Application.Interfaces.Services;
 using Infrastructure.Extensions;
+using Infrastructure.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +26,12 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         
         if (!cart.IsSuccess)
             return NotFound(cart.ErrorObject);
-        
-        return Ok(new { cart.Value.Items, cart.Value.Total });
+
+        return Ok(new
+        {
+            items = cart.Value.Items.Select(i => i.ToDto()).ToList(),
+            total = cart.Value.Total
+        });
     }
     
     [Authorize]
@@ -59,9 +65,16 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         if (!item.IsSuccess)
             return NotFound(item.ErrorObject);
 
-        if (!await ownershipService.HasItemOwnership(item.Value.Id, User.GetId()))
+        var hasOwnership = await ownershipService.HasItemOwnership(item.Value.CartId, User.GetId());
+        Console.WriteLine(hasOwnership);
+
+        if (!hasOwnership)
+        {
+            Console.WriteLine("XDXDDX");
             return Forbid();
-        
+        }
+
+        Console.WriteLine("deleting...");
         await mediator.Send(new DeleteItemCommand(item.Value.Id));
         return NoContent();
     }
