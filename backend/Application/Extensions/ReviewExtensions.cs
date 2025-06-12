@@ -9,7 +9,6 @@ public static class ReviewExtensions
     {
         return new GetReviewDto
         {
-            Id = review.Id,
             Rating = review.Rating,
             Comment = review.Comment,
             Username = review.User.Username,

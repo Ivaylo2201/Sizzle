@@ -13,7 +13,13 @@ public class ListProductsQueryHandler(IProductRepository productRepository) :
     public async Task<Result<List<GetProductShortDto>>> Handle(ListProductsQuery request, CancellationToken cancellationToken)
     {
         var result = await productRepository.GetAllProductsByCategory(request.Category);
-        var productDtos = result.Value.Select(p => p.ToShortDto()).ToList();
+        
+        var productDtos = result.Value.Select(p =>
+        {
+            p.Reviews = p.Reviews.OrderByDescending(r => r.CreatedAt).ToList();
+            return p.ToShortDto();
+        }).ToList();
+        
         return Result.Success(productDtos);
     }
 }

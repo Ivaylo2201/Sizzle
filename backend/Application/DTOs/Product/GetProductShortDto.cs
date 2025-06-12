@@ -6,6 +6,7 @@ public record GetProductShortDto
     public required string ProductName { get; init; }
     public required double InitialPrice { get; init; }
     public required double Price { get; init; }
+    public required int Rating { get; init; }
     public required int DiscountPercentage { get; init; }
     public required string ImageUrl { get; init; }
     public required string Description { get; init; }

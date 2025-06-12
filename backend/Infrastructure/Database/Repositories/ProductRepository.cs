@@ -11,6 +11,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
     {
         var products = await context.Products
             .Include(p => p.Category)
+            .Include(p => p.Reviews)
             .Where(p => p.Category.CategoryName == category)
             .ToListAsync();
         
