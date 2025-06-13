@@ -19,7 +19,6 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProductCard product={product} />} />
         <Route path='/products/:category' element={<ProductList />} />
         <Route path='/product/:productId' element={<ProductPage />} />
         <Route path='/404' element={<div>404</div>} />

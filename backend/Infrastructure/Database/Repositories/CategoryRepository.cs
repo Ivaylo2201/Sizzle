@@ -1,6 +1,15 @@
-﻿namespace Infrastructure.Database.Repositories;
+﻿using Core.Abstractions;
+using Core.Entities;
+using Core.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 
-public class CategoryRepository
+namespace Infrastructure.Database.Repositories;
+
+public class CategoryRepository(DatabaseContext context) : ICategoryRepository
 {
-    
+    public async Task<Result<List<Category>>> GetAllAsync()
+    {
+        var categories = await context.Categories.ToListAsync();
+        return Result.Success(categories);
+    }
 }

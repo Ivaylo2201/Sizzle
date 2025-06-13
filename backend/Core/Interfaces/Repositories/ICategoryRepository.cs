@@ -1,6 +1,6 @@
-﻿namespace Core.Interfaces.Repositories;
+﻿using Core.Entities;
+using Core.Interfaces.Generic;
 
-public interface ICategoryRepository
-{
-    
-}
+namespace Core.Interfaces.Repositories;
+
+public interface ICategoryRepository : IMultipleReadable<Category>;

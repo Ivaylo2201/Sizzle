@@ -1,6 +1,8 @@
-﻿namespace Core.Interfaces.Generic;
+﻿using Core.Abstractions;
 
-public interface IMultipleReadable
+namespace Core.Interfaces.Generic;
+
+public interface IMultipleReadable<T>
 {
-    
+    Task<Result<List<T>>> GetAllAsync();
 }

@@ -1,4 +1,5 @@
-﻿using Application.CQRS.Products.Queries;
+﻿using Application.CQRS.Categories.Queries;
+using Application.CQRS.Products.Queries;
 using Application.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,12 @@ public class ProductController(IMediator mediator) : ControllerBase
     [HttpGet("{category}")]
     public async Task<IActionResult> ListAllProductsByCategoryAsync([FromRoute] string category)
     {
+        var categoryResult = await mediator.Send(new ListCategoriesQuery());
+        var categoryNames = categoryResult.Value.Select(c => c.CategoryName.ToLower()).ToHashSet();
+        
+        if (!categoryNames.Contains(category.ToLower()))
+            return NotFound(new { message = "Category not found." });
+        
         var productsResult = await mediator.Send(new ListProductsQuery(category));
         var response = productsResult.Value.Select(p => p.ToShortDto()).ToList();
         

@@ -23,6 +23,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IReviewRepository, ReviewRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IOwnershipService, OwnershipService>();
         services.AddScoped<ICartService, CartService>();

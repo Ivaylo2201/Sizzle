@@ -9,6 +9,7 @@ body {
 
 @theme {
   --font-rubik: 'Rubik', sans-serif;
+  --font-dmsans: 'DM Sans', sans-serif;
   --color-theme-pink: #f52f66;
   --color-theme-lightpink: #f75a89;
   --color-theme-gray: #686869;

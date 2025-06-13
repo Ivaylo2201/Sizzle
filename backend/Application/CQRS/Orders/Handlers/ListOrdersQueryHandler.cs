@@ -12,7 +12,7 @@ public class ListOrdersQueryHandler(
 {
     public async Task<Result<List<Order>>> Handle(ListOrdersQuery request, CancellationToken cancellationToken)
     {
-        var result = await orderRepository.GetAllOrdersForUserAsync(request.UserId);
-        return Result.Success(result.Value);
+        var ordersResult = await orderRepository.GetAllOrdersForUserAsync(request.UserId);
+        return Result.Success(ordersResult.Value);
     }
 }

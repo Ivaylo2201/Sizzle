@@ -1,3 +1,7 @@
-﻿namespace Application.CQRS.Categories.Queries;
+﻿using Core.Abstractions;
+using Core.Entities;
+using MediatR;
 
-public record ListCategoriesQuery();
+namespace Application.CQRS.Categories.Queries;
+
+public record ListCategoriesQuery : IRequest<Result<List<Category>>>;
