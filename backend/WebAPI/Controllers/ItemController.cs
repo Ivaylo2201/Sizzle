@@ -16,23 +16,23 @@ public class ItemController(IMediator mediator, IOwnershipService ownershipServi
 {
     [Authorize]
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> UpdateItemQuantity([FromRoute] int id, [FromBody] UpdateItemRequest request)
+    public async Task<IActionResult> UpdateItemQuantityAsync([FromRoute] int id, [FromBody] UpdateItemRequest request)
     {
-        var item = await mediator.Send(new GetItemQuery(id));
+        var itemResult = await mediator.Send(new GetItemQuery(id));
 
-        if (!item.IsSuccess)
-            return NotFound(item.ErrorObject);
+        if (!itemResult.IsSuccess)
+            return NotFound(itemResult.ErrorObject);
 
-        if (!await ownershipService.HasItemOwnershipAsync(item.Value.CartId, User.GetId()))
+        if (!await ownershipService.HasItemOwnershipAsync(itemResult.Value.CartId, User.GetId()))
             return Forbid();
 
-        var dto = new UpdateItemDto
+        var updateItemDto = new UpdateItemDto
         {
-            Item = item.Value,
+            Item = itemResult.Value,
             Quantity = request.Quantity
         };
         
-        await mediator.Send(new UpdateItemCommand(dto));
+        await mediator.Send(new UpdateItemCommand(updateItemDto));
         return Ok(new { message = "Item quantity successfully updated." });
     }
 }

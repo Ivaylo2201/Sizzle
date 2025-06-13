@@ -1,4 +1,5 @@
 ﻿using Application.CQRS.Products.Queries;
+using Application.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,20 +10,23 @@ namespace WebAPI.Controllers;
 public class ProductController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{category}")]
-    public async Task<IActionResult> ListAllProductsByCategory([FromRoute] string category)
+    public async Task<IActionResult> ListAllProductsByCategoryAsync([FromRoute] string category)
     {
-        var result = await mediator.Send(new ListProductsQuery(category));
-        return Ok(result.Value);
+        var productsResult = await mediator.Send(new ListProductsQuery(category));
+        var response = productsResult.Value.Select(p => p.ToShortDto()).ToList();
+        
+        return Ok(response);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetProductById([FromRoute] Guid id)
+    public async Task<IActionResult> GetProductByIdAsync([FromRoute] Guid id)
     {
-        var result = await mediator.Send(new GetProductQuery(id));
+        var productResult = await mediator.Send(new GetProductQuery(id));
 
-        if (!result.IsSuccess)
-            return NotFound(new { message = result.Error });
+        if (!productResult.IsSuccess)
+            return NotFound(productResult.ErrorObject);
         
-        return Ok(result.Value);
+        var response = productResult.Value.ToLongDto();
+        return Ok(response);
     }
 }

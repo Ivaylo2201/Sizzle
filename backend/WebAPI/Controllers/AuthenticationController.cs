@@ -12,9 +12,9 @@ namespace WebAPI.Controllers;
 public class AuthenticationController(IMediator mediator, ITokenService tokenService) : ControllerBase
 {
     [HttpPost("sign-up")]
-    public async Task<IActionResult> SignUp([FromBody] CreateUserRequest request)
+    public async Task<IActionResult> SignUpAsync([FromBody] CreateUserRequest request)
     {
-        var dto = new CreateUserDto
+        var createUserDto = new CreateUserDto
         {
             Username = request.Username,
             PhoneNumber = request.PhoneNumber,
@@ -22,7 +22,7 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
             PasswordConfirmation = request.PasswordConfirmation
         };
         
-        var createUserResult = await mediator.Send(new CreateUserCommand(dto));
+        var createUserResult = await mediator.Send(new CreateUserCommand(createUserDto));
         
         if (!createUserResult.IsSuccess)
             return BadRequest(createUserResult.ErrorObject);
@@ -34,13 +34,13 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
     [HttpPost("sign-in")]
     public async Task<IActionResult> SignIn([FromBody] SignInUserRequest request)
     {
-        var dto = new SignInUserDto
+        var signInUserDto = new SignInUserDto
         {
             Username = request.Username,
             Password = request.Password,
         };
         
-        var signInUserResult = await mediator.Send(new SignInUserCommand(dto));
+        var signInUserResult = await mediator.Send(new SignInUserCommand(signInUserDto));
 
         if (!signInUserResult.IsSuccess)
             return BadRequest(signInUserResult.ErrorObject);

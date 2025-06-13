@@ -17,17 +17,19 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
 {
     [Authorize]
     [HttpGet]
-    public async Task<IActionResult> GetAddresses()
+    public async Task<IActionResult> GetAddressesAsync()
     {
         var addressResult = await mediator.Send(new ListAddressesQuery(User.GetId()));
-        return Ok(addressResult.Value.Select(a => a.ToDto()).ToList());
+        var response = addressResult.Value.Select(a => a.ToDto()).ToList();
+        
+        return Ok(response);
     }
 
     [Authorize]
     [HttpPost("add")]
-    public async Task<IActionResult> AddAddress([FromBody] AddAddressRequest request)
+    public async Task<IActionResult> AddAddressAsync([FromBody] AddAddressRequest request)
     {
-        var dto = new CreateAddressDto
+        var createAddressDto = new CreateAddressDto
         {
             StreetName = request.StreetName,
             StreetNumber = request.StreetNumber,
@@ -35,7 +37,7 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
             UserId = User.GetId()
         };
 
-        var addressResult = await mediator.Send(new CreateAddressCommand(dto));
+        var addressResult = await mediator.Send(new CreateAddressCommand(createAddressDto));
 
         if (!addressResult.IsSuccess)
             return BadRequest(addressResult.ErrorObject);
@@ -45,7 +47,7 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
 
     [Authorize]
     [HttpDelete("remove/{id:int}")]
-    public async Task<IActionResult> RemoveAddress([FromRoute] int id)
+    public async Task<IActionResult> RemoveAddressAsync([FromRoute] int id)
     {
         var addressResult = await mediator.Send(new GetAddressQuery(id));
         

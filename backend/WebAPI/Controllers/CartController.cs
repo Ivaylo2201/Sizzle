@@ -19,17 +19,17 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
 {
     [Authorize]
     [HttpGet]
-    public async Task<IActionResult> GetCartContent()
+    public async Task<IActionResult> ListCartItemsAsync()
     {
-        var cart = await mediator.Send(new GetCartQuery(User.GetId()));
+        var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
         
-        if (!cart.IsSuccess)
-            return NotFound(cart.ErrorObject);
+        if (!cartResult.IsSuccess)
+            return NotFound(cartResult.ErrorObject);
 
         var responseObject = new
         {
-            items = cart.Value.Items.Select(i => i.ToDto()).ToList(),
-            total = cart.Value.Total
+            items = cartResult.Value.Items.Select(i => i.ToDto()).ToList(),
+            total = cartResult.Value.Total
         };
 
         return Ok(responseObject);
@@ -37,39 +37,39 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
     
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> AddItemToCart([FromBody] AddItemToCartRequest request)
+    public async Task<IActionResult> AddItemToCartAsync([FromBody] AddItemToCartRequest request)
     {
-        var product = await mediator.Send(new GetProductQuery(request.ProductId));
+        var productResult = await mediator.Send(new GetProductQuery(request.ProductId));
         
-        if (!product.IsSuccess)
-            return NotFound(product.ErrorObject);
+        if (!productResult.IsSuccess)
+            return NotFound(productResult.ErrorObject);
         
         var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
 
-        var dto = new CreateItemDto
+        var createItemDto = new CreateItemDto
         {
-            Product = product.Value,
+            Product = productResult.Value,
             Quantity = request.Quantity, 
             Cart = cartResult.Value
         };
         
-        await mediator.Send(new CreateItemCommand(dto));
+        await mediator.Send(new CreateItemCommand(createItemDto));
         return Created(string.Empty, new { message = "Item added successfully." });
     }
 
     [Authorize]
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> RemoveItemFromCart([FromRoute] int id)
+    public async Task<IActionResult> RemoveItemFromCartAsync([FromRoute] int id)
     {
-        var item = await mediator.Send(new GetItemQuery(id));
+        var itemResult = await mediator.Send(new GetItemQuery(id));
 
-        if (!item.IsSuccess)
-            return NotFound(item.ErrorObject);
+        if (!itemResult.IsSuccess)
+            return NotFound(itemResult.ErrorObject);
 
-        if (!await ownershipService.HasItemOwnershipAsync(item.Value.CartId, User.GetId())) 
+        if (!await ownershipService.HasItemOwnershipAsync(itemResult.Value.CartId, User.GetId())) 
             return Forbid();
         
-        await mediator.Send(new DeleteItemCommand(item.Value.Id));
+        await mediator.Send(new DeleteItemCommand(itemResult.Value.Id));
         return NoContent();
     }
 }

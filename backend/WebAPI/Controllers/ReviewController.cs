@@ -12,11 +12,11 @@ namespace WebAPI.Controllers;
 [Route("api/reviews")]
 public class ReviewController(IMediator mediator) : ControllerBase
 {
-    [HttpPost("add")]
     [Authorize]
-    public async Task<IActionResult> AddReview([FromBody] CreateReviewRequest request)
+    [HttpPost]
+    public async Task<IActionResult> AddReviewAsync([FromBody] CreateReviewRequest request)
     {
-        var dto = new CreateReviewDto
+        var createReviewDto = new CreateReviewDto
         {
             Rating = request.Rating,
             Comment = request.Comment,
@@ -24,7 +24,7 @@ public class ReviewController(IMediator mediator) : ControllerBase
             UserId = User.GetId()
         };
         
-        await mediator.Send(new CreateReviewCommand(dto));
-        return Created(null as string, new { message = "Review added successfully." });
+        await mediator.Send(new CreateReviewCommand(createReviewDto));
+        return Created(string.Empty, new { message = "Review added successfully." });
     }
 }
