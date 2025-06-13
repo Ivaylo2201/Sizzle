@@ -27,8 +27,6 @@ public static class ProductExtensions
     
     public static GetProductShortDto ToShortDto(this Product product)
     {
-        Console.WriteLine(CalculateRating(product.Reviews));
-        
         return new GetProductShortDto
         {
             Id = product.Id,
@@ -47,8 +45,6 @@ public static class ProductExtensions
         if (reviews.Count == 0)
             return 0;
 
-        var rating = reviews.Average(r => r.Rating);
-        Console.WriteLine(rating);
-        return (int)Math.Floor(rating);
+        return (int)Math.Floor(reviews.Average(r => r.Rating));
     }
 }
