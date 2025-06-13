@@ -21,7 +21,7 @@ public static class ProductExtensions
             CategoryName = product.Category.CategoryName,
             Reviews = product.Reviews.Select(r => r.ToDto()).ToList(),
             Ingredients = product.Ingredients.Select(i => i.IngredientName).ToList(),
-            Price = product.Price,
+            Price = product.Price
         };
     }
     
@@ -35,8 +35,7 @@ public static class ProductExtensions
             DiscountPercentage = product.DiscountPercentage,
             Rating = CalculateRating(product.Reviews),
             Price = product.Price,
-            ImageUrl = product.ImageUrl,
-            Description = product.Description,
+            ImageUrl = product.ImageUrl
         };
     }
 

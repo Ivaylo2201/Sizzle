@@ -3,7 +3,7 @@ import '@mantine/core/styles.css';
 import './index.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Router from '@/ui/components/Router';
+import Router from '@/Router';
 import { MantineProvider } from '@mantine/core';
 
 const queryClient = new QueryClient();

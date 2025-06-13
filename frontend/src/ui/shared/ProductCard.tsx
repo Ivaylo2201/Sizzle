@@ -1,35 +1,52 @@
-import type { ShortProduct } from "@/utils/types/product/ShortProduct";
-import { useNavigate } from "react-router";
-import DiscountLabel from "./DiscountLabel";
-import ProductPriceLabel from "./ProductPriceLabel";
+import type { ShortProduct } from '@/utils/types/product/ShortProduct';
+import { useNavigate } from 'react-router';
+import DiscountLabel from './DiscountLabel';
 import { Rating } from '@mantine/core';
+import ProductPrice from './ProductPrice';
 
-type ProductCardProps = {
-  product: ShortProduct
-}
+type ProductCardProps = ShortProduct;
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ id, productName, initialPrice, price, rating, discountPercentage, imageUrl }: ProductCardProps) {
   const navigate = useNavigate();
-  const onCardClick = () => navigate(`/product/${product.id}`);
-
-  const imageUrl = `${import.meta.env.VITE_IMAGE_BASE_URL}/${product.imageUrl}`
-  const isDiscounted = product.discountPercentage > 0;
+  const goToProduct = () => navigate(`/product/${id}`);
 
   return (
-    <article className=" relative w-80 p-3 bg-white shadow-md rounded-2xl flex flex-col items-start" >
-      {isDiscounted &&
-       <DiscountLabel discountPercentage={product.discountPercentage} />}
+    <article className='w-[22rem] p-6 bg-white shadow-md rounded-xl flex flex-col justify-center gap-2 relative overflow-hidden'>
+      {discountPercentage > 0 && (
+        <DiscountLabel discountPercentage={discountPercentage} />
+      )}
 
-      <img 
-        src={imageUrl}
-        alt={`Image of ${product.productName}`}
-        className="w-[15rem] my-2 object-contain self-center"
+      <img
+        src={`${import.meta.env.VITE_IMAGE_BASE_URL}/${imageUrl}`}
+        alt={`Image of ${productName}`}
+        className='h-72 object-contain hover:scale-105 cursor-pointer duration-500 transition-transform'
+        onClick={goToProduct}
       />
-      <h2 className="font-dmsans text-xl px-2">{product.productName}</h2>
-      <ProductPriceLabel price={product.price} initialPrice={product.initialPrice} />
-      <p className="font-rubik text-theme-gray px-2 text-sm line-clamp-2">{product.description}</p>
-      <Rating className="my-4 px-2" defaultValue={product.rating} readOnly />
-      <button className="bg-theme-pink text-white px-8 py-1 ml-2 rounded-xl font-dmsans cursor-pointer hover:bg-theme-lightpink duration-150 transition-colors" onClick={onCardClick}>View</button>
+
+      <div className='flex flex-col gap-1'>
+        <Rating
+          value={rating}
+          color='#fa8173'
+          readOnly
+          className='mb-1.5'
+        />
+
+        <h1 className='text-xl font-rubik font-semibold uppercase'>
+          {productName}
+        </h1>
+
+        <ProductPrice
+          initialPrice={initialPrice}
+          price={price}
+        />
+
+        <button
+          className='self-start mt-2 font-dmsans font-bold bg-theme-pink text-white px-4 py-1.5 rounded-md cursor-pointer duration-150 transition-colors hover:bg-theme-lightpink'
+          onClick={goToProduct}
+        >
+          Order now
+        </button>
+      </div>
     </article>
   );
 }

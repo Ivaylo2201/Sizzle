@@ -6,5 +6,4 @@ export type ShortProduct = {
   rating: number;
   discountPercentage: number;
   imageUrl: string;
-  description: string;
 };
