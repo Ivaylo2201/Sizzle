@@ -4,5 +4,5 @@ namespace Application.Interfaces.Services;
 
 public interface ICartService
 {
-    Task AddItemPriceToCartTotal(double itemPrice, Cart cart);
+    Task AddItemPriceToCartTotalAsync(double itemPrice, Cart cart);
 }

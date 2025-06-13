@@ -11,11 +11,10 @@ public class GetAddressQueryHandler(IAddressRepository addressRepository)
 {
     public async Task<Result<Address>> Handle(GetAddressQuery request, CancellationToken cancellationToken)
     {
-        var result = await addressRepository.GetOne(request.Id);
+        var result = await addressRepository.GetOneAsync(request.Id);
         
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure<Address>(result.Error);
-        
-        return Result.Success(result.Value);
+        return !result.IsSuccess
+            ? Result.Failure<Address>(result.Error)
+            : Result.Success(result.Value);
     }
 }

@@ -13,7 +13,7 @@ public class UpdateUserCommandHandler(IUserRepository userRepository) :
         
         user.PhoneNumber = request.Dto.PhoneNumber;
         user.Password = request.Dto.Password;
-        await userRepository.Update(user);
+        await userRepository.UpdateAsync(user);
         
         return Unit.Value;
     }

@@ -52,7 +52,7 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
         if (!addressResult.IsSuccess)
             return NotFound(addressResult.ErrorObject);
         
-        if (!await ownershipService.HasAddressOwnership(addressResult.Value.Id, User.GetId()))
+        if (!await ownershipService.HasAddressOwnershipAsync(addressResult.Value.Id, User.GetId()))
             return Forbid();
         
         await mediator.Send(new DeleteAddressCommand(addressResult.Value.Id));

@@ -7,8 +7,7 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {
     public CreateOrderCommandValidator()
     {
-        RuleFor(c => c.Dto.UserId)
-            .NotEmpty().WithMessage("UserId must be provided.")
-            .GreaterThan(0).WithMessage("UserId must be greater than 0.");
+        RuleFor(c => c.Dto.User)
+            .NotEmpty().WithMessage("User must be provided.");
     }
 }

@@ -12,7 +12,7 @@ public class UpdateItemCommandHandler(IItemRepository itemRepository) :
         var item = request.Dto.Item;
         
         item.Quantity = request.Dto.Quantity;
-        await itemRepository.Update(item);
+        await itemRepository.UpdateAsync(item);
 
         return Unit.Value;
     }

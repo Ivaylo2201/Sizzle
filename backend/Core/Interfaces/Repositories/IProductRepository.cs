@@ -6,5 +6,5 @@ namespace Core.Interfaces.Repositories;
 
 public interface IProductRepository : ISingleReadable<Product, Guid>
 {
-    Task<Result<List<Product>>> GetAllProductsByCategory(string category);
+    Task<Result<List<Product>>> GetAllProductsByCategoryAsync(string category);
 }

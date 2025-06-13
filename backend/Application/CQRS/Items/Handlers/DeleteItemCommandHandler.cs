@@ -9,7 +9,7 @@ public class DeleteItemCommandHandler(IItemRepository itemRepository) :
 {
     public async Task<Unit> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
     {
-        await itemRepository.Delete(request.Id);
+        await itemRepository.DeleteAsync(request.Id);
         return Unit.Value;
     }
 }

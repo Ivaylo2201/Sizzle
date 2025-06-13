@@ -11,7 +11,7 @@ public class ListProductsQueryHandler(IProductRepository productRepository) :
 {
     public async Task<Result<List<Product>>> Handle(ListProductsQuery request, CancellationToken cancellationToken)
     {
-        var result = await productRepository.GetAllProductsByCategory(request.Category);
+        var result = await productRepository.GetAllProductsByCategoryAsync(request.Category);
         return Result.Success(result.Value);
     }
 }

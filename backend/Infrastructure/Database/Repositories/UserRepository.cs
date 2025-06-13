@@ -7,7 +7,7 @@ namespace Infrastructure.Database.Repositories;
 
 public class UserRepository(DatabaseContext context) : IUserRepository
 {
-    public async Task<Result<User>> Create(User user)
+    public async Task<Result<User>> CreateAsync(User user)
     {
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         var result = await context.Users.AddAsync(user);
@@ -19,7 +19,7 @@ public class UserRepository(DatabaseContext context) : IUserRepository
         return Result.Success(result.Entity);
     }
     
-    public async Task<Result> Update(User user)
+    public async Task<Result> UpdateAsync(User user)
     {
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         context.Users.Update(user);
@@ -27,7 +27,7 @@ public class UserRepository(DatabaseContext context) : IUserRepository
         return Result.Success();
     }
 
-    public async Task<Result<User>> GetOne(int id)
+    public async Task<Result<User>> GetOneAsync(int id)
     {
         var user = await context.Users.SingleOrDefaultAsync(u => u.Id == id);
         
@@ -36,7 +36,7 @@ public class UserRepository(DatabaseContext context) : IUserRepository
             : Result.Success(user);
     }
     
-    public async Task<Result<User>> GetOne(string username)
+    public async Task<Result<User>> GetOneAsync(string username)
     {
         var user = await context.Users.SingleOrDefaultAsync(u => u.Username == username);
         

@@ -12,7 +12,7 @@ public class CreateUserCommandHandler(IUserRepository userRepository, IAuthentic
 {
     public async Task<Result<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        if (await authenticationService.IsUsernameTaken(request.Dto.Username))
+        if (await authenticationService.IsUsernameTakenAsync(request.Dto.Username))
             return Result.Failure<User>("Username already taken.");
         
         var user = new User
@@ -22,7 +22,7 @@ public class CreateUserCommandHandler(IUserRepository userRepository, IAuthentic
             Password = request.Dto.Password,
         };
         
-        var result = await userRepository.Create(user);
+        var result = await userRepository.CreateAsync(user);
         return Result.Success(result.Value); 
     }
 }

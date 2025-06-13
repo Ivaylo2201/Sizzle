@@ -7,7 +7,7 @@ namespace Infrastructure.Database.Repositories;
 
 public class ProductRepository(DatabaseContext context) : IProductRepository
 {
-    public async Task<Result<List<Product>>> GetAllProductsByCategory(string category)
+    public async Task<Result<List<Product>>> GetAllProductsByCategoryAsync(string category)
     {
         var products = await context.Products
             .Include(p => p.Category)
@@ -18,7 +18,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
         return Result.Success(products);
     }
 
-    public async Task<Result<Product>> GetOne(Guid id)
+    public async Task<Result<Product>> GetOneAsync(Guid id)
     {
         var product = await context.Products
             .Include(p => p.Category)

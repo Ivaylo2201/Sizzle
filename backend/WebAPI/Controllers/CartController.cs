@@ -6,7 +6,6 @@ using Application.DTOs.Item;
 using Application.Extensions;
 using Application.Interfaces.Services;
 using Infrastructure.Extensions;
-using Infrastructure.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +26,13 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         if (!cart.IsSuccess)
             return NotFound(cart.ErrorObject);
 
-        return Ok(new
+        var responseObject = new
         {
             items = cart.Value.Items.Select(i => i.ToDto()).ToList(),
             total = cart.Value.Total
-        });
+        };
+
+        return Ok(responseObject);
     }
     
     [Authorize]
@@ -65,16 +66,9 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         if (!item.IsSuccess)
             return NotFound(item.ErrorObject);
 
-        var hasOwnership = await ownershipService.HasItemOwnership(item.Value.CartId, User.GetId());
-        Console.WriteLine(hasOwnership);
-
-        if (!hasOwnership)
-        {
-            Console.WriteLine("XDXDDX");
+        if (!await ownershipService.HasItemOwnershipAsync(item.Value.CartId, User.GetId())) 
             return Forbid();
-        }
-
-        Console.WriteLine("deleting...");
+        
         await mediator.Send(new DeleteItemCommand(item.Value.Id));
         return NoContent();
     }

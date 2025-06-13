@@ -9,7 +9,7 @@ public class DeleteAddressCommandHandler(IAddressRepository addressRepository) :
 {
     public async Task<Unit> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
     {
-        await addressRepository.Delete(request.Id);
+        await addressRepository.DeleteAsync(request.Id);
         return Unit.Value;
     }
 }

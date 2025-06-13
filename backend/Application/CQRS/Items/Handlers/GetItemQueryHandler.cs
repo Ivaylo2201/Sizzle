@@ -11,11 +11,10 @@ public class GetItemQueryHandler(IItemRepository itemRepository)
 {
     public async Task<Result<Item>> Handle(GetItemQuery request, CancellationToken cancellationToken)
     {
-        var result = await itemRepository.GetOne(request.Id);
+        var result = await itemRepository.GetOneAsync(request.Id);
 
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure<Item>(result.Error);
-
-        return Result.Success(result.Value);
+        return !result.IsSuccess
+            ? Result.Failure<Item>(result.Error)
+            : Result.Success(result.Value);
     }
 }

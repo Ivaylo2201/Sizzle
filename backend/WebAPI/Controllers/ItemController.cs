@@ -23,7 +23,7 @@ public class ItemController(IMediator mediator, IOwnershipService ownershipServi
         if (!item.IsSuccess)
             return NotFound(item.ErrorObject);
 
-        if (!await ownershipService.HasItemOwnership(item.Value.CartId, User.GetId()))
+        if (!await ownershipService.HasItemOwnershipAsync(item.Value.CartId, User.GetId()))
             return Forbid();
 
         var dto = new UpdateItemDto

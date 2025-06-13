@@ -2,6 +2,6 @@
 
 public interface IOwnershipService
 {
-    Task<bool> HasItemOwnership(int? cartId, int userId);
-    Task<bool> HasAddressOwnership(int addressId, int userId);
+    Task<bool> HasItemOwnershipAsync(int? cartId, int userId);
+    Task<bool> HasAddressOwnershipAsync(int addressId, int userId);
 }

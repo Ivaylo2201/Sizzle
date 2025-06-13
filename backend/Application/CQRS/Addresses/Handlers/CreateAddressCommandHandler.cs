@@ -19,6 +19,6 @@ public class CreateAddressCommandHandler(IAddressRepository addressRepository)
             UserId = request.Dto.UserId
         };
         
-        return await addressRepository.Create(address); 
+        return await addressRepository.CreateAsync(address); 
     }
 }

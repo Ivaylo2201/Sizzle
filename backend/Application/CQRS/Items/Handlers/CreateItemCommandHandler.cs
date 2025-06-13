@@ -13,7 +13,7 @@ public class CreateItemCommandHandler(IItemRepository itemRepository, ICartServi
     public async Task<Result<Item>> Handle(CreateItemCommand request, CancellationToken cancellationToken)
     {
         var itemPrice = request.Dto.Quantity * request.Dto.Product.Price;
-        await cartService.AddItemPriceToCartTotal(itemPrice, request.Dto.Cart);
+        await cartService.AddItemPriceToCartTotalAsync(itemPrice, request.Dto.Cart);
         
         var item = new Item
         {
@@ -22,6 +22,6 @@ public class CreateItemCommandHandler(IItemRepository itemRepository, ICartServi
             Cart = request.Dto.Cart
         };
 
-        return await itemRepository.Create(item);
+        return await itemRepository.CreateAsync(item);
     }
 }

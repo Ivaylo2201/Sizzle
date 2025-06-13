@@ -6,5 +6,5 @@ namespace Core.Interfaces.Repositories;
 
 public interface IOrderRepository : ICreatable<Order>
 {
-    Task<Result<List<Order>>> GetAllOrdersForUser(int userId);
+    Task<Result<List<Order>>> GetAllOrdersForUserAsync(int userId);
 }

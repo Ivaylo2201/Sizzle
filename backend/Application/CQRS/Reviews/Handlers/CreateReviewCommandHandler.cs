@@ -18,6 +18,6 @@ public class CreateReviewCommandHandler(IReviewRepository reviewRepository) : IR
             ProductId = request.Dto.ProductId,
         };
         
-        return await reviewRepository.Create(review);
+        return await reviewRepository.CreateAsync(review);
     }
 }

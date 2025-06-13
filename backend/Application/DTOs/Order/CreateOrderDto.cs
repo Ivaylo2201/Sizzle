@@ -2,5 +2,5 @@
 
 public record CreateOrderDto
 {
-    public required int UserId { get; init; }
+    public required Core.Entities.User User { get; init; }
 }

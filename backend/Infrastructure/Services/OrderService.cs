@@ -10,9 +10,9 @@ public class OrderService(DatabaseContext context, ICartRepository cartRepositor
 {
     public async Task<Result> MarkItemsInUsersCartAsOrderedAsync(int userId, Order order)
     {
-        var result = await cartRepository.GetItemsFromUsersCart(userId);
+        var result = await cartRepository.GetItemsFromUsersCartAsync(userId);
         
-        if (!result.IsSuccess || result.Value is null)
+        if (!result.IsSuccess)
             return Result.Failure(result.Error);
         
         foreach (var item in result.Value)
@@ -20,8 +20,8 @@ public class OrderService(DatabaseContext context, ICartRepository cartRepositor
             item.Cart = null;
             item.Order = order;
         }
-        
-        var isDone = await context.SaveChangesAsync() == result.Value.Count;
-        return Result.Success(isDone);
+
+        await context.SaveChangesAsync();
+        return Result.Success();
     }
 }

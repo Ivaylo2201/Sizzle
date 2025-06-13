@@ -6,9 +6,9 @@ namespace Infrastructure.Services;
 
 public class CartService(ICartRepository cartRepository) : ICartService
 {
-    public async Task AddItemPriceToCartTotal(double itemPrice, Cart cart)
+    public async Task AddItemPriceToCartTotalAsync(double itemPrice, Cart cart)
     {
         cart.Total += itemPrice;
-        await cartRepository.Update(cart);
+        await cartRepository.UpdateAsync(cart);
     }
 }

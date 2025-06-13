@@ -6,7 +6,7 @@ namespace Infrastructure.Database.Repositories;
 
 public class ReviewRepository(DatabaseContext context) : IReviewRepository
 {
-    public async Task<Result<Review>> Create(Review review)
+    public async Task<Result<Review>> CreateAsync(Review review)
     {
         var result = await context.Reviews.AddAsync(review);
         await context.SaveChangesAsync();

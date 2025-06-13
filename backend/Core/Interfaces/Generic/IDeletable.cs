@@ -4,5 +4,5 @@ namespace Core.Interfaces.Generic;
 
 public interface IDeletable<in T>
 {
-    Task<Result> Delete(T id);
+    Task<Result> DeleteAsync(T id);
 }

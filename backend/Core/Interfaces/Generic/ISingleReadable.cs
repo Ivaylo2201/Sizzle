@@ -4,5 +4,5 @@ namespace Core.Interfaces.Generic;
 
 public interface ISingleReadable<T, in TIdentifier>
 {
-    Task<Result<T>> GetOne(TIdentifier id);
+    Task<Result<T>> GetOneAsync(TIdentifier id);
 }

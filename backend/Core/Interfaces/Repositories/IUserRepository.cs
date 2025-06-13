@@ -9,5 +9,5 @@ public interface IUserRepository :
     ISingleReadable<User, int>,
     IUpdatable<User>
 {
-    Task<Result<User>> GetOne(string username);
+    Task<Result<User>> GetOneAsync(string username);
 }

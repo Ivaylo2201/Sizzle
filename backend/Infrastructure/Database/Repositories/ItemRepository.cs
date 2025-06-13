@@ -7,14 +7,14 @@ namespace Infrastructure.Database.Repositories;
 
 public class ItemRepository(DatabaseContext context) : IItemRepository
 {
-    public async Task<Result<Item>> Create(Item item)
+    public async Task<Result<Item>> CreateAsync(Item item)
     {
         var result = await context.Items.AddAsync(item);
         await context.SaveChangesAsync();
         return Result.Success(result.Entity);
     }
 
-    public async Task<Result<Item>> GetOne(int id)
+    public async Task<Result<Item>> GetOneAsync(int id)
     {
         var item = await context.Items
             .Include(i => i.Product)
@@ -26,21 +26,21 @@ public class ItemRepository(DatabaseContext context) : IItemRepository
             : Result.Success(item);
     }
 
-    public async Task<Result> Update(Item item)
+    public async Task<Result> UpdateAsync(Item item)
     {
         context.Items.Update(item);
         await context.SaveChangesAsync();
         return Result.Success();
     }
 
-    public async Task<Result> Delete(int id)
+    public async Task<Result> DeleteAsync(int id)
     {
-        var item = await context.Addresses.SingleOrDefaultAsync(a => a.Id == id);
+        var item = await context.Items.SingleOrDefaultAsync(i => i.Id == id);
 
         if (item is null)
             return Result.Failure($"Item {id} not found.");
         
-        context.Addresses.Remove(item);
+        context.Items.Remove(item);
         await context.SaveChangesAsync();
         return Result.Success();
     }

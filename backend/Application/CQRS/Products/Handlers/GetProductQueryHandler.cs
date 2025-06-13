@@ -11,11 +11,10 @@ public class GetProductQueryHandler(IProductRepository productRepository) :
 {
     public async Task<Result<Product>> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
-        var result = await productRepository.GetOne(request.ProductId);
+        var result = await productRepository.GetOneAsync(request.ProductId);
 
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure<Product>(result.Error);
-        
-        return Result.Success(result.Value);
+        return !result.IsSuccess
+            ? Result.Failure<Product>(result.Error)
+            : Result.Success(result.Value);
     }
 }

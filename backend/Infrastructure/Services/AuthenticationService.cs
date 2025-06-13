@@ -6,9 +6,9 @@ namespace Infrastructure.Services;
 
 public class AuthenticationService(IUserRepository userRepository) : IAuthenticationService
 {
-    public async Task<(bool, User)> IsSignedUp(string username, string password)
+    public async Task<(bool, User)> IsSignedUpAsync(string username, string password)
     {
-        var userResult = await userRepository.GetOne(username);
+        var userResult = await userRepository.GetOneAsync(username);
 
         if (!userResult.IsSuccess || !BCrypt.Net.BCrypt.Verify(password, userResult.Value.Password))
             return (false, userResult.Value);
@@ -16,9 +16,9 @@ public class AuthenticationService(IUserRepository userRepository) : IAuthentica
         return (true, userResult.Value);
     }
     
-    public async Task<bool> IsUsernameTaken(string username)
+    public async Task<bool> IsUsernameTakenAsync(string username)
     {
-        var userResult = await userRepository.GetOne(username);
+        var userResult = await userRepository.GetOneAsync(username);
         return userResult.IsSuccess;
     }
 }

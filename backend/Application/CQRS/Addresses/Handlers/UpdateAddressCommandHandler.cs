@@ -15,7 +15,7 @@ public class UpdateAddressCommandHandler(IAddressRepository addressRepository) :
         address.StreetName = request.Dto.StreetName;
         address.StreetNumber = request.Dto.StreetNumber;
         
-        await addressRepository.Update(address);
+        await addressRepository.UpdateAsync(address);
         return Unit.Value;
     }
 }

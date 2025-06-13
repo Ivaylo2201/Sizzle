@@ -7,13 +7,13 @@ namespace Infrastructure.Database.Repositories;
 
 public class OrderRepository(DatabaseContext context) : IOrderRepository
 {
-    public async Task<Result<List<Order>>> GetAllOrdersForUser(int userId)
+    public async Task<Result<List<Order>>> GetAllOrdersForUserAsync(int userId)
     {
         var items = await context.Orders.Where(o => o.UserId == userId).ToListAsync();
         return Result.Success(items);
     }
 
-    public async Task<Result<Order>> Create(Order order)
+    public async Task<Result<Order>> CreateAsync(Order order)
     {
         var result = await context.Orders.AddAsync(order);
         await context.SaveChangesAsync();

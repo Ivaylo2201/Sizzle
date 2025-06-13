@@ -14,7 +14,7 @@ public static class DbContextExtensions
         {
             address.City = await context.Cities.Random();
             address.User = await context.Users.Random();
-            await addressRepository.Create(address);
+            await addressRepository.CreateAsync(address);
         }
     }
     
@@ -26,7 +26,7 @@ public static class DbContextExtensions
         {
             review.Product = await context.Products.Random();
             review.User = await context.Users.Random();
-            await reviewRepository.Create(review);
+            await reviewRepository.CreateAsync(review);
         }
     }
 
@@ -36,7 +36,7 @@ public static class DbContextExtensions
     {
         foreach (var user in Data.Users)
         {
-            await userRepository.Create(user);
+            await userRepository.CreateAsync(user);
         }
     }
 }

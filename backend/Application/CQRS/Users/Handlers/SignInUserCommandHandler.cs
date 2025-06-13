@@ -11,7 +11,8 @@ public class SignInUserCommandHandler(IAuthenticationService authenticationServi
 {
     public async Task<Result<User>> Handle(SignInUserCommand request, CancellationToken cancellationToken)
     {
-        var (isSignedUp, user) = await authenticationService.IsSignedUp(request.Dto.Username, request.Dto.Password);
+        var (isSignedUp, user) = await authenticationService
+            .IsSignedUpAsync(request.Dto.Username, request.Dto.Password);
         
         return !isSignedUp ? Result.Failure<User>("Invalid credentials provided.") : Result.Success(user);
     }
