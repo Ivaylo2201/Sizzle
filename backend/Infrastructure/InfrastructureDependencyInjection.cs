@@ -4,14 +4,13 @@ using Core.Interfaces.Repositories;
 using Infrastructure.Database;
 using Infrastructure.Database.Repositories;
 using Infrastructure.Services;
+using Infrastructure.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure;
-
-public record JwtConfig(byte[] Key, string Issuer, string Audience);
 
 public static class InfrastructureDependencyInjection
 {
@@ -25,10 +24,10 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<IOrderService, OrderService>();
-        services.AddSingleton<ITokenService, TokenService>();
         services.AddScoped<IOwnershipService, OwnershipService>();
         services.AddScoped<ICartService, CartService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddSingleton<ITokenService, TokenService>();
 
         services.AddDbContext<DatabaseContext>(d =>
         {

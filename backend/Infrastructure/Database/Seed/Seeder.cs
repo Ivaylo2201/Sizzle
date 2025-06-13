@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Database.Repositories;
 using Infrastructure.Extensions;
 using Infrastructure.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Seed;
 
@@ -25,6 +26,7 @@ public class Seeder(DatabaseContext context)
         ColorConsole.WriteLine("Truncating tables...", ConsoleColor.Red);
         
         context.Addresses.RemoveRange(context.Addresses);
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Cities', RESEED, 0);");
         context.Cities.RemoveRange(context.Cities);
         context.Items.RemoveRange(context.Items);
         context.Orders.RemoveRange(context.Orders);
@@ -32,7 +34,9 @@ public class Seeder(DatabaseContext context)
         context.Reviews.RemoveRange(context.Reviews);
         context.Users.RemoveRange(context.Users);
         context.Products.RemoveRange(context.Products);
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Categories', RESEED, 0);");
         context.Categories.RemoveRange(context.Categories);
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Ingredients', RESEED, 0);");
         context.Ingredients.RemoveRange(context.Ingredients);
         
         await context.SaveChangesAsync();
