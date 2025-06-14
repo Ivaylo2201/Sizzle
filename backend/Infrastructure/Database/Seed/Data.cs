@@ -557,7 +557,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Big french fries",
+            ProductName = "French fries (Big)",
             InitialPrice = 3,
             ImageUrl = "/snacks/french_fries_big.png",
             Description = "A generous serving of classic golden fries — crispy, salty, and satisfying.",
@@ -573,7 +573,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Medium french fries",
+            ProductName = "French fries (Medium)",
             InitialPrice = 2.5,
             ImageUrl = "/snacks/french_fries_medium.png",
             Description = "Perfectly portioned crispy fries, golden and irresistible.",
@@ -588,7 +588,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Small french fries",
+            ProductName = "French fries (Small)",
             InitialPrice = 2,
             ImageUrl = "/snacks/french_fries_small.png",
             Description = "Small size, same big fry flavor — crispy and golden.",

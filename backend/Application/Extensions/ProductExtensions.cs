@@ -31,6 +31,7 @@ public static class ProductExtensions
         {
             Id = product.Id,
             ProductName = product.ProductName,
+            Weight = product.Weight,
             InitialPrice = product.InitialPrice,
             DiscountPercentage = product.DiscountPercentage,
             Rating = CalculateRating(product.Reviews),

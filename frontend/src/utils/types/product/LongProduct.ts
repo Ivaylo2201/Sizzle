@@ -3,7 +3,6 @@ import type { Review } from "@/utils/types/review/Review";
 
 export type LongProduct = ShortProduct & {
   calories: number;
-  weight: number;
   categoryName: string;
   reviews: Review[];
   ingredients: string[];

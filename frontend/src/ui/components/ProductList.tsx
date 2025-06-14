@@ -13,6 +13,7 @@ export default function ProductsList({ products }: ProductsListProps) {
           key={product.id}
           id={product.id}
           productName={product.productName}
+          weight={product.weight}
           initialPrice={product.initialPrice}
           price={product.price}
           rating={product.rating}
