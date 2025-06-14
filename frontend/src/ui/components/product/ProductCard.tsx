@@ -1,14 +1,15 @@
+import React from 'react';
 import { useNavigate } from 'react-router';
 import { Rating } from '@mantine/core';
 
-import type { ShortProduct } from '@/utils/types/product/ShortProduct';
-import ProductPrice from '@/ui/shared/ProductPrice';
-import TagContainer from './TagContainer';
+import type { ProductShortDto } from '@/utils/types/product/ProductShortDto';
+import ProductPrice from '@/ui/components/product/ProductPrice';
+import TagContainer from '@/ui/shared//TagContainer';
 import Tag from '@/ui/shared/Tag';
 
-type ProductCardProps = ShortProduct;
+type ProductCardProps = ProductShortDto;
 
-export default function ProductCard({
+function ProductCard({
   id,
   productName,
   weight,
@@ -77,3 +78,5 @@ export default function ProductCard({
     </article>
   );
 }
+
+export default ProductCard;

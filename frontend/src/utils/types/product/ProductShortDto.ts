@@ -1,4 +1,4 @@
-export type ShortProduct = {
+export type ProductShortDto = {
   id: string;               
   productName: string;
   weight: number;

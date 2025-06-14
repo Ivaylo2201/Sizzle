@@ -1,12 +1,5 @@
 @import 'tailwindcss';
 
-body {
-  background-color: #f0fbf5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @theme {
   --font-rubik: 'Rubik', sans-serif;
   --font-dmsans: 'DM Sans', sans-serif;
@@ -14,6 +7,7 @@ body {
   --color-theme-orange: #fa8173;
   --color-theme-lightpink: #f75a89;
   --color-theme-gray: #686869;
+  --color-theme-lightgreen: #f0fbf5;
 }
 
 button {

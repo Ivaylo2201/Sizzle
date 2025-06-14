@@ -1,15 +1,30 @@
-import Page from "@/ui/layouts/PageLayout";
-import ProductsList from "@/ui/components/ProductList";
-import useProducts from "@/lib/hooks/useProducts";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from 'react-router';
+import { useEffect } from 'react';
+
+import Page from '@/ui/layouts/Page';
+import ProductsList from '@/ui/components/product/ProductList';
+import useProducts from '@/lib/hooks/useProducts';
+import LoadingSpinner from '@/ui/shared/LoadingSpinner';
 
 export default function ProductPage() {
   const { category } = useParams();
-  const { data: products } = useProducts(category);
+  const navigate = useNavigate();
+  const { data: products, isError } = useProducts(category);
+
+  useEffect(() => {
+    if (isError) {
+      navigate('/404');
+      return;
+    }
+  }, [isError, navigate]);
+
+  if (products === undefined) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Page>
       <ProductsList products={products} />
     </Page>
   );
-};
+}

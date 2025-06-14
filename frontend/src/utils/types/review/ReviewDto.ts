@@ -1,4 +1,4 @@
-export type Review = {
+export type ReviewDto = {
   rating: number;
   comment: string | null;
   username: string;

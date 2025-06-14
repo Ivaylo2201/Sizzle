@@ -1,13 +1,13 @@
-import ProductCard from '@/ui/shared/ProductCard';
-import type { ShortProduct } from '@/utils/types/product/ShortProduct';
+import ProductCard from '@/ui/components/product/ProductCard';
+import type { ProductShortDto } from '@/utils/types/product/ProductShortDto';
 
 type ProductsListProps = {
-  products: ShortProduct[]
-}
+  products: ProductShortDto[];
+};
 
 export default function ProductsList({ products }: ProductsListProps) {
   return (
-    <div className='w-4/5 px-10 flex flex-wrap justify-center items-center gap-y-8 gap-x-12'>
+    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-x-12 gap-y-8'>
       {products.map((product) => (
         <ProductCard
           key={product.id}
