@@ -13,6 +13,7 @@ public class ProductRepository(DatabaseContext context) : IProductRepository
             .Include(p => p.Category)
             .Include(p => p.Reviews)
             .Where(p => p.Category.CategoryName == category)
+            .OrderBy(p => p.ProductName)
             .ToListAsync();
         
         return Result.Success(products);
