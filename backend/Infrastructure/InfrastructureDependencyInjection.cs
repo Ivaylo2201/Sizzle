@@ -24,6 +24,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IOwnershipService, OwnershipService>();
         services.AddScoped<ICartService, CartService>();

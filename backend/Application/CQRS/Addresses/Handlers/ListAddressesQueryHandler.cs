@@ -1,6 +1,4 @@
 ﻿using Application.CQRS.Addresses.Queries;
-using Application.DTOs.Address;
-using Application.Extensions;
 using Core.Abstractions;
 using Core.Entities;
 using Core.Interfaces.Repositories;

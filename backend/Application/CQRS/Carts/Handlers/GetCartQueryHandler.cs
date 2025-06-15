@@ -13,9 +13,8 @@ public class GetCartQueryHandler(ICartRepository cartRepository) :
     {
         var result = await cartRepository.GetOneByUserIdAsync(request.UserId);
         
-        if (!result.IsSuccess || result.Value is null)
-            return Result.Failure<Cart>(result.Error);
-        
-        return Result.Success(result.Value);
+        return !result.IsSuccess 
+            ? Result.Failure<Cart>(result.Error)
+            : Result.Success(result.Value);
     }
 }

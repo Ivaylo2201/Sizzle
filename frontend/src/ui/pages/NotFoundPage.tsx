@@ -30,7 +30,7 @@ export default function NotFoundPage() {
           ))}
         </div>
         <Link
-          className='bg-theme-pink text-white font-dmsans text-2xl px-14 py-4 my-18 rounded-full cursor-pointer duration-500 transition-colors hover:bg-theme-orange'
+          className='bg-white text-xl my-14 px-8 py-3 rounded-full font-dmsans shadow-md'
           to='/'
         >
           Back to Home
