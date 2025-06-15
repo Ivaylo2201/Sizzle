@@ -1,12 +1,21 @@
 import { ErrorBoundary } from 'react-error-boundary';
-import NotFoundPage from '../pages/NotFoundPage';
+import { useLocation } from 'react-router';
+
+import NotFoundPage from '@/ui/pages/NotFoundPage';
 
 type NotFoundErrorBoundaryProps = React.PropsWithChildren;
 
 export default function NotFoundErrorBoundary({
   children
 }: NotFoundErrorBoundaryProps) {
+  const location = useLocation();
+
   return (
-    <ErrorBoundary FallbackComponent={NotFoundPage}>{children}</ErrorBoundary>
+    <ErrorBoundary
+      FallbackComponent={NotFoundPage}
+      resetKeys={[location.pathname]}
+    >
+      {children}
+    </ErrorBoundary>
   );
 }
