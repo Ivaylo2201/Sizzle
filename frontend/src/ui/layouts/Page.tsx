@@ -1,8 +1,8 @@
 import Header from '@/ui/layouts/Header';
 
-type PageLayoutProps = React.PropsWithChildren;
+type PageProps = React.PropsWithChildren;
 
-export default function PageLayout({ children }: PageLayoutProps) {
+export default function Page({ children }: PageProps) {
   return (
     <div className='bg-theme-lightgreen'>
       <Header />

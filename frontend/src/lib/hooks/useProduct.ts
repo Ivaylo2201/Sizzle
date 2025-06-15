@@ -1,13 +1,15 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { httpClient } from "@/utils/httpClient";
 import type { ProductLongDto } from "@/utils/types/product/ProductLongDto";
 
-export default function useProduct(id: string | undefined) {
-  return useSuspenseQuery({
-    queryKey: ['product', id],
+export default function useProduct(guid: string | undefined) {
+  return useQuery({
+    queryKey: ['product', guid],
     queryFn: async () => {
-      const res = await httpClient.get<ProductLongDto>(`/products/${id}`); 
+      const res = await httpClient.get<ProductLongDto>(`/products/${guid}`); 
       return res.data;
     },
+    staleTime: 60 * 60 * 1000,
+    retry: false
   })
 }

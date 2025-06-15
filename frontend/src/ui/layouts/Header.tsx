@@ -1,4 +1,4 @@
-import CategoryLink from '../shared/CategoryLink';
+import CategoryLink from '@/ui/shared/CategoryLink';
 
 export default function Header() {
   return (
