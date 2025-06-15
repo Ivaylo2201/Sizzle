@@ -13,6 +13,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage />} />
+
         <Route
           path='/product/:guid'
           element={
@@ -23,6 +24,7 @@ export default function Router() {
             </Suspense>
           }
         />
+
         <Route
           path='/products/:category'
           element={
@@ -33,6 +35,13 @@ export default function Router() {
             </Suspense>
           }
         />
+
+        <Route path='/cart'>
+          <Route index element={<div>cart page</div>} />
+
+          <Route path='checkout' element={<div>checkout page</div>} />
+        </Route>
+
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

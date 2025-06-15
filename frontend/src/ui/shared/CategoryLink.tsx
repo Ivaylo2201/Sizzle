@@ -9,8 +9,8 @@ export default function CategoryLink({ to, children }: CategoryLinkProps) {
     <NavLink
       to={`/products${to}`}
       className={({ isActive }) =>
-        `px-8 py-2 text-lg rounded-full font-dmsans shadow-md transition-colors duration-150 ${
-          isActive ? 'bg-theme-green text-white' : 'bg-white text-black'
+        `font-rubik font-bold text-xl transition-colors duration-150 ${
+          isActive ? 'text-theme-pink' : 'text-[#c1bfbd] hover:text-theme-orange'
         }`
       }
     >

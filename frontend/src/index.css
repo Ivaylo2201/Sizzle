@@ -4,12 +4,12 @@
   --font-rubik: 'Rubik', sans-serif;
   --font-rubik-mono-one: 'Rubik Mono One', sans-serif;
   --font-dmsans: 'DM Sans', sans-serif;
+  --font-caprasimo: 'Caprasimo', serif;
   --color-theme-pink: #f52f66;
+  --color-theme-beige: #f0ece7;
   --color-theme-orange: #fa8173;
   --color-theme-lightpink: #f75a89;
   --color-theme-gray: #686869;
-  --color-theme-green: #036b39;
-  --color-theme-lightgreen: #f0fbf5;
 }
 
 button {

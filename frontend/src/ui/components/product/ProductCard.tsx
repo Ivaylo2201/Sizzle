@@ -62,7 +62,7 @@ function ProductCard({
         <div className='flex items-end font-rubik gap-1'>
           <h1 className='text-xl font-semibold uppercase'>
             {productName}
-            <span className='font-normal text-theme-gray'>,</span>
+            <span className='font-normal text-theme-beige'>,</span>
           </h1>
           <h3 className='text-theme-gray'>{weight} gr.</h3>
         </div>

@@ -106,14 +106,19 @@ public static class Data
         { "eggs", new Ingredient { IngredientName = "Eggs" } },
         { "sunflowerOil", new Ingredient { IngredientName = "Sunflower oil" } },
         { "salt", new Ingredient { IngredientName = "Salt" } },
-        { "sugar", new Ingredient { IngredientName = "Sugar" } }
+        { "sugar", new Ingredient { IngredientName = "Sugar" } },
+        { "macaroni", new Ingredient { IngredientName = "Macaroni pasta" } },
+        { "milk", new Ingredient { IngredientName = "Milk" } },
+        { "flour", new Ingredient { IngredientName = "Flour" } },
+        { "pepper", new Ingredient { IngredientName = "Black pepper" } },
+        { "butter", new Ingredient { IngredientName = "Butter" } }
     };
 
     public static readonly Dictionary<string, Category> Categories = new()
     {
         { "burgers", new Category { CategoryName = "Burgers" } },
         { "doners", new Category { CategoryName = "Doners" } },
-        { "snacks", new Category { CategoryName = "Snacks" } }
+        { "snacks", new Category { CategoryName = "Snacks" } },
     };
 
     public static readonly List<Product> Products =
@@ -687,6 +692,28 @@ public static class Data
                 Ingredients["caramelizedOnions"],
                 Ingredients["batteringMix"],
                 Ingredients["breadcrumbs"]
+            }
+        },
+        new()
+        {
+            ProductName = "Mac & Cheese",
+            InitialPrice = 5.00,
+            ImageUrl = "/snacks/mac_and_cheese.png",
+            Description = "Creamy elbow macaroni baked in a rich cheddar cheese sauce, a classic comfort food favorite.",
+            Calories = 450,
+            Weight = 250,
+            CategoryId = 3,
+            Category = Categories["snacks"],
+            DiscountPercentage = 0,
+            Ingredients = new List<Ingredient>
+            {
+                Ingredients["macaroni"],
+                Ingredients["cheddarCheese"],
+                Ingredients["milk"],
+                Ingredients["butter"],
+                Ingredients["flour"],
+                Ingredients["salt"],
+                Ingredients["pepper"]
             }
         }
     ];

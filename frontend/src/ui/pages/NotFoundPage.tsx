@@ -4,15 +4,11 @@ import Page from '@/ui/layouts/Page';
 import patty from '@/assets/patty.png';
 
 export default function NotFoundPage() {
-  const message = (import.meta.env.VITE_404_MESSAGE as string)
-    .replace(/\\n/g, '\n')
-    .split('\n');
-
   return (
     <Page>
       <div className='flex flex-col justify-center items-center'>
         <section className='flex justify-center items-center'>
-          <span className='text-[8rem] md:text-[14rem] xl:text-[18rem] text-theme-orange font-rubik-mono-one'>
+          <span className='text-[8rem] md:text-[14rem] xl:text-[18rem] text-theme-pink font-rubik-mono-one'>
             4
           </span>
           <img
@@ -20,17 +16,15 @@ export default function NotFoundPage() {
             src={patty}
             alt='0'
           />
-          <span className='text-[8rem] md:text-[14rem] xl:text-[18rem] text-theme-orange font-rubik-mono-one'>
+          <span className='text-[8rem] md:text-[14rem] xl:text-[18rem] text-theme-pink font-rubik-mono-one'>
             4
           </span>
         </section>
-        <div className='font-rubik font-semibold text-theme-orange text-center text-4xl'>
-          {message.map((m) => (
-            <p>{m}</p>
-          ))}
+        <div className='font-rubi font-extrabold text-theme-orange text-center text-4xl'>
+          <p>{import.meta.env.VITE_404_MESSAGE}</p>
         </div>
         <Link
-          className='bg-white text-xl my-14 px-8 py-3 rounded-full font-dmsans shadow-md'
+          className='bg-theme-pink text-white text-xl my-14 px-8 py-3 rounded-full font-dmsans shadow-lg transition-colors duration-200 hover:bg-theme-orange'
           to='/'
         >
           Back to Home
