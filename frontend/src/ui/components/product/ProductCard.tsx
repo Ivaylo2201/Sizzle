@@ -6,6 +6,7 @@ import type { ProductShortDto } from '@/utils/types/product/ProductShortDto';
 import ProductPrice from '@/ui/components/product/ProductPrice';
 import TagContainer from '@/ui/shared//TagContainer';
 import Tag from '@/ui/shared/Tag';
+import Button from '@/ui/shared/Button';
 
 type ProductCardProps = ProductShortDto;
 
@@ -68,12 +69,9 @@ function ProductCard({
 
         <ProductPrice initialPrice={initialPrice} price={price} />
 
-        <button
-          className='self-start mt-2 bg-theme-pink text-white px-4 py-1.5 rounded-md cursor-pointer duration-500 transition-colors hover:bg-theme-orange'
-          onClick={addToCart}
-        >
+        <Button className='self-start mt-2' onClick={addToCart}>
           Order now
-        </button>
+        </Button>
       </div>
     </article>
   );

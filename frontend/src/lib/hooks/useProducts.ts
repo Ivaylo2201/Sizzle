@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/httpClient';
 import type { ProductShortDto } from '@/utils/types/product/ProductShortDto';
 
 export default function useProducts(category: string | undefined) {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['products', category],
     queryFn: async () => {
       const res = await httpClient.get<ProductShortDto[]>(
