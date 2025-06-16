@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound } from 'lucide-react';
 
-import Button from '@/ui/shared/Button';
+import Button from '@/components/ui/button/Button';
 import useSignIn from '@/lib/hooks/useSignIn';
-import type { SignInData } from '@/utils/types/requests/SignInData';
+import type { SignInRequest } from '@/utils/types/requests/SignInRequest';
 
 export default function SignInForm() {
-  const { register, handleSubmit } = useForm<SignInData>();
+  const { register, handleSubmit } = useForm<SignInRequest>();
   const { mutate } = useSignIn();
 
   return (

@@ -1,7 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { useLocation } from 'react-router';
 
-import NotFoundPage from '@/ui/pages/NotFoundPage';
+import NotFoundPage from '@/components/pages/NotFoundPage';
 
 type NotFoundErrorBoundaryProps = React.PropsWithChildren;
 

@@ -1,18 +1,18 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import ProductsPage from '@/ui/pages/ProductsPage';
-import ProductPage from '@/ui/pages/ProductPage';
-import HomePage from '@/ui/pages/HomePage';
-import NotFoundErrorBoundary from '@/ui/shared/NotFoundErrorBoundary';
-import NotFoundPage from '@/ui/pages/NotFoundPage';
-import LoadingSpinner from '@/ui/shared/LoadingSpinner';
-import SignInPage from '@/ui/pages/SignInPage';
-import SignUpPage from '@/ui/pages/SignUpPage';
-import OrdersPage from '@/ui/pages/OrdersPage';
-import CartPage from '@/ui/pages/CartPage';
-import CheckoutPage from '@/ui/pages/CheckoutPage';
-import SignInRequired from '@/ui/components/auth/SignInRequired';
+import ProductsPage from '@/components/pages/ProductsPage';
+import ProductPage from '@/components/pages/ProductPage';
+import HomePage from '@/components/pages/HomePage';
+import NotFoundErrorBoundary from '@/components/shared/NotFoundErrorBoundary';
+import NotFoundPage from '@/components/pages/NotFoundPage';
+import LoadingSpinner from '@/components/shared/LoadingSpinner';
+import SignInPage from '@/components/pages/SignInPage';
+import SignUpPage from '@/components/pages/SignUpPage';
+import OrdersPage from '@/components/pages/OrdersPage';
+import CartPage from '@/components/pages/CartPage';
+import CheckoutPage from '@/components/pages/CheckoutPage';
+import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout';
 
 export default function Router() {
   return (
@@ -46,17 +46,17 @@ export default function Router() {
           <Route
             index
             element={
-              <SignInRequired>
+              <AuthenticatedLayout>
                 <CartPage />
-              </SignInRequired>
+              </AuthenticatedLayout>
             }
           />
           <Route
             path='checkout'
             element={
-              <SignInRequired>
+              <AuthenticatedLayout>
                 <CheckoutPage />
-              </SignInRequired>
+              </AuthenticatedLayout>
             }
           />
         </Route>
@@ -69,9 +69,9 @@ export default function Router() {
         <Route
           path='/orders'
           element={
-            <SignInRequired>
+            <AuthenticatedLayout>
               <OrdersPage />
-            </SignInRequired>
+            </AuthenticatedLayout>
           }
         />
 

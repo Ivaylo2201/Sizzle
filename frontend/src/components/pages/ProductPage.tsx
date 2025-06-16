@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 
 import useProduct from '@/lib/hooks/useProduct';
-import Page from '@/ui/layouts/Page';
+import Page from '@/components/layout/PageLayout';
 
 export default function ProductPage() {
   const { guid } = useParams();

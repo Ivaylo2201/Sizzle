@@ -1,6 +1,6 @@
-import CategoryLink from '@/ui/components/product/CategoryLink';
-import Logo from '@/ui/components/product/Logo';
-import HeaderButtons from '@/ui/components/header/HeaderButtons';
+import CategoryLink from "@/components/shared/CategoryLink";
+import HeaderButtons from "@/components/layout/Header/HeaderButtons";
+import Logo from "@/components/shared/Logo";
 
 export default function Header() {
   return (

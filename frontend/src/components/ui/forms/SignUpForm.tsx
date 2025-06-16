@@ -4,16 +4,16 @@ import { toast } from 'react-toastify';
 import { PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound, Phone } from 'lucide-react';
 
-import Button from '@/ui/shared/Button';
+import Button from '@/components/ui/button/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
-import type { SignUpData } from '@/utils/types/requests/SignUpData';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
+import type { SignUpRequest } from '@/utils/types/requests/SignUpRequest';
 
 export default function SignUpForm() {
-  const { register, handleSubmit } = useForm<SignUpData>();
+  const { register, handleSubmit } = useForm<SignUpRequest>();
   const { mutate } = useSignUp();
 
-  const onSubmit = (data: SignUpData) => {
+  const onSubmit = (data: SignUpRequest) => {
     const result = signUpSchema.safeParse(data);
 
     if (!result.success) {

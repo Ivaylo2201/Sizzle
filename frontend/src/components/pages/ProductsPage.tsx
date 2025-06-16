@@ -1,8 +1,8 @@
 import { useParams } from 'react-router';
 
-import Page from '@/ui/layouts/Page';
-import ProductsList from '@/ui/components/product/ProductList';
+import Page from '@/components/layout/PageLayout';
 import useProducts from '@/lib/hooks/useProducts';
+import ProductsList from '@/components/ui/product/ProductList';
 
 export default function ProductsPage() {
   const { category } = useParams();

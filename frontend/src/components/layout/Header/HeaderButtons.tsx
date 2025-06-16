@@ -1,10 +1,10 @@
 import { useAuthStore } from '@/lib/stores/useAuthStore';
 
-import CartButton from '@/ui/components/header/CartButton';
-import OrdersButton from '@/ui/components/header/OrdersButton';
-import SignOutButton from '@/ui/components/header/SignOutButton';
-import SignInButton from '@/ui/components/header/SignInButton';
-import SignUpButton from '@/ui/components/header/SignUpButton';
+import CartButton from '@/components/ui/button/CartButton';
+import OrdersButton from '@/components/ui/button/OrdersButton';
+import SignOutButton from '@/components/ui/button/SignOutButton';
+import SignInButton from '@/components/ui/button/SignInButton';
+import SignUpButton from '@/components/ui/button/SignUpButton';
 
 export default function HeaderButtons() {
   const { isAuthenticated } = useAuthStore();

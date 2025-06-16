@@ -1,8 +1,8 @@
-import ProductCard from '@/ui/components/product/ProductCard';
-import type { ProductShortDto } from '@/utils/types/models/ShortProduct';
+import type { ShortProduct } from '@/utils/types/models/ShortProduct';
+import ProductCard from '@/components/ui/product/ProductCard';
 
 type ProductsListProps = {
-  products: ProductShortDto[];
+  products: ShortProduct[];
 };
 
 export default function ProductsList({ products }: ProductsListProps) {

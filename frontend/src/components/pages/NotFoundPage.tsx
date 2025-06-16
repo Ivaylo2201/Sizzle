@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import Page from '@/ui/layouts/Page';
+import Page from '@/components/layout/PageLayout';
 import patty from '@/assets/patty.png';
 
 export default function NotFoundPage() {
