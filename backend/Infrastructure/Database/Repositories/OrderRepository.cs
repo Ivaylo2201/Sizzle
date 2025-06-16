@@ -9,7 +9,13 @@ public class OrderRepository(DatabaseContext context) : IOrderRepository
 {
     public async Task<Result<List<Order>>> GetAllOrdersForUserAsync(int userId)
     {
-        var items = await context.Orders.Where(o => o.UserId == userId).ToListAsync();
+        var items = await context.Orders
+            .Include(o => o.Address)
+                .ThenInclude(a => a.City)
+            .Include(o => o.Items)
+            .Where(o => o.UserId == userId)
+            .ToListAsync();
+        
         return Result.Success(items);
     }
 

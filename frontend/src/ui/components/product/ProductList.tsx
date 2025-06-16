@@ -1,5 +1,5 @@
 import ProductCard from '@/ui/components/product/ProductCard';
-import type { ProductShortDto } from '@/utils/types/product/ProductShortDto';
+import type { ProductShortDto } from '@/utils/types/models/ShortProduct';
 
 type ProductsListProps = {
   products: ProductShortDto[];

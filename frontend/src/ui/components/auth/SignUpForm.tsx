@@ -6,7 +6,7 @@ import { UserRound, KeyRound, Phone } from 'lucide-react';
 
 import Button from '@/ui/shared/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
-import type { SignUpData } from '@/utils/types/SignUpData';
+import type { SignUpData } from '@/utils/types/requests/SignUpData';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
 
 export default function SignUpForm() {
@@ -80,7 +80,7 @@ export default function SignUpForm() {
         <PasswordInput
           size='md'
           variant='filled'
-          label='Password'
+          label='Confirm password'
           leftSectionPointerEvents='none'
           leftSection={<KeyRound size={18} />}
           styles={{

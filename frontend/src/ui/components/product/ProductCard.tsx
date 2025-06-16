@@ -2,10 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { Rating } from '@mantine/core';
 
-import type { ProductShortDto } from '@/utils/types/product/ProductShortDto';
+import type { ProductShortDto } from '@/utils/types/models/ShortProduct';
 import ProductPrice from '@/ui/components/product/ProductPrice';
-import TagContainer from '@/ui/shared//TagContainer';
-import Tag from '@/ui/shared/Tag';
+import TagContainer from '@/ui/components/product/TagContainer';
+import Tag from '@/ui/components/product/Tag';
 import Button from '@/ui/shared/Button';
 
 type ProductCardProps = ProductShortDto;

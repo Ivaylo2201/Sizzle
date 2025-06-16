@@ -5,7 +5,7 @@ import { UserRound, KeyRound } from 'lucide-react';
 
 import Button from '@/ui/shared/Button';
 import useSignIn from '@/lib/hooks/useSignIn';
-import type { SignInData } from '@/utils/types/SignInData';
+import type { SignInData } from '@/utils/types/requests/SignInData';
 
 export default function SignInForm() {
   const { register, handleSubmit } = useForm<SignInData>();

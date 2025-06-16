@@ -18,7 +18,7 @@ public static class Data
         new() { CityName = "Burgas" },
         new() { CityName = "Ruse" }
     ];
-
+    
     public static readonly List<Address> Addresses =
     [
         new() { StreetName = "Tsar Simeon Str.", StreetNumber = 14 },
@@ -118,7 +118,7 @@ public static class Data
     {
         { "burgers", new Category { CategoryName = "Burgers" } },
         { "doners", new Category { CategoryName = "Doners" } },
-        { "snacks", new Category { CategoryName = "Snacks" } },
+        { "snacks", new Category { CategoryName = "Snacks" } }
     };
 
     public static readonly List<Product> Products =

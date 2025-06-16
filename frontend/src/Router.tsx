@@ -8,7 +8,11 @@ import NotFoundErrorBoundary from '@/ui/shared/NotFoundErrorBoundary';
 import NotFoundPage from '@/ui/pages/NotFoundPage';
 import LoadingSpinner from '@/ui/shared/LoadingSpinner';
 import SignInPage from '@/ui/pages/SignInPage';
-import SignUpPage from './ui/pages/SignUpPage';
+import SignUpPage from '@/ui/pages/SignUpPage';
+import OrdersPage from '@/ui/pages/OrdersPage';
+import CartPage from '@/ui/pages/CartPage';
+import CheckoutPage from '@/ui/pages/CheckoutPage';
+import SignInRequired from '@/ui/components/auth/SignInRequired';
 
 export default function Router() {
   return (
@@ -39,14 +43,37 @@ export default function Router() {
         />
 
         <Route path='/cart'>
-          <Route index element={<div>cart page</div>} />
-          <Route path='checkout' element={<div>checkout page</div>} />
+          <Route
+            index
+            element={
+              <SignInRequired>
+                <CartPage />
+              </SignInRequired>
+            }
+          />
+          <Route
+            path='checkout'
+            element={
+              <SignInRequired>
+                <CheckoutPage />
+              </SignInRequired>
+            }
+          />
         </Route>
 
         <Route path='/auth'>
           <Route path='sign-in' element={<SignInPage />} />
           <Route path='sign-up' element={<SignUpPage />} />
         </Route>
+
+        <Route
+          path='/orders'
+          element={
+            <SignInRequired>
+              <OrdersPage />
+            </SignInRequired>
+          }
+        />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
