@@ -15,3 +15,9 @@
 button {
   font-family: 'DM Sans', sans-serif !important;
 }
+
+.mantine-Input-input {
+  &:focus-within {
+    border: var(--color-theme-pink) 1px solid;
+  }
+}

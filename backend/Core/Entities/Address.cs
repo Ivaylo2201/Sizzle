@@ -9,4 +9,5 @@ public class Address
     public required int StreetNumber { get; set; }
     public int UserId { get; set; }
     public User User { get; set; } = null!;
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
 }

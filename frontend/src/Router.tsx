@@ -7,6 +7,7 @@ import HomePage from '@/ui/pages/HomePage';
 import NotFoundErrorBoundary from '@/ui/shared/NotFoundErrorBoundary';
 import NotFoundPage from '@/ui/pages/NotFoundPage';
 import LoadingSpinner from '@/ui/shared/LoadingSpinner';
+import SignInPage from '@/ui/pages/SignInPage';
 
 export default function Router() {
   return (
@@ -38,8 +39,12 @@ export default function Router() {
 
         <Route path='/cart'>
           <Route index element={<div>cart page</div>} />
-
           <Route path='checkout' element={<div>checkout page</div>} />
+        </Route>
+
+        <Route path='/auth'>
+          <Route path='sign-in' element={<SignInPage />} />
+          <Route path='sign-up' element={<></>} />
         </Route>
 
         <Route path='*' element={<NotFoundPage />} />

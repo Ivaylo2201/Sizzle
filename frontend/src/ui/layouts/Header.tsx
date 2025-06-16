@@ -2,8 +2,8 @@ import CategoryLink from '@/ui/shared/CategoryLink';
 
 export default function Header() {
   return (
-    <header className='py-5 flex flex-col md:flex-row justify-around items-center'>
-      <p className='font-caprasimo font-bold text-3xl uppercase'>
+    <header className='flex flex-col md:flex-row justify-around items-center'>
+      <p className='my-3 font-caprasimo font-bold text-4xl md:text-3xl uppercase'>
         <span className='text-theme-pink'>Siz</span>
         <span className='text-theme-orange'>zle</span>
       </p>
@@ -12,7 +12,6 @@ export default function Header() {
         <CategoryLink to='/doners'>Döners</CategoryLink>
         <CategoryLink to='/snacks'>Snacks</CategoryLink>
       </div>
-      <div></div>
     </header>
   );
 }
