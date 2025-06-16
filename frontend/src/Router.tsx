@@ -8,6 +8,7 @@ import NotFoundErrorBoundary from '@/ui/shared/NotFoundErrorBoundary';
 import NotFoundPage from '@/ui/pages/NotFoundPage';
 import LoadingSpinner from '@/ui/shared/LoadingSpinner';
 import SignInPage from '@/ui/pages/SignInPage';
+import SignUpPage from './ui/pages/SignUpPage';
 
 export default function Router() {
   return (
@@ -44,7 +45,7 @@ export default function Router() {
 
         <Route path='/auth'>
           <Route path='sign-in' element={<SignInPage />} />
-          <Route path='sign-up' element={<></>} />
+          <Route path='sign-up' element={<SignUpPage />} />
         </Route>
 
         <Route path='*' element={<NotFoundPage />} />

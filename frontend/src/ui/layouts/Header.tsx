@@ -1,17 +1,17 @@
 import CategoryLink from '@/ui/shared/CategoryLink';
+import Logo from '../shared/Logo';
 
 export default function Header() {
   return (
-    <header className='flex flex-col md:flex-row justify-around items-center'>
-      <p className='my-3 font-caprasimo font-bold text-4xl md:text-3xl uppercase'>
-        <span className='text-theme-pink'>Siz</span>
-        <span className='text-theme-orange'>zle</span>
-      </p>
-      <div className='flex justify-center items-center gap-8'>
+    <header className='flex flex-col md:flex-row py-2 gap-1.5 justify-around items-center'>
+      <section className=''>
+        <Logo />
+      </section>
+      <section className='flex justify-center items-center gap-8'>
         <CategoryLink to='/burgers'>Burgers</CategoryLink>
         <CategoryLink to='/doners'>Döners</CategoryLink>
         <CategoryLink to='/snacks'>Snacks</CategoryLink>
-      </div>
+      </section>
     </header>
   );
 }

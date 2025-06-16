@@ -21,3 +21,15 @@ button {
     border: var(--color-theme-pink) 1px solid;
   }
 }
+
+.Toastify__progress-bar {
+  background: var(--color-theme-pink) !important;
+}
+
+.Toastify__close-button:hover {
+  color: var(--color-theme-pink) !important;
+}
+
+.Toastify__toast-icon svg {
+  fill: var(--color-theme-pink) !important;
+}
