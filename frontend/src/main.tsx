@@ -18,13 +18,13 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <Router />
         <ToastContainer
-          autoClose={1500}
+          autoClose={2000}
           pauseOnHover={false}
           toastStyle={{
-            backgroundColor: 'white',
-            color: 'black',
-            fontFamily: 'DM Sans, sans-serif'
+            fontFamily: 'Rubik, sans-serif',
+            backgroundColor: 'var(--color-theme-beige)'
           }}
+          closeButton={false}
         />
       </QueryClientProvider>
     </MantineProvider>

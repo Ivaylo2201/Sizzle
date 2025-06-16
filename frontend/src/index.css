@@ -7,6 +7,7 @@
   --font-caprasimo: 'Caprasimo', serif;
   --color-theme-pink: #f52f66;
   --color-theme-beige: #f0ece7;
+  --color-theme-peach-beige: #f1d5c6;
   --color-theme-orange: #fa8173;
   --color-theme-lightpink: #f75a89;
   --color-theme-gray: #686869;
@@ -22,14 +23,14 @@ button {
   }
 }
 
-.Toastify__progress-bar {
+/* .Toastify__progress-bar {
+  background: var(--color-theme-pink) !important;
+} */
+
+.Toastify__toast--error .Toastify__progress-bar {
   background: var(--color-theme-pink) !important;
 }
 
-.Toastify__close-button:hover {
-  color: var(--color-theme-pink) !important;
-}
-
-.Toastify__toast-icon svg {
+.Toastify__toast--error .Toastify__toast-icon svg {
   fill: var(--color-theme-pink) !important;
 }

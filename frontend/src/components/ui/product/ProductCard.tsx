@@ -7,6 +7,7 @@ import type { ShortProduct } from '@/utils/types/models/ShortProduct';
 import TagContainer from '@/components/ui/tag/TagContainer';
 import Tag from '@/components/ui/tag/Tag';
 import ProductPrice from '@/components/ui/product/ProductPrice';
+import { toast } from 'react-toastify';
 
 type ProductCardProps = ShortProduct;
 
@@ -27,6 +28,7 @@ function ProductCard({
   const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     // TODO: add to cart
+    toast.success(`Product successfully added!`);
   };
 
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${imageUrl}`;

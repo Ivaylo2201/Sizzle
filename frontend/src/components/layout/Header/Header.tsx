@@ -4,7 +4,7 @@ import Logo from "@/components/shared/Logo";
 
 export default function Header() {
   return (
-    <header className='flex flex-col md:flex-row py-5 gap-4 md:gap-0 justify-around items-center'>
+    <header className='flex flex-col md:flex-row py-5 gap-4 md:gap-0 justify-around items-center shadow-md bg-theme-peach-beige'>
       <section>
         <Logo />
       </section>
