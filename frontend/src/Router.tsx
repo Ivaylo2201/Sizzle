@@ -1,18 +1,15 @@
-import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 import ProductsPage from '@/components/pages/ProductsPage';
 import ProductPage from '@/components/pages/ProductPage';
 import HomePage from '@/components/pages/HomePage';
-import NotFoundErrorBoundary from '@/components/shared/NotFoundErrorBoundary';
 import NotFoundPage from '@/components/pages/NotFoundPage';
-import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import SignInPage from '@/components/pages/SignInPage';
 import SignUpPage from '@/components/pages/SignUpPage';
 import OrdersPage from '@/components/pages/OrdersPage';
 import CartPage from '@/components/pages/CartPage';
 import CheckoutPage from '@/components/pages/CheckoutPage';
-import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout';
+import NotFoundErrorBoundaryLayout from '@/components/layout/NotFoundErrorBoundaryLayout';
 
 export default function Router() {
   return (
@@ -23,42 +20,24 @@ export default function Router() {
         <Route
           path='/product/:guid'
           element={
-            <Suspense fallback={<LoadingSpinner />}>
-              <NotFoundErrorBoundary>
-                <ProductPage />
-              </NotFoundErrorBoundary>
-            </Suspense>
+            <NotFoundErrorBoundaryLayout>
+              <ProductPage />
+            </NotFoundErrorBoundaryLayout>
           }
         />
 
         <Route
           path='/products/:category'
           element={
-            <Suspense fallback={<LoadingSpinner />}>
-              <NotFoundErrorBoundary>
-                <ProductsPage />
-              </NotFoundErrorBoundary>
-            </Suspense>
+            <NotFoundErrorBoundaryLayout>
+              <ProductsPage />
+            </NotFoundErrorBoundaryLayout>
           }
         />
 
         <Route path='/cart'>
-          <Route
-            index
-            element={
-              <AuthenticatedLayout>
-                <CartPage />
-              </AuthenticatedLayout>
-            }
-          />
-          <Route
-            path='checkout'
-            element={
-              <AuthenticatedLayout>
-                <CheckoutPage />
-              </AuthenticatedLayout>
-            }
-          />
+          <Route index element={<CartPage />} />
+          <Route path='checkout' element={<CheckoutPage />} />
         </Route>
 
         <Route path='/auth'>
@@ -66,14 +45,7 @@ export default function Router() {
           <Route path='sign-up' element={<SignUpPage />} />
         </Route>
 
-        <Route
-          path='/orders'
-          element={
-            <AuthenticatedLayout>
-              <OrdersPage />
-            </AuthenticatedLayout>
-          }
-        />
+        <Route path='/orders' element={<OrdersPage />} />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

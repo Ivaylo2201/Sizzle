@@ -8,10 +8,11 @@ import Button from '@/components/ui/button/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
 import type { SignUpRequest } from '@/utils/types/requests/SignUpRequest';
+import LoadingSpinner from '@/components/shared/LoadingSpinner';
 
 export default function SignUpForm() {
   const { register, handleSubmit } = useForm<SignUpRequest>();
-  const { mutate } = useSignUp();
+  const { mutate, isPending } = useSignUp();
 
   const onSubmit = (data: SignUpRequest) => {
     const result = signUpSchema.safeParse(data);
@@ -27,11 +28,12 @@ export default function SignUpForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='min-w-[25rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col  gap-8'
+      className='min-w-[25rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col gap-8'
     >
       <h1 className='font-dmsans text-2xl font-bold text-center'>
         Sign up to get started
       </h1>
+
       <div className='gap-3 flex flex-col'>
         <TextInput
           size='md'
@@ -48,6 +50,7 @@ export default function SignUpForm() {
           }}
           {...register('username')}
         />
+
         <TextInput
           size='md'
           variant='filled'
@@ -63,6 +66,7 @@ export default function SignUpForm() {
           }}
           {...register('phoneNumber')}
         />
+
         <PasswordInput
           size='md'
           variant='filled'
@@ -72,11 +76,13 @@ export default function SignUpForm() {
           styles={{
             input: {
               color: '#737374',
-              backgroundColor: 'var(--color-gray-200)'
+              backgroundColor: 'var(--color-gray-200)',
+              fontFamily: 'Rubik, sans-serif'
             }
           }}
           {...register('password')}
         />
+
         <PasswordInput
           size='md'
           variant='filled'
@@ -86,13 +92,18 @@ export default function SignUpForm() {
           styles={{
             input: {
               color: '#737374',
-              backgroundColor: 'var(--color-gray-200)'
+              backgroundColor: 'var(--color-gray-200)',
+              fontFamily: 'Rubik, sans-serif'
             }
           }}
           {...register('passwordConfirmation')}
         />
       </div>
-      <Button>Sign up</Button>
+
+      <Button className='h-10 flex justify-center items-center'>
+        {isPending ? <LoadingSpinner size={15} /> : 'Sign up'}
+      </Button>
+
       <Link
         to='/auth/sign-in'
         className='text-center text-theme-pink font-rubik text-sm transition-colors duration-200 hover:text-theme-orange'

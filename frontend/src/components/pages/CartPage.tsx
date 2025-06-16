@@ -1,5 +1,10 @@
 import Page from '@/components/layout/PageLayout';
+import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout';
 
 export default function CartPage() {
-  return <Page>cart page</Page>;
+  return (
+    <AuthenticatedLayout>
+      <Page>cart page</Page>
+    </AuthenticatedLayout>
+  );
 }

@@ -1,5 +1,10 @@
 import Page from '@/components/layout/PageLayout';
+import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout';
 
 export default function OrdersPage() {
-  return <Page>orders page</Page>;
+  return (
+    <AuthenticatedLayout>
+      <Page>orders page</Page>
+    </AuthenticatedLayout>
+  );
 }

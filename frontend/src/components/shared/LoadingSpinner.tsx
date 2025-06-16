@@ -1,10 +1,14 @@
 import { Loader } from '@mantine/core';
-import Page from '@/components/layout/PageLayout';
 
-export default function LoadingSpinner() {
+type LoadingSpinnerProps = {
+  size?: number;
+};
+
+export default function LoadingSpinner({ size = 20 }: LoadingSpinnerProps) {
   return (
-    <Page>
-      <Loader style={{ '--loader-color': 'var(--color-theme-orange)' }} />
-    </Page>
+    <Loader
+      size={size}
+      style={{ '--loader-color': 'var(--color-theme-orange)' }}
+    />
   );
 }
