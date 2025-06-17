@@ -10,6 +10,7 @@ import OrdersPage from '@/components/pages/OrdersPage';
 import CartPage from '@/components/pages/CartPage';
 import CheckoutPage from '@/components/pages/CheckoutPage';
 import NotFoundErrorBoundaryLayout from '@/components/layout/NotFoundErrorBoundaryLayout';
+import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout';
 
 export default function Router() {
   return (
@@ -36,8 +37,23 @@ export default function Router() {
         />
 
         <Route path='/cart'>
-          <Route index element={<CartPage />} />
-          <Route path='checkout' element={<CheckoutPage />} />
+          <Route
+            index
+            element={
+              <AuthenticatedLayout>
+                <CartPage />
+              </AuthenticatedLayout>
+            }
+          />
+
+          <Route
+            path='checkout'
+            element={
+              <AuthenticatedLayout>
+                <CheckoutPage />
+              </AuthenticatedLayout>
+            }
+          />
         </Route>
 
         <Route path='/auth'>
@@ -45,7 +61,14 @@ export default function Router() {
           <Route path='sign-up' element={<SignUpPage />} />
         </Route>
 
-        <Route path='/orders' element={<OrdersPage />} />
+        <Route
+          path='/orders'
+          element={
+            <AuthenticatedLayout>
+              <OrdersPage />
+            </AuthenticatedLayout>
+          }
+        />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

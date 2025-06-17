@@ -33,6 +33,7 @@ public class ItemController(IMediator mediator, IOwnershipService ownershipServi
         };
         
         await mediator.Send(new UpdateItemCommand(updateItemDto));
+        
         return Ok(new { message = "Item quantity successfully updated." });
     }
 }

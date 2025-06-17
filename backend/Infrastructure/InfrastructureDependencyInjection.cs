@@ -27,7 +27,6 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IOwnershipService, OwnershipService>();
-        services.AddScoped<ICartService, CartService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddSingleton<ITokenService, TokenService>();
 

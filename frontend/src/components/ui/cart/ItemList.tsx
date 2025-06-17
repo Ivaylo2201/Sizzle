@@ -1,5 +1,5 @@
-import type { Item } from '@/utils/types/models/Item';
 import ItemCard from '@/components/ui/item/ItemCard';
+import type { Item } from '@/utils/types/models/Item';
 
 type ItemListProps = {
   items: Item[];

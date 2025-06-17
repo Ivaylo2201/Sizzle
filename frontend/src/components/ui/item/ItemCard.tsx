@@ -1,7 +1,8 @@
-import type { Item } from '@/utils/types/models/Item';
 import { useState } from 'react';
-import QuantityButtons from './QuantityButtons';
+
+import QuantityButtons from '@/components/ui/item/QuantityButtons';
 import useQuantityChange from '@/lib/hooks/useQuantityChange';
+import type { Item } from '@/utils/types/models/Item';
 
 type ItemCardProps = Item;
 
@@ -26,14 +27,14 @@ export default function ItemCard({
   };
 
   return (
-    <article className='p-6 font-rubik bg-white shadow-md cursor-pointer rounded-xl flex items-center gap-5 relative overflow-hidden'>
+    <article className='p-6 font-rubik bg-white shadow-md cursor-pointer rounded-xl flex items-center gap-5'>
       <img
         src={imageSrc}
         alt={`Image of ${productName}`}
-        className='h-32 z-0 object-contain group-hover:scale-105 cursor-pointer duration-500 transition-transform'
+        className='h-32 z-0 object-contain'
       />
 
-      <div className='min-w-[22rem] flex flex-col gap-5'>
+      <div className='min-w-[8rem] sm:min-w-[12rem] md:min-w-[18rem] lg:min-w-[25rem] flex flex-col gap-5'>
         <div>
           <h1 className='text-xl font-semibold uppercase line-clamp-1'>
             {productName}

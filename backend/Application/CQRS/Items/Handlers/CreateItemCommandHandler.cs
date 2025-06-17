@@ -7,13 +7,12 @@ using MediatR;
 
 namespace Application.CQRS.Items.Handlers;
 
-public class CreateItemCommandHandler(IItemRepository itemRepository, ICartService cartService) 
+public class CreateItemCommandHandler(IItemRepository itemRepository) 
     : IRequestHandler<CreateItemCommand, Result<Item>>
 {
     public async Task<Result<Item>> Handle(CreateItemCommand request, CancellationToken cancellationToken)
     {
         var itemPrice = request.Dto.Quantity * request.Dto.Product.Price;
-        await cartService.AddItemPriceToCartTotalAsync(itemPrice, request.Dto.Cart);
         
         var item = new Item
         {

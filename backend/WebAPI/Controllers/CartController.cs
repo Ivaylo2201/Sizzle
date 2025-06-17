@@ -29,7 +29,7 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         var responseObject = new
         {
             items = cartResult.Value.Items.Select(i => i.ToDto()).ToList(),
-            total = cartResult.Value.Total
+            total = cartResult.Value.Items.Sum(i => i.Product.Price *  i.Quantity)
         };
 
         return Ok(responseObject);
