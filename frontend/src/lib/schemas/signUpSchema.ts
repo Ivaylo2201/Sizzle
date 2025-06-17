@@ -22,9 +22,9 @@ export const signUpSchema = z
         'Password must contain both letters and numbers.'
       ),
 
-    passwordConfirmation: z
-      .string()
-      .min(1, 'Password must be confirmed.')
+    passwordConfirmation: z.string().min(1, 'Password must be confirmed.'),
+
+    rememberMe: z.boolean()
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: 'Passwords do not match.',

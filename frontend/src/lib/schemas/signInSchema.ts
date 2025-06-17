@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const signInSchema = z.object({
-  username: z.string({ required_error: 'Email is required. ' }),
-  password: z.string({ required_error: 'Password is required. ' })
+  username: z.string().min(1, 'Username is required.'),
+  password: z.string().min(1, 'Password is required.'),
+  rememberMe: z.boolean()
 });

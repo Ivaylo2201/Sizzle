@@ -1,20 +1,21 @@
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { PasswordInput, TextInput } from '@mantine/core';
+import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound, Phone } from 'lucide-react';
+import type { z } from 'zod';
 
 import Button from '@/components/ui/button/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
-import type { SignUpRequest } from '@/utils/types/requests/SignUpRequest';
-import LoadingSpinner from '@/components/shared/LoadingSpinner';
+
+type SignUpSchema = z.infer<typeof signUpSchema>;
 
 export default function SignUpForm() {
-  const { register, handleSubmit } = useForm<SignUpRequest>();
+  const { register, handleSubmit } = useForm<SignUpSchema>();
   const { mutate, isPending } = useSignUp();
 
-  const onSubmit = (data: SignUpRequest) => {
+  const onSubmit = (data: SignUpSchema) => {
     const result = signUpSchema.safeParse(data);
 
     if (!result.success) {
@@ -28,7 +29,7 @@ export default function SignUpForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='min-w-[25rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col gap-8'
+      className='w-[28rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col gap-8'
     >
       <h1 className='font-dmsans text-2xl font-bold text-center'>
         Sign up to get started
@@ -100,8 +101,24 @@ export default function SignUpForm() {
         />
       </div>
 
+      <Checkbox
+        defaultChecked={false}
+        label='Remember me'
+        color='var(--color-theme-pink)'
+        styles={{
+          label: {
+            fontFamily: 'Rubik, sans-serif'
+          }
+        }}
+        {...register('rememberMe')}
+      />
+
       <Button className='h-10 flex justify-center items-center'>
-        {isPending ? <LoadingSpinner size={15} /> : 'Sign up'}
+        {isPending ? (
+          <Loader size={15} style={{ '--loader-color': 'white' }} />
+        ) : (
+          'Sign up'
+        )}
       </Button>
 
       <Link
@@ -110,6 +127,12 @@ export default function SignUpForm() {
       >
         Already have an account?
       </Link>
+
+      <p className='font-rubik text-xs text-center'>
+        This site is protected by reCAPTCHA and the Google{' '}
+        <a className='text-theme-pink font-bold' href='https://policies.google.com/privacy'>Privacy policy</a> and{' '}
+        <a className='text-theme-pink font-bold' href='https://policies.google.com/terms'>Terms of Service</a> apply
+      </p>
     </form>
   );
 }

@@ -386,7 +386,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Beef Doner",
+            ProductName = "Beef Döner",
             InitialPrice = 9,
             ImageUrl = "/doners/beef_doner.png",
             Description =
@@ -408,7 +408,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Chicken Doner",
+            ProductName = "Chicken Döner",
             InitialPrice = 8,
             ImageUrl = "/doners/chicken_doner.png",
             Description =
@@ -429,7 +429,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Crispy Chicken Doner",
+            ProductName = "Crispy Chicken Döner",
             InitialPrice = 9,
             ImageUrl = "/doners/crispy_chicken_doner.png",
             Description =
@@ -450,7 +450,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Lamb Doner",
+            ProductName = "Lamb Döner",
             InitialPrice = 10,
             ImageUrl = "/doners/lamb_doner.png",
             Description =
@@ -471,7 +471,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Pork Doner",
+            ProductName = "Pork Döner",
             InitialPrice = 8,
             ImageUrl = "/doners/pork_doner.png",
             Description =
@@ -490,7 +490,7 @@ public static class Data
         },
         new()
         {
-            ProductName = "Spicy Pork Doner",
+            ProductName = "Spicy Pork Döner",
             InitialPrice = 9,
             ImageUrl = "/doners/spicy_pork_doner.png",
             Description =

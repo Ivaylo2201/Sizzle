@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { Rating } from '@mantine/core';
 
-import Button from '@/components/ui/button/Button';
 import type { ShortProduct } from '@/utils/types/models/ShortProduct';
+import Button from '@/components/ui/button/Button';
 import TagContainer from '@/components/ui/tag/TagContainer';
 import Tag from '@/components/ui/tag/Tag';
 import ProductPrice from '@/components/ui/product/ProductPrice';
-import { toast } from 'react-toastify';
+import useAddToCart from '@/lib/hooks/useAddToCart';
 
 type ProductCardProps = ShortProduct;
 
@@ -22,13 +22,15 @@ function ProductCard({
   imageUrl
 }: ProductCardProps) {
   const navigate = useNavigate();
+  const { mutate } = useAddToCart();
 
-  const goToProduct = () => navigate(`/product/${id}`);
+  const goToProduct = () => {
+    navigate(`/product/${id}`);
+  };
 
   const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    // TODO: add to cart
-    toast.success(`Product successfully added!`);
+    mutate({ productId: id });
   };
 
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${imageUrl}`;

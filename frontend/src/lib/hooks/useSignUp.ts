@@ -1,32 +1,33 @@
 import type { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
-
-import { httpClient } from '@/utils/http/httpClient';
 import { useMutation } from '@tanstack/react-query';
+import type z from 'zod';
+
+import { httpClient } from '@/utils/httpClient';
 import { useAuthStore } from '@/lib/stores/useAuthStore';
-import type { SignUpRequest } from '@/utils/types/requests/SignUpRequest';
-import type { SignUpResponse } from '@/utils/types/responses/SignUpResponse';
+import type { signUpSchema } from '@/lib/schemas/signUpSchema';
+
+type UseSignUpResponse = { token: string };
+type UseSignUpAxiosError = AxiosError<{ message: string }>;
+type UseSignUpRequest = z.infer<typeof signUpSchema>;
+
+async function signUp(data: UseSignUpRequest) {
+  const res = await httpClient.post<UseSignUpResponse>('/auth/sign-up', data);
+  return res.data;
+}
 
 export default function useSignUp() {
   const { signIn } = useAuthStore();
   const navigate = useNavigate();
 
-  return useMutation<SignUpResponse, AxiosError, SignUpRequest>({
-    mutationFn: async (data) => {
-      const res = await httpClient.post<SignUpResponse>('/auth/sign-up', data);
-      return res.data;
-    },
-    onSuccess: (data) => {
-      localStorage.setItem('token', `Bearer ${data.token}`);
+  return useMutation<UseSignUpResponse, UseSignUpAxiosError, UseSignUpRequest>({
+    mutationFn: (data) => signUp(data),
+    onSuccess: (res, { rememberMe }) => {
+      signIn(res.token, rememberMe);
       navigate('/');
-      signIn();
     },
-    onError: (error) => {
-      toast.error(
-        (error.response?.data as { message: string }).message ||
-          'Something went wrong.'
-      );
-    }
+    onError: (e) =>
+      toast.error(e.response?.data.message || 'Something went wrong.')
   });
 }

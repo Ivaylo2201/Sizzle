@@ -1,21 +1,35 @@
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { PasswordInput, TextInput } from '@mantine/core';
+import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound } from 'lucide-react';
+import type z from 'zod';
+import { toast } from 'react-toastify';
 
 import Button from '@/components/ui/button/Button';
 import useSignIn from '@/lib/hooks/useSignIn';
-import type { SignInRequest } from '@/utils/types/requests/SignInRequest';
-import LoadingSpinner from '@/components/shared/LoadingSpinner';
+import { signInSchema } from '@/lib/schemas/signInSchema';
+
+type SignInSchema = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
-  const { register, handleSubmit } = useForm<SignInRequest>();
+  const { register, handleSubmit } = useForm<SignInSchema>();
   const { mutate, isPending } = useSignIn();
+
+  const onSubmit = (data: SignInSchema) => {
+    const result = signInSchema.safeParse(data);
+
+    if (!result.success) {
+      toast.error(result.error?.errors[0].message);
+      return;
+    }
+
+    mutate(data);
+  };
 
   return (
     <form
-      onSubmit={handleSubmit((data) => mutate(data))}
-      className='min-w-[25rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col  gap-8'
+      onSubmit={handleSubmit(onSubmit)}
+      className='w-[28rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col  gap-8'
     >
       <h1 className='font-dmsans text-2xl font-bold text-center'>
         Sign in to your account
@@ -55,8 +69,24 @@ export default function SignInForm() {
         />
       </div>
 
+      <Checkbox
+        defaultChecked={false}
+        label='Remember me'
+        color='var(--color-theme-pink)'
+        styles={{
+          label: {
+            fontFamily: 'Rubik, sans-serif'
+          }
+        }}
+        {...register('rememberMe')}
+      />
+
       <Button className='h-10 flex justify-center items-center'>
-        {isPending ? <LoadingSpinner size={15} /> : 'Sign in'}
+        {isPending ? (
+          <Loader size={15} style={{ '--loader-color': 'white' }} />
+        ) : (
+          'Sign in'
+        )}
       </Button>
 
       <Link

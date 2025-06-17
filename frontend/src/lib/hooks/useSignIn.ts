@@ -1,32 +1,32 @@
 import type { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
-
 import { useMutation } from '@tanstack/react-query';
+
 import { useAuthStore } from '@/lib/stores/useAuthStore';
-import type { SignInResponse } from '@/utils/types/responses/SignInResponse';
-import type { SignInRequest } from '@/utils/types/requests/SignInRequest';
-import { httpClient } from '@/utils/http/httpClient';
+import { httpClient } from '@/utils/httpClient';
+import type { z } from 'zod';
+import type { signInSchema } from '../schemas/signInSchema';
+
+type UseSignInResponse = { token: string };
+type UseSignInAxiosError = AxiosError<{ message: string }>;
+type UseSignInRequest = z.infer<typeof signInSchema>;
+
+async function signIn(data: UseSignInRequest) {
+  const res = await httpClient.post<UseSignInResponse>('/auth/sign-in', data);
+  return res.data;
+}
 
 export default function useSignIn() {
-  const { signIn } = useAuthStore();
   const navigate = useNavigate();
+  const { signIn: storeSignIn } = useAuthStore();
 
-  return useMutation<SignInResponse, AxiosError, SignInRequest>({
-    mutationFn: async (data) => {
-      const res = await httpClient.post<SignInResponse>('/auth/sign-in', data);
-      return res.data;
-    },
-    onSuccess: (data) => {
-      localStorage.setItem('token', `Bearer ${data.token}`);
+  return useMutation<UseSignInResponse, UseSignInAxiosError, UseSignInRequest>({
+    mutationFn: (data) => signIn(data),
+    onSuccess: (res, { rememberMe }) => {
+      storeSignIn(res.token, rememberMe);
       navigate('/');
-      signIn();
     },
-    onError: (error) => {
-      toast.error(
-        (error.response?.data as { message: string }).message ||
-          'Something went wrong.'
-      );
-    }
+    onError: (e) => toast.error(e.response?.data.message || 'Something went wrong.')
   });
 }

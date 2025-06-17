@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import NotFoundErrorBoundary from '@/components/shared/NotFoundErrorBoundary';
 import PageLayout from '@/components/layout/PageLayout';
-import LoadingSpinner from '@/components/shared/LoadingSpinner';
+import { Loader } from '@mantine/core';
 
 type NotFoundErrorBoundaryLayoutProps = React.PropsWithChildren;
 
@@ -13,7 +13,7 @@ export default function NotFoundErrorBoundaryLayout({
     <Suspense
       fallback={
         <PageLayout>
-          <LoadingSpinner size={50} />
+          <Loader size={50} style={{ '--loader-color': 'var(--color-theme-orange)' }} />
         </PageLayout>
       }
     >

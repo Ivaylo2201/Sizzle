@@ -54,7 +54,7 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         };
         
         await mediator.Send(new CreateItemCommand(createItemDto));
-        return Created(string.Empty, new { message = "Item added successfully." });
+        return Created(string.Empty, new { message = $"{productResult.Value.ProductName} added to cart!" });
     }
 
     [Authorize]
