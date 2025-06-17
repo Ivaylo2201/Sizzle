@@ -27,7 +27,9 @@ export default function useAddToCart() {
   >({
     mutationFn: (data) => addToCart(data),
     onSuccess: (res) => toast.success(res.message),
-    onError: (e) =>
-      toast.error(e.response?.data.message || 'Something went wrong.')
+    onError: (e) => {
+      console.error(e),
+        toast.error(e.response?.data.message || 'Something went wrong.');
+    }
   });
 }

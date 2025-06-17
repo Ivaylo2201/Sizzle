@@ -1,13 +1,14 @@
+import type z from 'zod';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound } from 'lucide-react';
-import type z from 'zod';
 import { toast } from 'react-toastify';
 
 import Button from '@/components/ui/button/Button';
 import useSignIn from '@/lib/hooks/useSignIn';
 import { signInSchema } from '@/lib/schemas/signInSchema';
+import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';
 
 type SignInSchema = z.infer<typeof signInSchema>;
 
@@ -29,7 +30,7 @@ export default function SignInForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-[28rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col  gap-8'
+      className='w-[27.5rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col gap-6'
     >
       <h1 className='font-dmsans text-2xl font-bold text-center'>
         Sign in to your account
@@ -95,6 +96,8 @@ export default function SignInForm() {
       >
         Do not have an account yet?
       </Link>
+
+      <PrivacyPolicyAndTermsOfService />
     </form>
   );
 }

@@ -1,13 +1,14 @@
+import type { z } from 'zod';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound, Phone } from 'lucide-react';
-import type { z } from 'zod';
 
 import Button from '@/components/ui/button/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
+import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';
 
 type SignUpSchema = z.infer<typeof signUpSchema>;
 
@@ -29,7 +30,7 @@ export default function SignUpForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-[28rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col gap-8'
+      className='w-[27.5rem] bg-white rounded-xl px-15 py-15 shadow-md flex flex-col gap-6'
     >
       <h1 className='font-dmsans text-2xl font-bold text-center'>
         Sign up to get started
@@ -128,11 +129,7 @@ export default function SignUpForm() {
         Already have an account?
       </Link>
 
-      <p className='font-rubik text-xs text-center'>
-        This site is protected by reCAPTCHA and the Google{' '}
-        <a className='text-theme-pink font-bold' href='https://policies.google.com/privacy'>Privacy policy</a> and{' '}
-        <a className='text-theme-pink font-bold' href='https://policies.google.com/terms'>Terms of Service</a> apply
-      </p>
+      <PrivacyPolicyAndTermsOfService />
     </form>
   );
 }
