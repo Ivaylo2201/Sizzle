@@ -11,7 +11,7 @@ public class UpdateItemCommandHandler(IItemRepository itemRepository) :
     {
         var item = request.Dto.Item;
         
-        item.Quantity += request.Dto.Quantity;
+        item.Quantity = request.Dto.Quantity;
         await itemRepository.UpdateAsync(item);
 
         return Unit.Value;

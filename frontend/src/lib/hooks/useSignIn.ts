@@ -27,6 +27,7 @@ export default function useSignIn() {
       storeSignIn(res.token, rememberMe);
       navigate('/');
     },
-    onError: (e) => toast.error(e.response?.data.message || 'Something went wrong.')
+    onError: (e) =>
+      toast.error(e.response?.data.message || 'Something went wrong.')
   });
 }

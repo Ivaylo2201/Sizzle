@@ -9,7 +9,7 @@ type UseAddToCartResponse = {
 
 type UseAddToCartRequest = {
   productId: string;
-  quantity?: number;
+  quantity: number;
 };
 
 type UseAddToCartAxiosError = AxiosError<{ message: string }>;
@@ -28,8 +28,7 @@ export default function useAddToCart() {
     mutationFn: (data) => addToCart(data),
     onSuccess: (res) => toast.success(res.message),
     onError: (e) => {
-      console.error(e),
-        toast.error(e.response?.data.message || 'Something went wrong.');
+      toast.error(e.response?.data.message || 'Something went wrong.');
     }
   });
 }

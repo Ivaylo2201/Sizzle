@@ -2,5 +2,5 @@
 
 public record UpdateItemRequest
 {
-    public int Quantity { get; init; } = 1;
+    public required int Quantity { get; init; }
 }
