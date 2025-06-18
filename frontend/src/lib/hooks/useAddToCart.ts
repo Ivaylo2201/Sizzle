@@ -9,7 +9,7 @@ type UseAddToCartResponse = {
 
 type UseAddToCartRequest = {
   productId: string;
-  quantity: number;
+  quantity?: number;
 };
 
 type UseAddToCartAxiosError = AxiosError<{ message: string }>;
