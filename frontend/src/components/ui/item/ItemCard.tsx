@@ -3,6 +3,8 @@ import { useState } from 'react';
 import QuantityButtons from '@/components/ui/item/QuantityButtons';
 import useQuantityChange from '@/lib/hooks/useQuantityChange';
 import type { Item } from '@/utils/types/models/Item';
+import useItemRemove from '@/lib/hooks/useItemRemove';
+import RemoveItemButton from './RemoveItemButton';
 
 type ItemCardProps = Item;
 
@@ -15,16 +17,19 @@ export default function ItemCard({
   quantity
 }: ItemCardProps) {
   const [selectedQuantity, setSelectedQuantity] = useState<number>(quantity);
-  const { mutate } = useQuantityChange();
+  const { mutate: changeQuantity } = useQuantityChange();
+  const { mutate: removeItem } = useItemRemove();
 
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${imageUrl}`;
 
   const handleQuantityChange = (quantity: number) => {
     if (quantity >= 1 && quantity <= 15) {
       setSelectedQuantity(quantity);
+      changeQuantity({ id, quantity });
     }
-    mutate({ id, quantity });
   };
+
+  const handleItemRemove = (id: number) => removeItem({ id });
 
   return (
     <article className='p-6 font-rubik bg-white shadow-md cursor-pointer rounded-xl flex items-center gap-5'>
@@ -34,7 +39,7 @@ export default function ItemCard({
         className='h-32 z-0 object-contain'
       />
 
-      <div className='min-w-[8rem] sm:min-w-[12rem] md:min-w-[18rem] lg:min-w-[25rem] flex flex-col gap-5'>
+      <div className='min-w-[6rem] sm:min-w-[16rem] md:min-w-[18rem] lg:min-w-[27rem] flex flex-col gap-5'>
         <div>
           <h1 className='text-xl font-semibold uppercase line-clamp-1'>
             {productName}
@@ -52,6 +57,8 @@ export default function ItemCard({
         quantity={selectedQuantity}
         onChange={handleQuantityChange}
       />
+
+      <RemoveItemButton callback={() => handleItemRemove(id)} />
     </article>
   );
 }

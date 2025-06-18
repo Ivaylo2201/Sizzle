@@ -13,7 +13,7 @@ export default function QuantityButtons({
   const onDecrement = () => onChange(quantity - 1);
 
   return (
-    <div className='flex flex-col justify-center items-center gap-2 md:mx-3'>
+    <div className='flex flex-col justify-center items-center gap-2'>
       <button
         className={`bg-theme-pink p-2 rounded-full transition-colors duration-200 hover:bg-theme-orange cursor-pointer ${
           quantity >= 15 ? 'opacity-50 pointer-events-none' : 'opacity-100'

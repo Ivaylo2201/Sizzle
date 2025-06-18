@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <Router />
         <ToastContainer
-          autoClose={2000}
+          autoClose={500}
           pauseOnHover={false}
           toastStyle={{
             fontFamily: 'Rubik, sans-serif',
