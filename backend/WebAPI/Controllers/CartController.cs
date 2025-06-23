@@ -22,39 +22,44 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
     public async Task<IActionResult> ListCartItemsAsync()
     {
         var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
-        
+
         if (!cartResult.IsSuccess)
             return NotFound(cartResult.ErrorObject);
 
         var responseObject = new
         {
             items = cartResult.Value.Items.Select(i => i.ToDto()).ToList(),
-            total = cartResult.Value.Items.Sum(i => i.Product.Price *  i.Quantity)
+            total = cartResult.Value.Items.Sum(i => i.Product.Price * i.Quantity)
         };
 
         return Ok(responseObject);
     }
-    
+
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddItemToCartAsync([FromBody] AddItemToCartRequest request)
     {
         var productResult = await mediator.Send(new GetProductQuery(request.ProductId));
-        
+
         if (!productResult.IsSuccess)
             return NotFound(productResult.ErrorObject);
-        
+
         var cartResult = await mediator.Send(new GetCartQuery(User.GetId()));
 
         var createItemDto = new CreateItemDto
         {
             Product = productResult.Value,
-            Quantity = request.Quantity, 
+            Quantity = request.Quantity,
             Cart = cartResult.Value
         };
-        
+
         await mediator.Send(new CreateItemCommand(createItemDto));
-        return Created(string.Empty, new { message = $"{productResult.Value.ProductName} added to cart!" });
+
+        var message =
+            $"{(request.Quantity > 1 ? $"{request.Quantity}x " : "")}" +
+            $"{productResult.Value.ProductName} added to cart!";
+
+        return Created(string.Empty, new { message });
     }
 
     [Authorize]
@@ -66,9 +71,9 @@ public class CartController(IMediator mediator, IOwnershipService ownershipServi
         if (!itemResult.IsSuccess)
             return NotFound(itemResult.ErrorObject);
 
-        if (!await ownershipService.HasItemOwnershipAsync(itemResult.Value.CartId, User.GetId())) 
+        if (!await ownershipService.HasItemOwnershipAsync(itemResult.Value.CartId, User.GetId()))
             return Forbid();
-        
+
         await mediator.Send(new DeleteItemCommand(itemResult.Value.Id));
         return NoContent();
     }

@@ -71,7 +71,7 @@ function ProductCard({
           <h3 className='text-theme-gray'>{weight} gr.</h3>
         </div>
 
-        <ProductPrice initialPrice={initialPrice} price={price} />
+        <ProductPrice initialPrice={initialPrice} price={price} mode='card' />
 
         <Button className='self-start mt-2' onClick={addToCart}>
           Order now
