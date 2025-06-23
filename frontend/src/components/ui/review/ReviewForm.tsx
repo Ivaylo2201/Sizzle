@@ -5,9 +5,10 @@ import { toast } from 'react-toastify';
 import useAddReview from '@/lib/hooks/useAddReview';
 import Button from '@/components/shared/Button';
 import type { LongProduct } from '@/utils/types/models/LongProduct';
+import SizzleRating from '@/components/shared/SizzleRating';
 
 type ReviewFormProps = {
-  product: LongProduct
+  product: LongProduct;
 };
 
 export default function ReviewForm({ product }: ReviewFormProps) {
@@ -19,10 +20,10 @@ export default function ReviewForm({ product }: ReviewFormProps) {
     e.preventDefault();
 
     if (!selectedRating) {
-      toast.error('Rating must be provided.')
+      toast.error('Rating must be provided.');
       return;
     }
-    
+
     mutate({
       comment: commentRef.current,
       rating: selectedRating,
@@ -43,11 +44,10 @@ export default function ReviewForm({ product }: ReviewFormProps) {
         onChange={handleCommentChange}
       />
       <div className='flex justify-center items-center gap-5'>
-        <Rating
+        <SizzleRating
           value={selectedRating ?? 0}
           size={25}
           onChange={setSelectedRating}
-          style={{ '--rating-color': 'var(--color-theme-orange)' }}
         />
         <Button onClick={addReview}>Submit</Button>
       </div>

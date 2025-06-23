@@ -8,6 +8,7 @@ import TagContainer from '@/components/ui/tag/TagContainer';
 import Tag from '@/components/ui/tag/Tag';
 import ProductPrice from '@/components/ui/product/ProductPrice';
 import useAddToCart from '@/lib/hooks/useAddToCart';
+import SizzleRating from '@/components/shared/SizzleRating';
 
 type ProductCardProps = ShortProduct;
 
@@ -56,12 +57,7 @@ function ProductCard({
       />
 
       <div className='flex flex-col gap-1'>
-        <Rating
-          value={rating}
-          readOnly
-          className='mb-1.5'
-          style={{ '--rating-color': 'var(--color-theme-orange)' }}
-        />
+        <SizzleRating value={rating} readOnly className='mb-1.5' />
 
         <div className='flex items-end font-rubik gap-1'>
           <h1 className='text-xl font-semibold uppercase'>

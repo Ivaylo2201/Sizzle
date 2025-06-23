@@ -12,6 +12,7 @@ import ProductPrice from '@/components/ui/product/ProductPrice';
 import QuantityButtons from '@/components/ui/item/QuantityButtons';
 import ReviewList from '@/components/ui/review/ReviewList';
 import ReviewForm from '@/components/ui/review/ReviewForm';
+import SizzleRating from '../shared/SizzleRating';
 
 export default function ProductPage() {
   const { guid } = useParams();
@@ -28,7 +29,7 @@ export default function ProductPage() {
 
   const addToCart = () =>
     mutate({ productId: product.id, quantity: selectedQuantity });
-  
+
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${product.imageUrl}`;
 
   return (
@@ -39,11 +40,7 @@ export default function ProductPage() {
           <section className='flex flex-col gap-2'>
             <h1 className='text-2xl font-bold'>{product.productName}</h1>
             <div className='flex items-center gap-2'>
-              <Rating
-                value={product.rating}
-                readOnly
-                style={{ '--rating-color': 'var(--color-theme-orange)' }}
-              />
+              <SizzleRating value={product.rating} readOnly />
               <span className='font-dmsans'>({product.reviews.length})</span>
             </div>
             <ProductPrice
