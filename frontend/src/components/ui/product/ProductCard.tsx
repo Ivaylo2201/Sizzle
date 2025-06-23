@@ -29,7 +29,7 @@ function ProductCard({
   };
 
   const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Click on the parent (card) sends the user to the product's page
+    e.stopPropagation(); // Prevent sending the user to the product's page
     mutate({ productId: id });
   };
 

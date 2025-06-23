@@ -1,23 +1,32 @@
 import { useRef, useState } from 'react';
 import { Rating, Textarea } from '@mantine/core';
+import { toast } from 'react-toastify';
 
 import useAddReview from '@/lib/hooks/useAddReview';
 import Button from '@/components/shared/Button';
+import type { LongProduct } from '@/utils/types/models/LongProduct';
 
 type ReviewFormProps = {
-  productId: string;
+  product: LongProduct
 };
 
-export default function ReviewForm({ productId }: ReviewFormProps) {
-  const [selectedRating, setSelectedRating] = useState<number>(0);
+export default function ReviewForm({ product }: ReviewFormProps) {
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const commentRef = useRef<string | null>(null);
-  const { mutate } = useAddReview(productId);
+  const { mutate } = useAddReview(product);
 
-  const addReview = () => {
+  const addReview = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!selectedRating) {
+      toast.error('Rating must be provided.')
+      return;
+    }
+    
     mutate({
       comment: commentRef.current,
       rating: selectedRating,
-      productId
+      productId: product.id
     });
   };
 
@@ -35,7 +44,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
       />
       <div className='flex justify-center items-center gap-5'>
         <Rating
-          value={selectedRating}
+          value={selectedRating ?? 0}
           size={25}
           onChange={setSelectedRating}
           style={{ '--rating-color': 'var(--color-theme-orange)' }}

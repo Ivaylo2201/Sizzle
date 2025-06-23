@@ -68,7 +68,7 @@ export default function ProductPage() {
           </section>
         </div>
         <ReviewList reviews={product.reviews} />
-        <ReviewForm productId={product.id} />
+        <ReviewForm product={product} />
       </div>
     </Page>
   );
