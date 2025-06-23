@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
 import { UserRound, KeyRound, Phone } from 'lucide-react';
 
-import Button from '@/components/ui/button/Button';
+import Button from '@/components/shared/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
 import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';

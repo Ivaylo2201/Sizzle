@@ -19,7 +19,7 @@ public static class ProductExtensions
             Calories = product.Calories,
             Weight = product.Weight,
             CategoryName = product.Category.CategoryName,
-            Reviews = product.Reviews.Select(r => r.ToDto()).ToList(),
+            Reviews = product.Reviews.Select(r => r.ToDto()).OrderByDescending(r => r.CreatedAt).ToList(),
             Ingredients = product.Ingredients.Select(i => i.IngredientName).ToList(),
             Price = product.Price
         };

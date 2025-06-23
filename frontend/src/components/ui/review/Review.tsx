@@ -11,7 +11,7 @@ export default function Review({
 }: ReviewProps) {
   return (
     <article className='min-w-[25rem] bg-white shadow-md rounded-xl flex flex-col p-4 gap-3 font-rubik'>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-1'>
         <div className='flex items-center gap-2'>
           <p>{username}</p>
           <p className='text-sm text-theme-gray italic'>
