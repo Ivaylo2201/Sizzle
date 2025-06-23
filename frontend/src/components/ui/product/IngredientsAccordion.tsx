@@ -14,7 +14,9 @@ export default function IngredientsAccordion({
         <Accordion.Panel>
           <ul className='grid grid-cols-2 list-[square] list-inside marker:text-theme-pink'>
             {ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
+              <li className='text-sm' key={index}>
+                {ingredient}
+              </li>
             ))}
           </ul>
         </Accordion.Panel>

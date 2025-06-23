@@ -15,8 +15,8 @@ export default function DetailsAccordion({
         <Accordion.Control>Details</Accordion.Control>
         <Accordion.Panel>
           <ul className='list-[square] list-inside marker:text-theme-pink'>
-            <li>Weight - {weight} gr.</li>
-            <li>Calories - {calories} kCal</li>
+            <li className='text-sm'>Weight - {weight} gr.</li>
+            <li className='text-sm'>Calories - {calories} kCal</li>
           </ul>
         </Accordion.Panel>
       </Accordion.Item>

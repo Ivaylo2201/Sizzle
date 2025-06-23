@@ -13,13 +13,16 @@ export default function OrderSummary({ items, total }: OrderSummaryProps) {
 
   return (
     <div>
-      {items.map((item) => (
-        <section className='flex justify-between text-sm font-normal text-theme-gray'>
+      {items.map((item, i) => (
+        <article
+          key={i}
+          className='flex justify-between text-sm font-normal text-theme-gray'
+        >
           <p>
             {item.quantity}x {item.productName}
           </p>
           <p>${item.price.toFixed(2)}</p>
-        </section>
+        </article>
       ))}
 
       <hr className='my-5' />

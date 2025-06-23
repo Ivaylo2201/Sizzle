@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useProduct from '@/lib/hooks/useProduct';
 import Page from '@/components/layout/PageLayout';
@@ -8,8 +8,9 @@ import Button from '@/components/ui/button/Button';
 import useAddToCart from '@/lib/hooks/useAddToCart';
 import IngredientsList from '@/components/ui/product/IngredientsAccordion';
 import DetailsAccordion from '@/components/ui/product/DetailsAccordion';
-import ProductPrice from '../ui/product/ProductPrice';
-import QuantityButtons from '../ui/item/QuantityButtons';
+import ProductPrice from '@/components/ui/product/ProductPrice';
+import QuantityButtons from '@/components/ui/item/QuantityButtons';
+import ReviewList from '../ui/review/ReviewList';
 
 export default function ProductPage() {
   const { guid } = useParams();
@@ -24,16 +25,18 @@ export default function ProductPage() {
     }
   };
 
-  const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    mutate({ productId: product.id, quantity: selectedQuantity });
-  };
+  const addToCart = () =>
+    mutate({
+      productId: product.id,
+      quantity: selectedQuantity
+    });
 
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${product.imageUrl}`;
 
   return (
     <Page>
-      <div className='bg-white rounded-xl flex flex-col lg:flex-row items-center shadow-md p-10 font-rubik gap-10'>
+      <div className='flex flex-col gap-4 justify-center items-center'>
+        <div className='bg-white min-h-[38rem] rounded-xl flex flex-col lg:flex-row items-center shadow-md p-10 font-rubik gap-10'>
         <img src={imageSrc} alt={`Image of ${product.productName}`} />
         <section className='flex flex-col gap-2'>
           <h1 className='text-2xl font-bold'>{product.productName}</h1>
@@ -62,11 +65,11 @@ export default function ProductPage() {
               onChange={handleQuantityChange}
               orientation='horizontal'
             />
-            <Button onClick={addToCart}>
-              Add to cart
-            </Button>
+            <Button onClick={addToCart}>Add to cart</Button>
           </div>
         </section>
+      </div>
+      <ReviewList reviews={product.reviews} />
       </div>
     </Page>
   );
