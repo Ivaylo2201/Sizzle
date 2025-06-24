@@ -12,4 +12,10 @@ public class CityRepository(DatabaseContext context) : ICityRepository
         var categories = await context.Cities.ToListAsync();
         return Result.Success(categories);
     }
+
+    public async Task<Result<City>> GetOneByNameAsync(string name)
+    {
+        var city = await context.Cities.SingleOrDefaultAsync(c => c.CityName == name);
+        return Result.Success(city);
+    }
 }

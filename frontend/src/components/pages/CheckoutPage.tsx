@@ -78,7 +78,7 @@ export default function CheckoutPage() {
               />
             </div>
           </section>
-          <Button>Submit</Button>
+          <Button>Place order</Button>
         </form>
       </FormProvider>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using Application.CQRS.Addresses.Commands;
 using Application.CQRS.Addresses.Queries;
+using Application.CQRS.Cities.Queries;
 using Application.DTOs.Address;
 using Application.Extensions;
 using Application.Interfaces.Services;
@@ -26,14 +27,19 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
     }
 
     [Authorize]
-    [HttpPost("add")]
+    [HttpPost]
     public async Task<IActionResult> AddAddressAsync([FromBody] AddAddressRequest request)
     {
+        var cityResult = await mediator.Send(new GetCityQuery(request.CityName));
+
+        if (!cityResult.IsSuccess)
+            return BadRequest(cityResult.ErrorObject);
+        
         var createAddressDto = new CreateAddressDto
         {
             StreetName = request.StreetName,
             StreetNumber = request.StreetNumber,
-            CityId = request.CityId,
+            CityId = cityResult.Value.Id,
             UserId = User.GetId()
         };
 
@@ -46,7 +52,7 @@ public class AddressController(IMediator mediator, IOwnershipService ownershipSe
     }
 
     [Authorize]
-    [HttpDelete("remove/{id:int}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> RemoveAddressAsync([FromRoute] int id)
     {
         var addressResult = await mediator.Send(new GetAddressQuery(id));
