@@ -20,7 +20,7 @@ export default function NotFoundPage() {
             4
           </span>
         </section>
-        <div className='font-rubi font-extrabold text-theme-orange text-center text-4xl'>
+        <div className='font-rubik font-extrabold text-theme-orange text-center text-4xl'>
           <p>{import.meta.env.VITE_404_MESSAGE}</p>
         </div>
         <Link

@@ -1,20 +1,26 @@
 import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 
+import useCart from '@/lib/hooks/useCart';
 import Page from '@/components/layout/PageLayout';
 import ItemList from '@/components/ui/cart/ItemList';
 import OrderSummary from '@/components/ui/cart/OrderSummary';
-import useCart from '@/lib/hooks/useCart';
 
 export default function CartPage() {
   const { data: cart } = useCart();
 
   if (cart.items.length === 0) {
     return (
-      <Page className=' flex-col'>
-        <p className='font-rubik text-xl font-semibold text-theme-pink'>
+      <Page className='flex-col'>
+        <p className='font-rubik font-extrabold text-theme-orange text-center text-4xl'>
           Your cart is empty.
         </p>
+        <Link
+          className='bg-theme-pink text-white text-xl my-14 px-8 py-3 rounded-full font-dmsans shadow-lg transition-colors duration-200 hover:bg-theme-orange'
+          to='/products/burgers'
+        >
+          How about a burger?
+        </Link>
       </Page>
     );
   }

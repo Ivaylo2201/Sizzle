@@ -1,6 +1,7 @@
-import type { Address } from '@/utils/types/models/Address';
-import AddressCard from './AddressCard';
 import { useState } from 'react';
+
+import AddressCard from '@/components/ui/address/AddressCard';
+import type { Address } from '@/utils/types/models/Address';
 
 type AddressListProps = {
   addresses: Address[];
