@@ -2,7 +2,7 @@ import useItemRemove from '@/lib/hooks/useItemRemove';
 import useQuantityChange from '@/lib/hooks/useQuantityChange';
 import useQuantityUpdate from '@/lib/hooks/useQuantityUpdate';
 import QuantityButtons from '@/components/ui/item/QuantityButtons';
-import RemoveItemButton from '@/components/ui/item/RemoveItemButton';
+import RemoveButton from '@/components/ui/button/RemoveButton';
 import type { Item } from '@/utils/types/models/Item';
 
 type ItemCardProps = Item;
@@ -56,7 +56,7 @@ export default function ItemCard({
         onChange={handleQuantityUpdate}
       />
 
-      <RemoveItemButton callback={() => handleItemRemove(id)} />
+      <RemoveButton callback={() => handleItemRemove(id)} />
     </article>
   );
 }
