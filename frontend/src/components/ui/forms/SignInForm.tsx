@@ -1,7 +1,7 @@
 import type z from 'zod';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
+import { Loader } from '@mantine/core';
 import { UserRound, KeyRound } from 'lucide-react';
 import { toast } from 'react-toastify';
 
@@ -9,6 +9,9 @@ import Button from '@/components/shared/Button';
 import useSignIn from '@/lib/hooks/useSignIn';
 import { signInSchema } from '@/lib/schemas/signInSchema';
 import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';
+import SizzleCheckbox from '@/components/shared/SizzleCheckbox';
+import SizzleTextInput from '@/components/shared/SizzleTextInput';
+import SizzlePasswordInput from '@/components/shared/SizzlePasswordInput';
 
 type SignInSchema = z.infer<typeof signInSchema>;
 
@@ -37,48 +40,24 @@ export default function SignInForm() {
       </h1>
 
       <div className='gap-3 flex flex-col'>
-        <TextInput
-          size='md'
-          variant='filled'
+        <SizzleTextInput
           label='Username'
           leftSectionPointerEvents='none'
           leftSection={<UserRound size={18} />}
-          styles={{
-            input: {
-              color: '#737374',
-              backgroundColor: 'var(--color-gray-200)',
-              fontFamily: 'Rubik, sans-serif'
-            }
-          }}
           {...register('username')}
         />
 
-        <PasswordInput
-          size='md'
-          variant='filled'
+        <SizzlePasswordInput
           label='Password'
           leftSectionPointerEvents='none'
           leftSection={<KeyRound size={18} />}
-          styles={{
-            input: {
-              color: '#737374',
-              backgroundColor: 'var(--color-gray-200)',
-              fontFamily: 'Rubik, sans-serif'
-            }
-          }}
           {...register('password')}
         />
       </div>
 
-      <Checkbox
+      <SizzleCheckbox
         defaultChecked={false}
         label='Remember me'
-        color='var(--color-theme-pink)'
-        styles={{
-          label: {
-            fontFamily: 'Rubik, sans-serif'
-          }
-        }}
         {...register('rememberMe')}
       />
 

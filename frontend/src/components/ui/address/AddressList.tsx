@@ -11,11 +11,7 @@ type AddressListProps = {
 export default function AddressList({ addresses, onSelect }: AddressListProps) {
   const [addressId, setAddressId] = useState<number | null>(null);
 
-  const getSelectedStyles = (id: number) => {
-    return addressId === id ? 'border-theme-pink' : 'border-transparent';
-  };
-
-  const handleAddressSelection = (id: number) => {
+  const handleSelect = (id: number) => {
     setAddressId(id);
     onSelect(id);
   };
@@ -23,8 +19,15 @@ export default function AddressList({ addresses, onSelect }: AddressListProps) {
   return (
     <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4'>
       {addresses.map((address, index) => (
-        <li key={index} onClick={() => handleAddressSelection(address.id)}>
-          <AddressCard {...address} className={getSelectedStyles(address.id)} />
+        <li key={index} onClick={() => handleSelect(address.id)}>
+          <AddressCard
+            {...address}
+            className={
+              addressId === address.id
+                ? 'border-theme-pink'
+                : 'border-transparent'
+            }
+          />
         </li>
       ))}
     </ul>

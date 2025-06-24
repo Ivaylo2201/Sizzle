@@ -2,13 +2,16 @@ import type { z } from 'zod';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { Checkbox, Loader, PasswordInput, TextInput } from '@mantine/core';
+import { Loader } from '@mantine/core';
 import { UserRound, KeyRound, Phone } from 'lucide-react';
 
 import Button from '@/components/shared/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
 import { signUpSchema } from '@/lib/schemas/signUpSchema';
 import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';
+import SizzlePasswordInput from '@/components/shared/SizzlePasswordInput';
+import SizzleTextInput from '@/components/shared/SizzleTextInput';
+import SizzleCheckbox from '@/components/shared/SizzleCheckbox';
 
 type SignUpSchema = z.infer<typeof signUpSchema>;
 
@@ -37,80 +40,38 @@ export default function SignUpForm() {
       </h1>
 
       <div className='gap-3 flex flex-col'>
-        <TextInput
-          size='md'
-          variant='filled'
+        <SizzleTextInput
           label='Username'
           leftSectionPointerEvents='none'
           leftSection={<UserRound size={18} />}
-          styles={{
-            input: {
-              color: '#737374',
-              backgroundColor: 'var(--color-gray-200)',
-              fontFamily: 'Rubik, sans-serif'
-            }
-          }}
           {...register('username')}
         />
 
-        <TextInput
-          size='md'
-          variant='filled'
+        <SizzleTextInput
           label='Phone number'
           leftSectionPointerEvents='none'
           leftSection={<Phone size={18} />}
-          styles={{
-            input: {
-              color: '#737374',
-              backgroundColor: 'var(--color-gray-200)',
-              fontFamily: 'Rubik, sans-serif'
-            }
-          }}
           {...register('phoneNumber')}
         />
 
-        <PasswordInput
-          size='md'
-          variant='filled'
+        <SizzlePasswordInput
           label='Password'
           leftSectionPointerEvents='none'
           leftSection={<KeyRound size={18} />}
-          styles={{
-            input: {
-              color: '#737374',
-              backgroundColor: 'var(--color-gray-200)',
-              fontFamily: 'Rubik, sans-serif'
-            }
-          }}
           {...register('password')}
         />
 
-        <PasswordInput
-          size='md'
-          variant='filled'
+        <SizzlePasswordInput
           label='Confirm password'
           leftSectionPointerEvents='none'
           leftSection={<KeyRound size={18} />}
-          styles={{
-            input: {
-              color: '#737374',
-              backgroundColor: 'var(--color-gray-200)',
-              fontFamily: 'Rubik, sans-serif'
-            }
-          }}
           {...register('passwordConfirmation')}
         />
       </div>
 
-      <Checkbox
+      <SizzleCheckbox
         defaultChecked={false}
         label='Remember me'
-        color='var(--color-theme-pink)'
-        styles={{
-          label: {
-            fontFamily: 'Rubik, sans-serif'
-          }
-        }}
         {...register('rememberMe')}
       />
 
