@@ -10,26 +10,32 @@ namespace Application.CQRS.Orders.Handlers;
 public class CreateOrderCommandHandler(
     IOrderRepository orderRepository,
     IAddressRepository addressRepository,
+    IUserRepository userRepository,
     IOrderService orderService) : IRequestHandler<CreateOrderCommand, Result<Order>>
 {
     public async Task<Result<Order>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
+        var userResult = await userRepository.GetOneAsync(request.Dto.UserId);
+        
+        if (!userResult.IsSuccess)
+            return Result.Failure<Order>(userResult.Error);
+        
+        var addressResult = await addressRepository.GetOneAsync(request.Dto.AddressId);
+        
+        if (addressResult.Value.UserId != userResult.Value.Id)
+            return Result.Failure<Order>(addressResult.Error);
+        
         var order = new Order
         {
-            User = request.Dto.User, 
-            Address = request.Dto.Address,
+            User = userResult.Value, 
+            Address = addressResult.Value,
             Notes = request.Dto.Notes,
             DeliveryTime = request.Dto.DeliveryTime
         };
         
         var orderResult = await orderRepository.CreateAsync(order);
-
-        var addressResult = await addressRepository.GetOneAsync(request.Dto.Address.Id);
         
-        if (addressResult.Value.UserId != request.Dto.User.Id)
-            return Result.Failure<Order>(addressResult.Error);
-        
-        var markResult = await orderService.MarkItemsInUsersCartAsOrderedAsync(request.Dto.User.Id, order);
+        var markResult = await orderService.MarkItemsInUsersCartAsOrderedAsync(userResult.Value.Id, order);
 
         return markResult.IsSuccess
             ? Result.Success(orderResult.Value)

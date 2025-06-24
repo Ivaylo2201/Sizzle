@@ -46,6 +46,6 @@ public class AuthenticationController(IMediator mediator, ITokenService tokenSer
             return BadRequest(signInUserResult.ErrorObject);
         
         var token = tokenService.GenerateToken(signInUserResult.Value);
-        return Created(string.Empty, new { token  });
+        return Created(string.Empty, new { token });
     }
 }
