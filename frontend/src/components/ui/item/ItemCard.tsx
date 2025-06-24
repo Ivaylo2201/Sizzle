@@ -1,10 +1,9 @@
-import { useState } from 'react';
-
-import QuantityButtons from '@/components/ui/item/QuantityButtons';
-import useQuantityChange from '@/lib/hooks/useQuantityChange';
-import type { Item } from '@/utils/types/models/Item';
 import useItemRemove from '@/lib/hooks/useItemRemove';
-import RemoveItemButton from './RemoveItemButton';
+import useQuantityChange from '@/lib/hooks/useQuantityChange';
+import useQuantityUpdate from '@/lib/hooks/useQuantityUpdate';
+import QuantityButtons from '@/components/ui/item/QuantityButtons';
+import RemoveItemButton from '@/components/ui/item/RemoveItemButton';
+import type { Item } from '@/utils/types/models/Item';
 
 type ItemCardProps = Item;
 
@@ -16,20 +15,19 @@ export default function ItemCard({
   price,
   quantity
 }: ItemCardProps) {
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(quantity);
-  const { mutate: changeQuantity } = useQuantityChange();
+  const { mutate: updateQuantity } = useQuantityUpdate();
   const { mutate: removeItem } = useItemRemove();
+  const { quantity: itemQuantity, handleQuantityChange } =
+    useQuantityChange(quantity);
 
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${imageUrl}`;
 
-  const handleQuantityChange = (quantity: number) => {
-    if (quantity >= 1 && quantity <= 15) {
-      setSelectedQuantity(quantity);
-      changeQuantity({ id, quantity });
-    }
-  };
-
   const handleItemRemove = (id: number) => removeItem({ id });
+
+  const handleQuantityUpdate = (quantity: number) => {
+    handleQuantityChange(quantity);
+    updateQuantity({ id, quantity });
+  };
 
   return (
     <article className='p-6 font-rubik bg-white shadow-md cursor-pointer rounded-xl flex items-center gap-5'>
@@ -54,8 +52,8 @@ export default function ItemCard({
       </div>
 
       <QuantityButtons
-        quantity={selectedQuantity}
-        onChange={handleQuantityChange}
+        quantity={itemQuantity}
+        onChange={handleQuantityUpdate}
       />
 
       <RemoveItemButton callback={() => handleItemRemove(id)} />

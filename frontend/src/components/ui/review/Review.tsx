@@ -1,6 +1,5 @@
 import SizzleRating from '@/components/shared/SizzleRating';
 import type { Review as TReview } from '@/utils/types/models/Review';
-import { Rating } from '@mantine/core';
 
 type ReviewProps = TReview;
 

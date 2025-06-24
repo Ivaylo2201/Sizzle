@@ -1,5 +1,5 @@
-import type { ShortProduct } from '@/utils/types/models/ShortProduct';
 import ProductCard from '@/components/ui/product/ProductCard';
+import type { ShortProduct } from '@/utils/types/models/ShortProduct';
 
 type ProductsListProps = {
   products: ShortProduct[];

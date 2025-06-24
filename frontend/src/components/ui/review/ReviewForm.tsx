@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import { Rating, Textarea } from '@mantine/core';
+import {  Textarea } from '@mantine/core';
 import { toast } from 'react-toastify';
 
 import useAddReview from '@/lib/hooks/useAddReview';
-import Button from '@/components/shared/Button';
 import type { LongProduct } from '@/utils/types/models/LongProduct';
+import Button from '@/components/shared/Button';
 import SizzleRating from '@/components/shared/SizzleRating';
 
 type ReviewFormProps = {

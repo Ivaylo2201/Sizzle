@@ -3,8 +3,8 @@ import { ArrowRight } from 'lucide-react';
 
 import Page from '@/components/layout/PageLayout';
 import ItemList from '@/components/ui/cart/ItemList';
+import OrderSummary from '@/components/ui/cart/OrderSummary';
 import useCart from '@/lib/hooks/useCart';
-import OrderSummary from '../ui/cart/OrderSummary';
 
 export default function CartPage() {
   const { data: cart } = useCart();

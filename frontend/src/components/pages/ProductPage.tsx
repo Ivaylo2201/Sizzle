@@ -1,42 +1,40 @@
-import { useState } from 'react';
 import { useParams } from 'react-router';
-import { Rating } from '@mantine/core';
 
 import useProduct from '@/lib/hooks/useProduct';
 import useAddToCart from '@/lib/hooks/useAddToCart';
+import useQuantityControl from '@/lib/hooks/useQuantityChange';
 import Page from '@/components/layout/PageLayout';
 import Button from '@/components/shared/Button';
-import IngredientsList from '@/components/ui/product/IngredientsAccordion';
-import DetailsAccordion from '@/components/ui/product/DetailsAccordion';
-import ProductPrice from '@/components/ui/product/ProductPrice';
+import SizzleRating from '@/components/shared/SizzleRating';
 import QuantityButtons from '@/components/ui/item/QuantityButtons';
-import ReviewList from '@/components/ui/review/ReviewList';
+import DetailsAccordion from '@/components/ui/product/DetailsAccordion';
+import IngredientsAccordion from '@/components/ui/product/IngredientsAccordion';
+import ProductPrice from '@/components/ui/product/ProductPrice';
 import ReviewForm from '@/components/ui/review/ReviewForm';
-import SizzleRating from '../shared/SizzleRating';
+import ReviewList from '@/components/ui/review/ReviewList';
 
 export default function ProductPage() {
   const { guid } = useParams();
   const { data: product } = useProduct(guid);
-  const { mutate } = useAddToCart();
+  const { mutate: addToCart } = useAddToCart();
 
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const { quantity, handleQuantityChange } = useQuantityControl();
 
-  const handleQuantityChange = (quantity: number) => {
-    if (quantity >= 1 && quantity <= 15) {
-      setSelectedQuantity(quantity);
-    }
+  const handleAddToCart = () => {
+    addToCart({ productId: product.id, quantity });
   };
-
-  const addToCart = () =>
-    mutate({ productId: product.id, quantity: selectedQuantity });
 
   const imageSrc = `${import.meta.env.VITE_IMAGE_BASE_URL}${product.imageUrl}`;
 
   return (
     <Page>
-      <div className='flex flex-col gap-9 justify-center items-center'>
-        <div className='bg-white min-h-[32rem] rounded-xl flex flex-col lg:flex-row items-center shadow-md p-10 font-rubik gap-10'>
-          <img src={imageSrc} alt={`Image of ${product.productName}`} />
+      <div className='flex flex-col gap-16 justify-center items-center'>
+        <div className='bg-white min-h-[40rem] md:h-[40rem] rounded-xl flex flex-col lg:flex-row items-center shadow-md p-10 font-rubik gap-10'>
+          <img
+            src={imageSrc}
+            alt={`Image of ${product.productName}`}
+            className='md:size-[35rem]'
+          />
           <section className='flex flex-col gap-2'>
             <h1 className='text-2xl font-bold'>{product.productName}</h1>
             <div className='flex items-center gap-2'>
@@ -49,18 +47,20 @@ export default function ProductPage() {
               mode='page'
             />
             <p className='max-w-96'>{product.description}</p>
-            <IngredientsList ingredients={product.ingredients} />
-            <DetailsAccordion
-              weight={product.weight}
-              calories={product.calories}
-            />
+            <div className='my-4'>
+              <IngredientsAccordion ingredients={product.ingredients} />
+              <DetailsAccordion
+                weight={product.weight}
+                calories={product.calories}
+              />
+            </div>
             <div className='flex justify-center items-center gap-6 my-6'>
               <QuantityButtons
-                quantity={selectedQuantity}
+                quantity={quantity}
                 onChange={handleQuantityChange}
                 orientation='horizontal'
               />
-              <Button onClick={addToCart}>Add to cart</Button>
+              <Button onClick={handleAddToCart}>Add to cart</Button>
             </div>
           </section>
         </div>

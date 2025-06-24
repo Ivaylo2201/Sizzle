@@ -1,27 +1,16 @@
-import { httpClient } from '@/utils/httpClient';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
+import { useState } from 'react';
 
-type UseQuantityChangeResponse = { message: string };
-type UseQuantityChangeRequest = { id: number; quantity: number };
-type UseQuantityChangeAxiosError = AxiosError<{ message: string }>;
+const ITEM_MIN_QUANTITY = 1;
+const ITEM_MAX_QUANTITY = 15;
 
-async function updateItemQuantity({ id, quantity }: UseQuantityChangeRequest) {
-  const res = await httpClient.patch(`/items/${id}`, { quantity });
-  return res.data;
-}
+export default function useQuantityChange(q: number = 1) {
+  const [quantity, setQuantity] = useState<number>(q);
 
-export default function useQuantityChange() {
-  const queryClient = useQueryClient();
+  const handleQuantityChange = (q: number) => {
+    if (q >= ITEM_MIN_QUANTITY && q <= ITEM_MAX_QUANTITY) {
+      setQuantity(q);
+    }
+  };
 
-  return useMutation<
-    UseQuantityChangeResponse,
-    UseQuantityChangeAxiosError,
-    UseQuantityChangeRequest
-  >({
-    mutationFn: (data) => updateItemQuantity(data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cart'] }),
-    onError: () => toast.error('Something went wrong.')
-  });
+  return { quantity, handleQuantityChange };
 }

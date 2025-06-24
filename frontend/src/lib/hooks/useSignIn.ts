@@ -2,11 +2,11 @@ import type { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import { useMutation } from '@tanstack/react-query';
+import type { z } from 'zod';
 
 import { useAuthStore } from '@/lib/stores/useAuthStore';
+import type { signInSchema } from '@/lib/schemas/signInSchema';
 import { httpClient } from '@/utils/httpClient';
-import type { z } from 'zod';
-import type { signInSchema } from '../schemas/signInSchema';
 
 type UseSignInResponse = { token: string };
 type UseSignInAxiosError = AxiosError<{ message: string }>;

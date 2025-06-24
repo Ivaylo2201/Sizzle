@@ -1,7 +1,7 @@
 import React from 'react';
 
-import type { Review as TReview } from '@/utils/types/models/Review';
 import Review from '@/components/ui/review/Review';
+import type { Review as TReview } from '@/utils/types/models/Review';
 
 type ReviewListProps = {
   reviews: TReview[];

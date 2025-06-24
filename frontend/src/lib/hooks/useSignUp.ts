@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router';
 import { useMutation } from '@tanstack/react-query';
 import type z from 'zod';
 
-import { httpClient } from '@/utils/httpClient';
 import { useAuthStore } from '@/lib/stores/useAuthStore';
 import type { signUpSchema } from '@/lib/schemas/signUpSchema';
+import { httpClient } from '@/utils/httpClient';
 
 type UseSignUpResponse = { token: string };
 type UseSignUpAxiosError = AxiosError<{ message: string }>;

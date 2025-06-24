@@ -1,14 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { Rating } from '@mantine/core';
 
-import type { ShortProduct } from '@/utils/types/models/ShortProduct';
-import Button from '@/components/shared/Button';
-import TagContainer from '@/components/ui/tag/TagContainer';
-import Tag from '@/components/ui/tag/Tag';
-import ProductPrice from '@/components/ui/product/ProductPrice';
 import useAddToCart from '@/lib/hooks/useAddToCart';
 import SizzleRating from '@/components/shared/SizzleRating';
+import Button from '@/components/shared/Button';
+import ProductPrice from '@/components/ui/product/ProductPrice';
+import TagContainer from '@/components/ui/tag/TagContainer';
+import Tag from '@/components/ui/tag/Tag';
+import type { ShortProduct } from '@/utils/types/models/ShortProduct';
 
 type ProductCardProps = ShortProduct;
 
