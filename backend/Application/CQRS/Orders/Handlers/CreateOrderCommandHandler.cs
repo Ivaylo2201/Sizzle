@@ -14,12 +14,18 @@ public class CreateOrderCommandHandler(
 {
     public async Task<Result<Order>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = new Order { User = request.Dto.User };
+        var order = new Order
+        {
+            User = request.Dto.User, 
+            Address = request.Dto.Address,
+            Notes = request.Dto.Notes,
+            DeliveryTime = request.Dto.DeliveryTime
+        };
+        
         var orderResult = await orderRepository.CreateAsync(order);
 
         var addressResult = await addressRepository.GetOneAsync(request.Dto.Address.Id);
         
-        // TODO: Test
         if (addressResult.Value.UserId != request.Dto.User.Id)
             return Result.Failure<Order>(addressResult.Error);
         

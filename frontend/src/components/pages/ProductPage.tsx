@@ -46,7 +46,7 @@ export default function ProductPage() {
               initialPrice={product.initialPrice}
               mode='page'
             />
-            <p className='max-w-96'>{product.description}</p>
+            <p className='max-w-96 mt-2'>{product.description}</p>
             <div className='my-4'>
               <IngredientsAccordion ingredients={product.ingredients} />
               <DetailsAccordion

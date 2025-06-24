@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import {  Textarea } from '@mantine/core';
+import { Textarea } from '@mantine/core';
 import { toast } from 'react-toastify';
 
 import useAddReview from '@/lib/hooks/useAddReview';
@@ -12,21 +12,21 @@ type ReviewFormProps = {
 };
 
 export default function ReviewForm({ product }: ReviewFormProps) {
-  const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number | null>(null);
   const commentRef = useRef<string | null>(null);
   const { mutate } = useAddReview(product);
 
   const addReview = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedRating) {
+    if (!rating) {
       toast.error('Rating must be provided.');
       return;
     }
 
     mutate({
       comment: commentRef.current,
-      rating: selectedRating,
+      rating: rating,
       productId: product.id
     });
   };
@@ -44,11 +44,7 @@ export default function ReviewForm({ product }: ReviewFormProps) {
         onChange={handleCommentChange}
       />
       <div className='flex justify-center items-center gap-5'>
-        <SizzleRating
-          value={selectedRating ?? 0}
-          size={25}
-          onChange={setSelectedRating}
-        />
+        <SizzleRating value={rating ?? 0} size={25} onChange={setRating} />
         <Button onClick={addReview}>Submit</Button>
       </div>
     </form>
