@@ -22,10 +22,10 @@ export default function CheckoutPage() {
 
   const now = new Date();
   const earliest = new Date(now.getTime() + 30 * 60 * 1000);
-  const earliesIsoString = earliest.toISOString();
+  const earliestIsoString = earliest.toISOString();
 
   const methods = useForm<CheckoutSchema>({
-    defaultValues: { deliveryTime: earliest.toISOString() }
+    defaultValues: { deliveryTime: earliestIsoString }
   });
 
   const handleDateTimeChange = (data: string | null) => {
@@ -37,7 +37,7 @@ export default function CheckoutPage() {
 
   const handleAsapSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsAsapSelected(e.target.checked);
-    methods.setValue('deliveryTime', earliesIsoString);
+    methods.setValue('deliveryTime', earliestIsoString);
   };
 
   const onSubmit = (data: CheckoutSchema) => {
@@ -56,10 +56,10 @@ export default function CheckoutPage() {
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
-          className='flex flex-col justify-center items-center gap-6'
+          className='flex flex-col justify-center items-center gap-8'
         >
           <AddressSection addresses={addresses} />
-          <section className='w-full bg-white rounded-xl shadow-md p-6 flex flex-col justify-center items-center gap-4'>
+          <section className='w-full bg-white rounded-xl shadow-md p-6 flex flex-col justify-center items-center gap-6'>
             <h2 className='font-rubik text-2xl font-bold uppercase'>
               Delivery time
             </h2>

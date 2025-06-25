@@ -16,6 +16,9 @@ public class CityRepository(DatabaseContext context) : ICityRepository
     public async Task<Result<City>> GetOneByNameAsync(string name)
     {
         var city = await context.Cities.SingleOrDefaultAsync(c => c.CityName == name);
-        return Result.Success(city);
+        
+        return city == null
+            ? Result.Failure<City>($"City {name} not found.") 
+            : Result.Success(city);
     }
 }

@@ -10,7 +10,7 @@ public class ListAddressesQueryHandler(IAddressRepository addressRepository) : I
 {
     public async Task<Result<List<Address>>> Handle(ListAddressesQuery request, CancellationToken cancellationToken)
     {
-        var addressResult = await addressRepository.GetAllAddressesForUserAsync(request.UserId);
+        var addressResult = await addressRepository.GetRecentAddressesForUserAsync(request.UserId);
         return Result.Success(addressResult.Value);
     }
 }

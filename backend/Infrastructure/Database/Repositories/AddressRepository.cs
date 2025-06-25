@@ -33,11 +33,13 @@ public class AddressRepository(DatabaseContext context) : IAddressRepository
         return Result.Success();
     }
 
-    public async Task<Result<List<Address>>> GetAllAddressesForUserAsync(int userId)
+    public async Task<Result<List<Address>>> GetRecentAddressesForUserAsync(int userId)
     {
         var addresses = await context.Addresses
             .Include(a => a.City)
             .Where(a => a.UserId == userId)
+            .OrderByDescending(a => a.Id)
+            .Take(6)
             .ToListAsync();
 
         return Result.Success(addresses);

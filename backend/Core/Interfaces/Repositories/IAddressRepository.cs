@@ -10,5 +10,5 @@ public interface IAddressRepository :
     IUpdatable<Address>,
     IDeletable<int>
 {
-    Task<Result<List<Address>>> GetAllAddressesForUserAsync(int userId);
+    Task<Result<List<Address>>> GetRecentAddressesForUserAsync(int userId);
 }

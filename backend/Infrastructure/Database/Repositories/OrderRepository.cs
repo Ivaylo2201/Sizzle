@@ -13,6 +13,7 @@ public class OrderRepository(DatabaseContext context) : IOrderRepository
             .Include(o => o.Address)
                 .ThenInclude(a => a.City)
             .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
             .Where(o => o.UserId == userId)
             .ToListAsync();
         
