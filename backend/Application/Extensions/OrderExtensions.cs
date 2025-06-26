@@ -14,7 +14,9 @@ public static class OrderExtensions
             StreetName = order.Address.StreetName,
             StreetNumber = order.Address.StreetNumber,
             Items = order.Items.Select(i => i.ToDto()).ToList(),
+            Total = order.Items.Sum(i => i.Price),
             CreatedAt = order.CreatedAt,
+            Notes = order.Notes
         };
     }
 }

@@ -10,4 +10,6 @@ public class Item
     public Cart? Cart { get; set; }
     public int? OrderId { get; set; }
     public Order? Order { get; set; }
+
+    public double Price => Product.Price * Quantity;
 }

@@ -1,19 +1,16 @@
-import type { z } from 'zod';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { Loader } from '@mantine/core';
-import { UserRound, KeyRound, Phone } from 'lucide-react';
+import { UserRound, Phone } from 'lucide-react';
 
 import Button from '@/components/shared/Button';
 import useSignUp from '@/lib/hooks/useSignUp';
-import { signUpSchema } from '@/lib/schemas/signUpSchema';
+import { signUpSchema, type SignUpSchema } from '@/lib/schemas/signUpSchema';
 import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';
 import SizzlePasswordInput from '@/components/shared/SizzlePasswordInput';
 import SizzleTextInput from '@/components/shared/SizzleTextInput';
 import SizzleCheckbox from '@/components/shared/SizzleCheckbox';
-
-type SignUpSchema = z.infer<typeof signUpSchema>;
 
 export default function SignUpForm() {
   const { register, handleSubmit } = useForm<SignUpSchema>();
@@ -56,15 +53,11 @@ export default function SignUpForm() {
 
         <SizzlePasswordInput
           label='Password'
-          leftSectionPointerEvents='none'
-          leftSection={<KeyRound size={18} />}
           {...register('password')}
         />
 
         <SizzlePasswordInput
           label='Confirm password'
-          leftSectionPointerEvents='none'
-          leftSection={<KeyRound size={18} />}
           {...register('passwordConfirmation')}
         />
       </div>

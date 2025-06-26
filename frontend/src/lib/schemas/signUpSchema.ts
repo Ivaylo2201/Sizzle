@@ -34,3 +34,5 @@ export const signUpSchema = z
     message: 'Password must not contain username.',
     path: ['password']
   });
+
+export type SignUpSchema = z.infer<typeof signUpSchema>;

@@ -1,11 +1,10 @@
 import { PasswordInput, type PasswordInputProps } from '@mantine/core';
+import { KeyRound } from 'lucide-react';
 
 type SizzlePasswordInputProps = PasswordInputProps;
 
 export default function SizzlePasswordInput({
   label,
-  leftSectionPointerEvents,
-  leftSection,
   ...rest
 }: SizzlePasswordInputProps) {
   return (
@@ -13,8 +12,8 @@ export default function SizzlePasswordInput({
       size='md'
       variant='filled'
       label={label}
-      leftSectionPointerEvents={leftSectionPointerEvents}
-      leftSection={leftSection}
+      leftSectionPointerEvents='none'
+      leftSection={<KeyRound size={18} />}
       styles={{
         input: {
           color: '#737374',

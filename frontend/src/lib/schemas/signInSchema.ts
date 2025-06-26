@@ -5,3 +5,5 @@ export const signInSchema = z.object({
   password: z.string().min(1, 'Password must be provided.'),
   rememberMe: z.boolean()
 });
+
+export type SignInSchema = z.infer<typeof signInSchema>;

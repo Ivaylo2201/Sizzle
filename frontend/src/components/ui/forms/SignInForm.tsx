@@ -1,19 +1,17 @@
-import type z from 'zod';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Loader } from '@mantine/core';
-import { UserRound, KeyRound } from 'lucide-react';
+import { UserRound } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import Button from '@/components/shared/Button';
 import useSignIn from '@/lib/hooks/useSignIn';
-import { signInSchema } from '@/lib/schemas/signInSchema';
+import { signInSchema, type SignInSchema } from '@/lib/schemas/signInSchema';
 import PrivacyPolicyAndTermsOfService from '@/components/shared/PrivacyPolicyAndTermsOfService';
 import SizzleCheckbox from '@/components/shared/SizzleCheckbox';
 import SizzleTextInput from '@/components/shared/SizzleTextInput';
 import SizzlePasswordInput from '@/components/shared/SizzlePasswordInput';
 
-type SignInSchema = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
   const { register, handleSubmit } = useForm<SignInSchema>();
@@ -49,14 +47,11 @@ export default function SignInForm() {
 
         <SizzlePasswordInput
           label='Password'
-          leftSectionPointerEvents='none'
-          leftSection={<KeyRound size={18} />}
           {...register('password')}
         />
       </div>
 
       <SizzleCheckbox
-        defaultChecked={false}
         label='Remember me'
         {...register('rememberMe')}
       />

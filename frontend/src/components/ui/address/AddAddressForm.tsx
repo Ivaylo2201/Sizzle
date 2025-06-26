@@ -30,7 +30,7 @@ export default function AddAddressForm() {
   };
 
   return (
-    <form className='flex flex-col justify-center items-center gap-8 bg-white rounded-xl shadow-md p-10'>
+    <div className='flex flex-col justify-center items-center gap-8 bg-white rounded-xl shadow-md p-10'>
       <div className='flex flex-col gap-4'>
         <SizzleSelect
           label='City'
@@ -47,6 +47,6 @@ export default function AddAddressForm() {
         />
       </div>
       <Button onClick={handleSubmit(onSubmit)}>Add address</Button>
-    </form>
+    </div>
   );
 }
